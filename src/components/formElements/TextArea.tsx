@@ -1,14 +1,14 @@
 import classNames from "classnames"
 import { FC, TextareaHTMLAttributes } from "react"
 
-type ITextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label: string
   message?: string
   error?: string
   touched?: boolean
 }
 
-const TextArea: FC<ITextAreaProps> = ({
+const TextArea: FC<TextAreaProps> = ({
   label, message, error, touched, ...props
 }) => {
   return <div className="flex flex-col gap-1">

@@ -1,21 +1,20 @@
 "use client"
 
-import useDictionary from "@/stores/dictionary"
+import dictionary from "@/i18n"
 import { IconTrash } from "@tabler/icons-react"
 import classNames from "classnames"
 import { ChangeEvent, FC, InputHTMLAttributes, useState } from "react"
 
-type IFileInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
+type FileInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
   label: string
   message?: string
   error?: string
   touched?: boolean
 }
 
-const FileInput: FC<IFileInputProps> = ({
+const FileInput: FC<FileInputProps> = ({
   label, message, error, touched, ...props
 }) => {
-  const dictionary = useDictionary()
 
   const [file, setFile] = useState<File>()
   const [focused, setFocused] = useState<boolean>(false)

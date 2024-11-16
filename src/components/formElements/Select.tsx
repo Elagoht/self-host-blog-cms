@@ -1,14 +1,14 @@
 import classNames from "classnames"
 import { FC, SelectHTMLAttributes } from "react"
 
-type ISelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   label: string
   message?: string
   error?: string
   touched?: boolean
 }
 
-const Select: FC<ISelectProps> = ({
+const Select: FC<SelectProps> = ({
   label, message, error, touched, ...props
 }) => {
   return <div className="flex flex-col gap-1">

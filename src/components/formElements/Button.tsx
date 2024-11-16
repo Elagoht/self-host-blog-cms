@@ -1,12 +1,12 @@
 import classNames from "classnames"
 import { ButtonHTMLAttributes, FC, ReactNode } from "react"
 
-type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode
   color?: "primary" | "danger" | "success" | "warning"
 }
 
-const Button: FC<IButtonProps> = ({
+const Button: FC<ButtonProps> = ({
   color = "primary",
   ...props
 }) => {

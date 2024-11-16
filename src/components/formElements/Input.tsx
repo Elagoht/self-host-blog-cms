@@ -1,14 +1,14 @@
 import classNames from "classnames"
 import { FC, InputHTMLAttributes } from "react"
 
-type IInputProps = InputHTMLAttributes<HTMLInputElement> & {
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string
   message?: string
   error?: string
   touched?: boolean
 }
 
-const Input: FC<IInputProps> = ({
+const Input: FC<InputProps> = ({
   label, message, error, touched, ...props
 }) => {
   return <div className="flex flex-col gap-1">

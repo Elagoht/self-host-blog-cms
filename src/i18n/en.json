@@ -9,6 +9,14 @@
       "failure": "Invalid credentials."
     }
   },
+  "input": {
+    "file": {
+      "change": "Change",
+      "choose": "Choose File",
+      "selected": "Selected",
+      "placeholder": "No file selected"
+    }
+  },
   "form": {
     "error": {
       "required": "{{field}} field is required.",
