@@ -1,0 +1,36 @@
+{
+  "auth": {
+    "login": {
+      "title": "Welcome Back!",
+      "username": "Email",
+      "passphrase": "Passphrase",
+      "login": "Login",
+      "success": "Logged in successfully.",
+      "failure": "Invalid credentials."
+    }
+  },
+  "form": {
+    "error": {
+      "required": "{{field}} field is required.",
+      "min": "{{field}} field must be at least {{min}} characters.",
+      "max": "{{field}} field must be at most {{max}} characters."
+    },
+    "field": {
+      "username": "User Name",
+      "passphrase": "Passphrase",
+      "title": "Title",
+      "description": "Description",
+      "keywords": "Keywords",
+      "spot": "Spot",
+      "dateCreated": "Creation Date",
+      "dateModified": "Modification Date",
+      "cover": "Cover Image"
+    }
+  },
+  "api": {
+    "error": {
+      "server": "Server encountered an error. Please try again later.",
+      "badRequest": "Please check your input."
+    }
+  }
+}
