@@ -1,3 +1,4 @@
+import Providers from "@/components/layout/Providers"
 import "@/design/globals.css"
 import classNames from "classnames"
 import { Metadata } from "next"
@@ -13,7 +14,9 @@ const RootLayout: FC<RootLayoutComponent> = ({
       "dark:bg-neutral-900 dark:text-neutral-100",
       dmSans.className
     )}>
-      {children}
+      <Providers>
+        {children}
+      </Providers>
     </body>
   </html>
 
