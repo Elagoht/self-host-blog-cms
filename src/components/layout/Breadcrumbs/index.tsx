@@ -15,7 +15,7 @@ const Breadcrumbs: FC = () => {
       href="/"
       className="flex items-center justify-center rounded-full h-10 w-10
       transition-all hover:bg-primary-400 dark:hover:bg-primary-600
-      bg-primary-500 text-primary-50"
+      bg-primary-500 text-primary-50 shadow-md"
     >
       <IconHome size={20} />
     </Link>

@@ -3,9 +3,9 @@ type PageComponent = {
   searchParams: Promise<Record<string, string | undefined>>
 }
 
-type ParentComponent = {
+type ParentComponent<T = object> = {
   children: ReactNode
-}
+} & T
 
 type RootLayoutComponent = ParentComponent
 
