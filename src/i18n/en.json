@@ -1,4 +1,7 @@
 {
+  "branding": {
+    "title": "Own Blog CMS"
+  },
   "auth": {
     "login": {
       "title": "Welcome Back!",
@@ -40,5 +43,17 @@
       "server": "Server encountered an error. Please try again later.",
       "badRequest": "Please check your input."
     }
+  },
+  "breadcrumbs": {
+    "dashboard": "Dashboard",
+    "blogs": "Blogs",
+    "categories": "Categories",
+    "create": "Create",
+    "edit": "Edit"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "blogs": "Blogs",
+    "categories": "Categories"
   }
 }

@@ -1,10 +1,11 @@
+import Content from "@/components/layout/Content"
 import { FC } from "react"
 
 const DashboardPage: FC<PageComponent> = () =>
-  <main>
+  <Content breadcrumbs={[]}>
     <h1>Dashboard</h1>
 
     <p>Dashboard content goes here</p>
-  </main>
+  </Content>
 
 export default DashboardPage

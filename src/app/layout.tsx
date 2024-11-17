@@ -10,8 +10,8 @@ const RootLayout: FC<RootLayoutComponent> = ({
 }) =>
   <html lang="en">
     <body className={classNames(
-      "bg-neutral-100 text-neutral-900",
-      "dark:bg-neutral-900 dark:text-neutral-100",
+      "bg-neutral-50 text-neutral-900",
+      "dark:bg-neutral-950 dark:text-neutral-50",
       dmSans.className
     )}>
       <Providers>

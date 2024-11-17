@@ -1,0 +1,40 @@
+#article {
+  @apply prose prose-stone dark:prose-invert prose-lg prose-h1:text-4xl prose-h1:mt-0 prose-h1:mb-4 prose-h2:text-3xl prose-h2:mt-0 prose-h2:mb-4 prose-h3:text-2xl prose-h3:mt-0 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-0 prose-h4:mb-4 prose-h5:text-lg prose-h5:mt-0 prose-h5:mb-4 prose-h6:text-lg prose-h6:mt-0 prose-h6:mb-4 prose-h6:italic prose-p:my-2 prose-img:my-4 prose-ul:my-4 prose-ol:my-4 prose-pre:my-4 prose-p:leading-normal prose-p:mb-4 w-full max-w-full prose-hr:border-stone-800 prose-hr:dark:border-stone-200;
+}
+
+img {
+  @apply rounded-lg;
+}
+
+pre {
+  @apply !p-0;
+}
+
+.code-container {
+  @apply mx-auto text-lg;
+}
+
+.code-lang {
+  @apply leading-none !font-[unset];
+}
+
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a,
+.prose h6 {
+  @apply !no-underline;
+}
+
+.code-header {
+  @apply bg-stone-200 dark:bg-stone-900 text-stone-900 dark:text-stone-100 select-none items-center justify-between flex pl-4 p-2 rounded-t;
+}
+
+.code-copy {
+  @apply p-2 bg-stone-300 hover:bg-stone-400 dark:bg-stone-800 dark:hover:bg-stone-700 transition-colors rounded leading-none;
+}
+
+hr {
+  @apply border-none w-full h-px bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-500 to-transparent !m-0 !my-8;
+}
