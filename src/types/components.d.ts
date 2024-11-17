@@ -1,6 +1,6 @@
 type PageComponent = {
-  params: Promise<Record<string, string?>>
-  searchParams: Promise<Record<string, string?>>
+  params: Promise<Record<string, string>>
+  searchParams: Promise<Record<string, string | undefined>>
 }
 
 type ParentComponent = {

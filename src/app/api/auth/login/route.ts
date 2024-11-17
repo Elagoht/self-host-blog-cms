@@ -1,6 +1,7 @@
 import dictionary from "@/i18n"
 import { loginSchema } from "@/lib/validation/login"
 import ApiEndpoint from "@/utilities/ApiEndpoint"
+import Auth from "@/utilities/Auth"
 import FormBody from "@/utilities/FormBody"
 import { NextRequest } from "next/server"
 
@@ -12,13 +13,15 @@ export const POST = ApiEndpoint(async (
   ).validate(loginSchema)
 
   if (
-    validated.username === process.env.USERNAME &&
-    validated.passphrase === process.env.PASSPHRASE
+    validated.username !== process.env.USERNAME ||
+    validated.passphrase !== process.env.PASSPHRASE
   ) return Response.json({
-    message: dictionary.auth.login.success
-  }, { status: 200 })
-
-  return Response.json({
     message: dictionary.auth.login.failure
   }, { status: 401 })
+
+  return Response.json({
+    accessToken: await Auth.createToken({
+      username: validated.username
+    })
+  }, { status: 200 })
 })

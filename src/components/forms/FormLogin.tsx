@@ -11,7 +11,13 @@ import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { loginSchema } from "@/lib/validation/login"
 
-const FormLogin: FC = () => {
+type FormLoginProps = {
+  next?: string
+}
+
+const FormLogin: FC<FormLoginProps> = ({
+  next
+}) => {
   const router = useRouter()
 
   return <Formik
@@ -36,7 +42,7 @@ const FormLogin: FC = () => {
         (await response.json()).accessToken
       )
 
-      router.push("/")
+      router.push(next || "/")
     }}
   >
     {({ values, touched, errors, handleChange }) =>
