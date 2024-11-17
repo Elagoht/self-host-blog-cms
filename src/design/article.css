@@ -1,5 +1,5 @@
 #article {
-  @apply prose prose-stone dark:prose-invert prose-lg prose-h1:text-4xl prose-h1:mt-0 prose-h1:mb-4 prose-h2:text-3xl prose-h2:mt-0 prose-h2:mb-4 prose-h3:text-2xl prose-h3:mt-0 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-0 prose-h4:mb-4 prose-h5:text-lg prose-h5:mt-0 prose-h5:mb-4 prose-h6:text-lg prose-h6:mt-0 prose-h6:mb-4 prose-h6:italic prose-p:my-2 prose-img:my-4 prose-ul:my-4 prose-ol:my-4 prose-pre:my-4 prose-p:leading-normal prose-p:mb-4 w-full max-w-full prose-hr:border-stone-800 prose-hr:dark:border-stone-200;
+  @apply prose prose-neutral dark:prose-invert prose-lg prose-h1:text-4xl prose-h1:mt-0 prose-h1:mb-4 prose-h2:text-3xl prose-h2:mt-0 prose-h2:mb-4 prose-h3:text-2xl prose-h3:mt-0 prose-h3:mb-4 prose-h4:text-xl prose-h4:mt-0 prose-h4:mb-4 prose-h5:text-lg prose-h5:mt-0 prose-h5:mb-4 prose-h6:text-lg prose-h6:mt-0 prose-h6:mb-4 prose-h6:italic prose-p:my-2 prose-img:my-4 prose-ul:my-4 prose-ol:my-4 prose-pre:my-4 prose-p:leading-normal prose-p:mb-4 w-full max-w-full prose-hr:border-neutral-800 prose-hr:dark:border-neutral-200;
 }
 
 img {
@@ -8,6 +8,10 @@ img {
 
 pre {
   @apply !p-0;
+}
+
+mark {
+  @apply bg-secondary-500 bg-opacity-75 text-white p-1 rounded;
 }
 
 .code-container {
@@ -28,13 +32,13 @@ pre {
 }
 
 .code-header {
-  @apply bg-stone-200 dark:bg-stone-900 text-stone-900 dark:text-stone-100 select-none items-center justify-between flex pl-4 p-2 rounded-t;
+  @apply bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 select-none items-center justify-between flex pl-4 p-2 rounded-t;
 }
 
 .code-copy {
-  @apply p-2 bg-stone-300 hover:bg-stone-400 dark:bg-stone-800 dark:hover:bg-stone-700 transition-colors rounded leading-none;
+  @apply p-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-800 dark:hover:bg-neutral-700 transition-colors rounded leading-none;
 }
 
 hr {
-  @apply border-none w-full h-px bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-500 to-transparent !m-0 !my-8;
+  @apply border-none w-full h-px bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-500 to-transparent !m-0 !my-8;
 }
