@@ -23,7 +23,11 @@ const TextArea: FC<TextAreaProps> = ({
     <textarea
       {...props}
       className={classNames(
-        "bg-neutral-200 dark:bg-neutral-800 shadow-inner p-2 rounded-lg focus:outline-none ring-2 ring-transparent focus:outline-primary-500 transition-colors read-only:bg-neutral-50 dark:read-only:bg-neutral-950 disabled:bg-neutral-50 dark:disabled:bg-neutral-950 disabled:cursor-not-allowed disabled:bg-opacity-50 h-32",
+        "bg-neutral-200 dark:bg-neutral-800 shadow-inner p-2 rounded-lg",
+        "focus:outline-none ring-2 ring-transparent focus:outline-primary-500",
+        "read-only:bg-neutral-50 dark:read-only:bg-neutral-950",
+        "disabled:bg-neutral-50 dark:disabled:bg-neutral-950 transition-all",
+        "disabled:cursor-not-allowed disabled:bg-opacity-50 h-32",
         props.className
       )}
     />

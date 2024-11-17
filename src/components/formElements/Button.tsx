@@ -1,32 +1,56 @@
 import classNames from "classnames"
-import { ButtonHTMLAttributes, FC, ReactNode } from "react"
+import Link, { LinkProps } from "next/link"
+import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, ReactNode } from "react"
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = {
   icon?: ReactNode
-  color?: "primary" | "danger" | "success" | "warning"
-}
+  color?: "primary" | "danger" | "success" | "warning",
+} & ((ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: never
+}) | (LinkProps & AnchorHTMLAttributes<HTMLAnchorElement> & {
+  disabled?: never
+  href: string
+}))
+
 
 const Button: FC<ButtonProps> = ({
-  color = "primary",
-  ...props
+  color = "primary", icon, href, ...props
 }) => {
+  const buttonClass = classNames(
+    "p-2 rounded-lg flex items-center gap-2 shadow",
+    "block whitespace-nowrap block transition-all",
+    "hover:ring-2 hover: ring-offset-2",
+    "ring-offset-neutral-50 dark:ring-offset-neutral-900",
+    props.className, {
+    "ring-primary-500 bg-primary-500 text-white": color === "primary",
+    "ring-red-500 bg-red-500 text-white": color === "danger",
+    "ring-green-500 bg-green-500 text-white": color === "success",
+    "ring-amber-500 bg-amber-500 text-white": color === "warning",
+    "cursor-not-allowed opacity-75": !href && props.disabled
+  })
+
+  if (href)
+    return <Link
+      {...props as LinkProps}
+      href={href}
+      className={buttonClass}
+    >
+      <span className="grow">
+        {props.children}
+      </span>
+
+      {icon}
+    </Link>
+
   return <button
-    {...props}
-    className={classNames(
-      "p-2 rounded-lg flex items-center gap-2 shadow",
-      props.className, {
-      "bg-primary-500 text-white": color === "primary",
-      "bg-red-500 text-white": color === "danger",
-      "bg-green-500 text-white": color === "success",
-      "bg-amber-500 text-white": color === "warning",
-      "cursor-not-allowed opacity-75": props.disabled
-    })}
+    {...props as ButtonHTMLAttributes<HTMLButtonElement>}
+    className={buttonClass}
   >
     <span className="grow">
       {props.children}
     </span>
 
-    {props.icon}
+    {icon}
   </button>
 }
 
