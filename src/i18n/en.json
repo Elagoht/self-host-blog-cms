@@ -46,6 +46,29 @@
       }
     }
   },
+  "categories": {
+    "main": {
+      "title": "Categories",
+      "description": "Here are the list of your categories.",
+      "new": "New Category",
+      "edit": "Edit Category",
+      "delete": "Delete Category"
+    },
+    "new": {
+      "title": "New Category",
+      "description": "Create a new category.",
+      "submit": "Create Category",
+      "success": "Category created successfully.",
+      "failure": "Failed to create category.",
+      "form": {
+        "name": "Name",
+        "keywords": "Keywords",
+        "commaSeparated": "Keywords should be comma separated.",
+        "spot": "Spot",
+        "description": "Description"
+      }
+    }
+  },
   "input": {
     "file": {
       "change": "Change",
@@ -58,7 +81,10 @@
     "error": {
       "required": "{{field}} field is required.",
       "min": "{{field}} field must be at least {{min}} characters.",
-      "max": "{{field}} field must be at most {{max}} characters."
+      "max": "{{field}} field must be at most {{max}} characters.",
+      "image": "{{field}} field must be an image.",
+      "large": "{{field}} field must be less than {{size}}.",
+      "date": "{{field}} field must be a valid date."
     },
     "field": {
       "username": "User Name",
@@ -69,13 +95,18 @@
       "spot": "Spot",
       "dateCreated": "Creation Date",
       "dateModified": "Modification Date",
-      "cover": "Cover Image"
+      "cover": "Cover Image",
+      "category": "Category",
+      "content": "Content",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
     }
   },
   "api": {
     "error": {
       "server": "Server encountered an error. Please try again later.",
-      "badRequest": "Please check your input."
+      "badRequest": "Please check your input.",
+      "unauthorized": "You are not authorized to perform this action."
     }
   },
   "breadcrumbs": {
