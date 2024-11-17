@@ -1,0 +1,32 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  content     String
+  keywords    String
+  description String
+  spot        String
+  cover       String
+  published   Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  readTime    Int
+  readCount   Int
+  category    Category @relation(fields: [id], references: [id])
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  slug  String @unique
+  blogs Blog[]
+}
