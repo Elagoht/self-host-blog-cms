@@ -4,3 +4,5 @@ type CategoryModel = {
   keywords: string
   spot: string
 }
+
+type CategoryRequest = CategoryModel
