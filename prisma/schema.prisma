@@ -21,12 +21,17 @@ model Blog {
   updatedAt   DateTime @default(now())
   readTime    Int
   readCount   Int
-  category    Category @relation(fields: [id], references: [id])
+
+  category Category @relation(fields: [id], references: [id])
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  slug  String @unique
+  id          Int    @id @default(autoincrement())
+  name        String
+  slug        String @unique
+  description String
+  keywords    String
+  spot        String
+
   blogs Blog[]
 }
