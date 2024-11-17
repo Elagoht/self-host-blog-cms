@@ -12,6 +12,40 @@
       "failure": "Invalid credentials."
     }
   },
+  "blogs": {
+    "main": {
+      "title": "Blogs",
+      "description": "Here are the list of your blogs.",
+      "new": "New Blog",
+      "edit": "Edit Blog",
+      "delete": "Delete Blog"
+    },
+    "new": {
+      "title": "New Blog",
+      "description": "Create a new blog.",
+      "submit": "Create Blog",
+      "success": "Blog created successfully.",
+      "failure": "Failed to create blog.",
+      "form": {
+        "title": "Title",
+        "description": "Description",
+        "keywords": "Keywords",
+        "spot": "Spot",
+        "content": "Content",
+        "cover": "Cover Image",
+        "category": "Category"
+      }
+    },
+    "preview": {
+      "title": "Blog Preview",
+      "placeholder": {
+        "title": "Here goes the title",
+        "spot": "Here goes the spot text of the blog and it can be a bit longer than the title.",
+        "content": "Here goes the content of the blog. You can write your blog in markdown format.",
+        "cover": "Upload a cover image to see it here."
+      }
+    }
+  },
   "input": {
     "file": {
       "change": "Change",
