@@ -1,5 +1,6 @@
 import Providers from "@/components/layout/Providers"
 import "@/design/globals.css"
+import dictionary from "@/i18n"
 import classNames from "classnames"
 import { Metadata } from "next"
 import { DM_Sans as DMSans } from "next/font/google"
@@ -22,8 +23,8 @@ const RootLayout: FC<RootLayoutComponent> = ({
 
 export const metadata: Metadata = {
   title: {
-    default: "Own Blog CMS",
-    template: "%s | Own Blog CMS"
+    default: dictionary.branding.title,
+    template: `%s | ${dictionary.branding.title}`
   },
   description: "Manage your blog and create an API to use it in your frontend"
 }
