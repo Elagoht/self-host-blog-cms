@@ -24,7 +24,20 @@ const config: Config = {
           800: "#951c45",
           900: "#801b40",
           950: "#470a1f"
-        }
+        },
+        secondary: {
+          50: "#fffbeb",
+          100: "#fef3c7",
+          200: "#fde58a",
+          300: "#fbd24e",
+          400: "#fabe25",
+          500: "#f49d0c",
+          600: "#d87607",
+          700: "#bc560a",
+          800: "#923f0e",
+          900: "#78340f",
+          950: "#451a03"
+        },
       },
       gridTemplateRows: {
         "dashboard": "auto 1fr",
