@@ -1,6 +1,6 @@
 import dictionary from "@/i18n"
 import { loginSchema } from "@/lib/validation/login"
-import ApiEndpoint from "@/utilities/ApiEndpoint"
+import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Auth from "@/utilities/Auth"
 import FormBody from "@/utilities/FormBody"
 import { NextRequest } from "next/server"
@@ -24,4 +24,4 @@ export const POST = ApiEndpoint(async (
       username: validated.username
     })
   }, { status: 200 })
-})
+}, ApiType.public)

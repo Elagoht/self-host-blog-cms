@@ -4,7 +4,7 @@ import Auth from "./utilities/Auth"
 export const middleware = async (
   request: NextRequest
 ) => {
-  const isAuthorized = await Auth.validateToken(
+  const isAuthorized = await Auth.isValid(
     Auth.getAccessToken(request.cookies)
   )
   const isOnAuthPage = Auth.authRoutes.some((route) =>

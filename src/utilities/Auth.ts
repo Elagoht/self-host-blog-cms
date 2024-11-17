@@ -12,7 +12,7 @@ class Auth {
     .setExpirationTime(expiresIn)
     .sign(new TextEncoder().encode(process.env.JWT_SECRET!))
 
-  public static validateToken = async (
+  public static isValid = async (
     accessToken?: string
   ): Promise<boolean> => {
     if (!accessToken) return false
