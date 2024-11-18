@@ -36,7 +36,8 @@ const PanelLayout: FC<LayoutComponent> = ({
     </header>
 
     <main className="flex flex-col gap-4 shadow-inner p-4 rounded-2xl
-      bg-neutral-100 dark:bg-neutral-900 overflow-x-auto">
+      bg-neutral-100 dark:bg-neutral-900 overflow-x-auto"
+    >
       {children}
     </main>
   </div>
