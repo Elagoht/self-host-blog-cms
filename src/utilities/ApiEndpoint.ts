@@ -40,10 +40,9 @@ const ApiEndpoint = <T>(
         ? Response.json({
           message: error.message,
         }, { status: 400 })
-        : Response.json(
-          { message: dictionary.api.error.server },
-          { status: 500 }
-        )
+        : Response.json({
+          message: dictionary.api.error.server
+        }, { status: 500 })
     }
   }
 
