@@ -51,8 +51,13 @@
       "title": "Categories",
       "description": "Here are the list of your categories.",
       "new": "New Category",
-      "edit": "Edit Category",
-      "delete": "Delete Category"
+      "table": {
+        "name": "Name",
+        "keywords": "Keywords",
+        "spot": "Spot",
+        "edit": "Edit",
+        "delete": "Delete"
+      }
     },
     "new": {
       "title": "New Category",
@@ -67,6 +72,17 @@
         "spot": "Spot",
         "description": "Description"
       }
+    },
+    "edit": {
+      "title": "Edit Category",
+      "description": "Edit the category details.",
+      "submit": "Update Category",
+      "success": "Category updated successfully.",
+      "failure": "Failed to update category."
+    },
+    "blogs": {
+      "title": "Blogs",
+      "description": "Here are the list of blogs under \"{{category}}\" category."
     }
   },
   "input": {
@@ -99,7 +115,8 @@
       "category": "Category",
       "content": "Content",
       "createdAt": "Created At",
-      "updatedAt": "Updated At"
+      "updatedAt": "Updated At",
+      "name": "Name"
     }
   },
   "api": {
@@ -114,7 +131,8 @@
     "blogs": "Blogs",
     "categories": "Categories",
     "new": "New",
-    "edit": "Edit"
+    "edit": "Edit",
+    "relatedBlogs": "Related Blogs"
   },
   "navbar": {
     "dashboard": "Dashboard",

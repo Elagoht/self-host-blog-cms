@@ -1,4 +1,4 @@
-import FormCategoryAdd from "@/components/forms/FormCategoryAdd"
+import FormCategory from "@/components/forms/FormCategory"
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
 import dictionary from "@/i18n"
@@ -13,7 +13,7 @@ const NewCategoryPage: FC = () => {
       title={dictionary.categories.new.title}
       description={dictionary.categories.new.description}
     >
-      <FormCategoryAdd />
+      <FormCategory mode="add" />
     </Container>
   </Content>
 }

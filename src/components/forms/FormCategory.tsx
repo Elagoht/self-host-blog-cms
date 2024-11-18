@@ -5,31 +5,61 @@ import { Form, Formik } from "formik"
 import { FC } from "react"
 import Input from "../formElements/Input"
 import Button from "../formElements/Button"
-import { postCategory } from "@/services/category"
+import { patchCategory, postCategory } from "@/services/category"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
-import { categoryAddScheme } from "@/lib/validation/category"
+import { categoryAddScheme as categoryScheme } from "@/lib/validation/category"
 
-const FormCategoryAdd: FC = () => {
+type FormCategoryProps = {
+  mode: "add"
+  slug?: never
+  initialValues?: never
+} | {
+  mode: "edit"
+  slug: CategoryResponse["slug"]
+  initialValues: CategoryFormModel
+}
+
+const FormCategory: FC<FormCategoryProps> = ({
+  mode, initialValues, slug
+}) => {
   const router = useRouter()
 
-  return <Formik
-    initialValues={{
+  return <Formik<CategoryFormModel>
+    initialValues={initialValues || {
       name: "",
       description: "",
       spot: "",
       keywords: ""
-    } as CategoryModel}
-    validationSchema={categoryAddScheme}
+    }}
+    validationSchema={categoryScheme}
     onSubmit={async (values, { setSubmitting }) => {
-      const response = await postCategory(values)
+      const response = await (mode === "add"
+        ? postCategory(values)
+        : patchCategory(
+          slug,
+          Object.fromEntries(Object.entries(initialValues)
+            .filter(([key]) => values[
+              key as keyof CategoryFormModel
+            ] !== initialValues[key as keyof CategoryFormModel]).map(([key]) =>
+              [key, values[key as keyof CategoryFormModel]]
+            )
+          ))
+      )
+
 
       if (!response.ok) {
-        toast.error(dictionary.categories.new.failure)
+        toast.error(mode === "edit"
+          ? dictionary.categories.edit.failure
+          : dictionary.categories.new.failure
+        )
         return setSubmitting(false)
       }
 
-      toast.success(dictionary.categories.new.success)
+      toast.success(mode === "edit"
+        ? dictionary.categories.edit.success
+        : dictionary.categories.new.success
+      )
       router.push("/categories")
       router.refresh()
     }}
@@ -86,4 +116,4 @@ const FormCategoryAdd: FC = () => {
   </Formik>
 }
 
-export default FormCategoryAdd
+export default FormCategory

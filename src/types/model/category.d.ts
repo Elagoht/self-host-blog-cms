@@ -1,8 +1,13 @@
-type CategoryModel = {
+type CategoryFormModel = {
   name: string
   description: string
   keywords: string
   spot: string
 }
 
-type CategoryRequest = CategoryModel
+type CategoryRequest = CategoryFormModel
+
+type CategoryResponse = CategoryFormModel & {
+  readonly id: string
+  readonly slug: string
+}
