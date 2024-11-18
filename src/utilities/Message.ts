@@ -1,3 +1,5 @@
+import dictionary from "@/i18n"
+
 export default class Message {
   /**
    * @param message - Insert the arguments into the message template.
@@ -18,4 +20,13 @@ export default class Message {
     )
     return formattedMessage
   }
+
+  public static errorMessage = (
+    type: keyof typeof dictionary.form.error,
+    fieldKey: keyof typeof dictionary.form.field,
+    extra = {}
+  ) => Message.format(dictionary.form.error[type], {
+    field: dictionary.form.field[fieldKey],
+    ...extra
+  })
 }
