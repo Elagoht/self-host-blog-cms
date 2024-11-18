@@ -1,14 +1,21 @@
-type BlogModel = {
+type BlogFormModel = {
   title: string
-  slug: string
   content: string
   cover: File | null
   description: string
   spot: string
   keywords: string
-  category: string
+  category: number
+  published: boolean
 }
 
-type BlogRequest = BlogModel & {
+type BlogRequest = BlogFormModel & {
   cover: File
+}
+
+type BlogResponse = BlogRequest & {
+  readonly id: number
+  readonly slug: string
+  readonly createdAt: string
+  readonly updatedAt: string
 }
