@@ -7,7 +7,10 @@ const Providers: FC<ParentComponent> = ({
   children
 }) =>
   <>
-    <Toaster />
+    <Toaster
+      reverseOrder
+      position="bottom-right"
+    />
 
     {children}
   </>
