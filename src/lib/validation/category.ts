@@ -1,42 +1,35 @@
-import dictionary from "@/i18n"
 import Message from "@/utilities/Message"
 import { object, string } from "yup"
 
-const formatMessage = (
-  type: keyof typeof dictionary.form.error,
-  fieldKey: keyof typeof dictionary.form.field,
-  extra = {}
-) => Message.format(dictionary.form.error[type], {
-  field: dictionary.form.field[fieldKey],
-  ...extra
-})
-
 const rules = {
   name: string()
-
-    .max(50, formatMessage("max", "name", { length: 50 })),
+    .max(50, Message.errorMessage("max", "name", { length: 50 })),
   description: string()
-    .max(155, formatMessage("max", "description", { length: 155 }))
-    .min(75, formatMessage("min", "description", { length: 75 })),
+    .min(75, Message.errorMessage("min", "description", { length: 75 }))
+    .max(155, Message.errorMessage("max", "description", { length: 155 })),
   spot: string()
-    .max(75, formatMessage("max", "spot", { length: 75 })),
-  keywords: string(),
+    .max(75, Message.errorMessage("max", "spot", { length: 75 })),
+  keywords: string()
 }
 
 export const categoryAddScheme = object({
   name: rules.name
-    .required(formatMessage("required", "name")),
+    .required(Message.errorMessage("required", "name")),
   description: rules.description
-    .required(formatMessage("required", "description")),
+    .required(Message.errorMessage("required", "description")),
   spot: rules.spot
-    .required(formatMessage("required", "spot")),
+    .required(Message.errorMessage("required", "spot")),
   keywords: rules.keywords
-    .required(formatMessage("required", "keywords"))
+    .required(Message.errorMessage("required", "keywords"))
 })
 
 export const categoryEditScheme = object({
-  name: rules.name.optional(),
-  description: rules.description.optional(),
-  spot: rules.spot.optional(),
-  keywords: rules.keywords.optional()
+  name: rules.name
+    .optional(),
+  description: rules.description
+    .optional(),
+  spot: rules.spot
+    .optional(),
+  keywords: rules.keywords
+    .optional()
 })

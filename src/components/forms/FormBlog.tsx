@@ -7,48 +7,87 @@ import Select from "@/components/formElements/Select"
 import TextArea from "@/components/formElements/TextArea"
 import BlogPreview from "@/components/pages/blogs/BlogPreview"
 import dictionary from "@/i18n"
-import { postBlog } from "@/services/blog"
+import { patchBlog, postBlog } from "@/services/blog"
 import {
   IconDeviceFloppy, IconEyeOff, IconLayoutBottombarFilled,
   IconLayoutSidebarRightFilled, IconLoader
 } from "@tabler/icons-react"
 import classNames from "classnames"
 import { Form, Formik } from "formik"
+import { useRouter } from "next/navigation"
 import { FC, useState } from "react"
 import toast from "react-hot-toast"
+import Switch from "../formElements/Switch"
+import { blogAddScheme } from "@/lib/validation/blogs"
 
-type FormBlogAddProps = {
-  categories: Category[]
-}
+type FormBlogProps = {
+  categories: CategoryResponse[]
+} & ({
+  mode: "add"
+  slug?: never
+  initialValues?: never
+} | {
+  mode: "edit"
+  slug: CategoryResponse["slug"]
+  initialValues: BlogResponse
+})
 
-const FormBlogAdd: FC<FormBlogAddProps> = ({
-  categories
+const FormBlog: FC<FormBlogProps> = ({
+  categories, mode, slug, initialValues
 }) => {
+  const router = useRouter()
+
   const [preview, setPreview] = useState<
     "horizontal" | "vertical" | "disabled"
   >("vertical")
 
-  return <Formik
-    initialValues={{
+  return <Formik<BlogFormModel>
+    initialValues={initialValues || {
       title: "",
-      slug: "",
       content: "",
       cover: null,
       keywords: "",
       description: "",
       spot: "",
-      category: ""
-    } as BlogModel}
-    onSubmit={(values, { setSubmitting }) => postBlog({
-      ...values,
-      cover: values.cover as File
-    }).then(() => toast.success(
-      dictionary.blogs.new.success
-    )).catch(() => toast.error(
-      dictionary.blogs.new.failure
-    )).finally(() =>
-      setSubmitting(false)
-    )}
+      category: -1,
+      published: false
+    }}
+    validationSchema={blogAddScheme}
+    onSubmit={async (values, { setSubmitting }) => {
+      const response = await (mode === "add"
+        ? postBlog(values as BlogRequest)
+        : patchBlog(
+          slug,
+          Object.fromEntries(Object.entries(
+            initialValues
+          ).filter(([key]) => values[
+            key as keyof BlogFormModel
+          ] !== initialValues[key as keyof BlogFormModel]).map(([key]) =>
+            [key, values[key as keyof BlogFormModel]]
+          ))
+        )
+      )
+
+      if (!response.ok) {
+        try {
+          const { message } = await response.json() as { message: string }
+          toast.error(message)
+        } catch {
+          toast.error(mode === "edit"
+            ? dictionary.blogs.edit.failure
+            : dictionary.blogs.new.failure
+          )
+        }
+        return setSubmitting(false)
+      }
+
+      toast.success(mode === "edit"
+        ? dictionary.blogs.edit.success
+        : dictionary.blogs.new.success
+      )
+
+      router.push("/blogs")
+    }}
   >
     {({ values, errors, touched, handleChange, setValues, isSubmitting }) =>
       <Form>
@@ -93,7 +132,7 @@ const FormBlogAdd: FC<FormBlogAddProps> = ({
                 label={dictionary.blogs.new.form.cover}
                 name="cover"
                 accept=".jpg,.jpeg,.png,.webp"
-                error={String(errors.cover)}
+                error={errors.cover}
                 touched={Boolean(touched.cover)}
                 onChange={(event) => setValues({
                   ...values,
@@ -103,12 +142,46 @@ const FormBlogAdd: FC<FormBlogAddProps> = ({
 
               <TextArea
                 label={dictionary.blogs.new.form.content}
+                message={dictionary.blogs.new.form.markdown}
                 name="content"
                 value={values.content}
                 error={errors.content}
                 touched={touched.content}
                 onChange={handleChange}
                 className="font-mono min-h-64"
+              />
+
+              <Input
+                label={dictionary.blogs.new.form.keywords}
+                message={dictionary.blogs.new.form.commaSeparated}
+                name="keywords"
+                value={values.keywords}
+                error={errors.keywords}
+                touched={touched.keywords}
+                onChange={handleChange}
+              />
+
+              <Input
+                label={dictionary.blogs.new.form.description}
+                message={dictionary.blogs.new.form.plainText}
+                name="description"
+                value={values.description}
+                error={errors.description}
+                touched={touched.description}
+                onChange={handleChange}
+                minLength={75}
+                maxLength={155}
+              />
+
+              <Input
+                label={dictionary.blogs.new.form.spot}
+                message={dictionary.blogs.new.form.markdown}
+                name="spot"
+                value={values.spot}
+                error={errors.spot}
+                touched={touched.spot}
+                onChange={handleChange}
+                maxLength={75}
               />
 
               <Select
@@ -128,6 +201,15 @@ const FormBlogAdd: FC<FormBlogAddProps> = ({
                   </option>
                 )}
               </Select>
+
+              <Switch
+                label={dictionary.blogs.new.form.published}
+                name="published"
+                checked={values.published}
+                onChange={handleChange}
+                error={errors.published}
+                touched={touched.published}
+              />
 
               <Button
                 type="submit"
@@ -160,4 +242,4 @@ const FormBlogAdd: FC<FormBlogAddProps> = ({
   </Formik>
 }
 
-export default FormBlogAdd
+export default FormBlog

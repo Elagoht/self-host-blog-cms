@@ -30,11 +30,22 @@
         "title": "Title",
         "description": "Description",
         "keywords": "Keywords",
+        "commaSeparated": "Keywords should be comma separated.",
+        "markdown": "Supports markdown.",
+        "plainText": "Only plain text.",
         "spot": "Spot",
         "content": "Content",
         "cover": "Cover Image",
-        "category": "Category"
+        "category": "Category",
+        "published": "Published"
       }
+    },
+    "edit": {
+      "title": "Edit Blog",
+      "description": "Edit the blog details.",
+      "submit": "Update Blog",
+      "success": "Blog updated successfully.",
+      "failure": "Failed to update blog."
     },
     "preview": {
       "title": "Blog Preview",
@@ -55,6 +66,7 @@
         "name": "Name",
         "keywords": "Keywords",
         "spot": "Spot",
+        "blogs": "Blogs",
         "edit": "Edit",
         "delete": "Delete"
       }

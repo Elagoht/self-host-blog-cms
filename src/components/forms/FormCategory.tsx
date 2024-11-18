@@ -44,7 +44,8 @@ const FormCategory: FC<FormCategoryProps> = ({
             ] !== initialValues[key as keyof CategoryFormModel]).map(([key]) =>
               [key, values[key as keyof CategoryFormModel]]
             )
-          ))
+          )
+        )
       )
 
 

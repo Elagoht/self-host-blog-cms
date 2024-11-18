@@ -23,7 +23,11 @@ const Select: FC<SelectProps> = ({
     <select
       {...props}
       className={classNames(
-        "!bg-neutral-200 dark:!bg-neutral-800 shadow-inner p-2 rounded-lg focus:outline-none ring-2 ring-transparent focus:outline-primary-500 transition-all read-only:bg-neutral-50 dark:read-only:bg-neutral-950 disabled:bg-neutral-50 dark:disabled:bg-neutral-950 disabled:cursor-not-allowed disabled:bg-opacity-50",
+        "!bg-neutral-200 dark:!bg-neutral-800 shadow-inner p-2 rounded-lg",
+        "focus:outline-none ring-2 ring-transparent focus:outline-primary-500",
+        "transition-all read-only:bg-neutral-50 disabled:bg-opacity-50",
+        "dark:read-only:bg-neutral-950 disabled:bg-neutral-50",
+        "dark:disabled:bg-neutral-950 disabled:cursor-not-allowed",
         props.className
       )}
     >
