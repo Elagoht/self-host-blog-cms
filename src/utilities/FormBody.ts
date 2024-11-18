@@ -24,16 +24,6 @@ export default class FormBody<T = Record<string, unknown>> {
     }
   }
 
-  public get<Type>(key: string): Type {
-    if (!this.data[key as keyof T])
-      throw new FormBodyError("api.validate", { key })
-    return this.data[key as keyof T] as Type
-  }
-
-  public has(key: string): boolean {
-    return this.data[key as keyof T] !== undefined
-  }
-
   public async validate(schema: Schema): Promise<T> {
     try {
       await schema.validate(this.data)
