@@ -7,7 +7,7 @@ class ApiCall {
     cacheTag: string[] = []
   ) => fetch(url.startsWith("http")
     ? url
-    : `${process.env.HOST_URL}/${url}`, {
+    : `${process.env.HOST_URL}${url}`, {
     method,
     headers: {
       ...(body instanceof FormData
