@@ -3,7 +3,7 @@ import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
 import dictionary from "@/i18n"
 import { getCategories } from "@/services/category"
-import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconEdit, IconEye, IconPlus, IconTrash } from "@tabler/icons-react"
 import classNames from "classnames"
 import Link from "next/link"
 import { FC } from "react"
@@ -30,6 +30,7 @@ const CategoriesPage: FC<PageComponent> = async () => {
               dictionary.categories.main.table.name,
               dictionary.categories.main.table.spot,
               dictionary.categories.main.table.keywords,
+              dictionary.categories.main.table.blogs,
               dictionary.categories.main.table.edit,
               dictionary.categories.main.table.delete
             ].map((column) =>
@@ -55,22 +56,40 @@ const CategoriesPage: FC<PageComponent> = async () => {
                 category.spot,
                 category.keywords,
                 <Link
+                  key="blogs"
+                  href={`/categories/blogs/${category.slug}`}
+                  className="absolute inset-0 grid place-items-center group"
+                >
+                  <div className="transition-all p-3 rounded-full 
+                    group-hover:bg-sky-500 group-hover:text-neutral-100
+                    group-hover:shadow"
+                  >
+                    <IconEye />
+                  </div>
+                </Link>,
+                <Link
                   key="edit"
                   href={`/categories/edit/${category.slug}`}
-                  className="absolute inset-0 grid place-items-center
-                  hover:bg-secondary-500 hover:text-neutral-900
-                  transition-all"
+                  className="absolute inset-0 grid place-items-center group"
                 >
-                  <IconEdit />
+                  <div className="transition-all p-3 rounded-full
+                    group-hover:bg-secondary-500 group-hover:text-neutral-100
+                    group-hover:shadow"
+                  >
+                    <IconEdit />
+                  </div>
                 </Link>,
                 <Link
                   key="delete"
-                  className="absolute inset-0 grid place-items-center
-                  hover:bg-red-500 hover:text-neutral-100
-                  transition-all"
+                  className="absolute inset-0 grid place-items-center group"
                   href={`/categories/delete/${category.slug}`}
                 >
-                  <IconTrash />
+                  <div className="transition-all p-3 rounded-full
+                    group-hover:bg-red-500 group-hover:text-neutral-100
+                    group-hover:shadow"
+                  >
+                    <IconTrash />
+                  </div>
                 </Link>
               ].map((cell, index) =>
                 <td

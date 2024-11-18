@@ -1,24 +1,20 @@
-import FormBlogAdd from "@/components/forms/FormBlogAdd"
+import FormBlog from "@/components/forms/FormBlog"
 import { FC } from "react"
 import "@/design/article.css"
 import "@/design/highlight.css"
 import Content from "@/components/layout/Content"
+import { getCategories } from "@/services/category"
 
-const NewBlogPage: FC = () => {
+const NewBlogPage: FC<PageComponent> = async () => {
+  const categories = await (await getCategories()).json()
+
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" },
     { name: "new", href: "/blogs/new" }
   ]}>
-    <FormBlogAdd
-      categories={[{
-        id: "1",
-        name: "TypeScript",
-        slug: "typescript"
-      }, {
-        id: "2",
-        name: "Bicycle",
-        slug: "bicycle"
-      }]}
+    <FormBlog
+      mode="add"
+      categories={categories}
     />
   </Content>
 }
