@@ -1,5 +1,5 @@
-type PageComponent = {
-  params: Promise<Record<string, string>>
+type PageComponent<Context> = {
+  params: Promise<Context>
   searchParams: Promise<Record<string, string | undefined>>
 }
 
