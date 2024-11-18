@@ -14,8 +14,12 @@ interface IBlogPreviewProps {
 }
 
 const BlogPreview: FC<IBlogPreviewProps> = ({ preview }) => {
-  return <article className="prose prose-neutral dark:prose-invert max-w-none w-full">
-    <span className="text-2xl text-neutral-500 font-bold">{dictionary.blogs.preview.title}</span>
+  return <article className="prose prose-neutral dark:prose-invert
+    max-w-none w-full"
+  >
+    <span className="text-2xl text-neutral-500 font-bold">
+      {dictionary.blogs.preview.title}
+    </span>
 
     <hr />
 
@@ -30,9 +34,13 @@ const BlogPreview: FC<IBlogPreviewProps> = ({ preview }) => {
         height={576}
         src={URL.createObjectURL(preview.cover || new Blob())}
         alt={preview.title}
-        className="rounded-lg border-2 border-neutral-200 dark:border-neutral-800 aspect-video"
+        className="rounded-lg border-2 aspect-video
+        border-neutral-200 dark:border-neutral-800"
       />
-      : <div className="bg-spiral bg-cover aspect-video flex flex-col items-center justify-center text-xl bg-neutral-200 dark:bg-neutral-800 rounded-lg" >
+      : <div className="bg-spiral bg-cover aspect-video flex flex-col
+        items-center justify-center text-xl rounded-lg
+        bg-neutral-200 dark:bg-neutral-800"
+      >
         <IconImageInPicture
           size={128}
           stroke={1.25}
