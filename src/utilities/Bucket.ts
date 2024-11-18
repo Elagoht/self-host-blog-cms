@@ -36,16 +36,16 @@ class Bucket {
   public static uploadFile = async (
     file: File | Sharp,
     filePath: string
-  ): Promise<void> => {
+  ): Promise<string> => {
     await Bucket.createDirectory(path.dirname(filePath))
 
     try {
-      if (file instanceof File) return await fs.writeFile(
+      if (file instanceof File) await fs.writeFile(
         path.join(Bucket.path, filePath),
         Buffer.from(await file.arrayBuffer())
       )
-
-      await file.toFile(path.join(Bucket.path, filePath))
+      else await file.toFile(path.join(Bucket.path, filePath))
+      return filePath
     } catch {
       throw new BucketError("save")
     }
