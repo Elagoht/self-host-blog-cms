@@ -13,7 +13,7 @@ export default class FormBody<T = Record<string, unknown>> {
 
   public static async fromRequest<T>(
     request: Request,
-    type: "json" | "form" = "json"
+    type: FormBodyType = FormBodyType.JSON
   ): Promise<FormBody<T>> {
     try {
       return new FormBody(type === "json"
@@ -40,4 +40,9 @@ export class FormBodyError extends Error {
     this.name = "ValidateError"
     this.message = Message.format(message, args)
   }
+}
+
+export enum FormBodyType {
+  JSON = "json",
+  FORM_DATA = "formData"
 }
