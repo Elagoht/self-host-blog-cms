@@ -13,7 +13,7 @@ export const POST = ApiEndpoint(async (
   ).validate(loginSchema)
 
   if (
-    validated.username !== process.env.USERNAME ||
+    validated.username !== process.env.USER_NAME ||
     validated.passphrase !== process.env.PASSPHRASE
   ) return Response.json({
     message: dictionary.auth.login.failure
