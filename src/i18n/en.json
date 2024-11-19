@@ -1,6 +1,6 @@
 {
   "branding": {
-    "title": "OwnBlog CMS"
+    "title": "OwnBlog"
   },
   "auth": {
     "login": {
@@ -17,7 +17,8 @@
       "status": {
         "published": "Published",
         "draft": "Draft"
-      }
+      },
+      "empty": "No blogs found."
     },
     "main": {
       "title": "Blogs",

@@ -43,7 +43,7 @@ const config: Config = {
         "dashboard": "auto 1fr",
       },
       gridTemplateColumns: {
-        "dashboard": "20rem 1fr",
+        "dashboard": "16rem 1fr",
         "cards": "repeat(auto-fill, minmax(16rem, 1fr))"
       }
     }
