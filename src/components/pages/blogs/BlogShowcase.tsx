@@ -6,6 +6,7 @@ import BlogCard from "./BlogCard"
 import { IconLayoutGrid, IconLayoutRows, IconPlus } from "@tabler/icons-react"
 import Button from "@/components/formElements/Button"
 import dictionary from "@/i18n"
+import BlogCardEmpty from "./BlogCardEmpty"
 
 type BlogShowcaseProps = {
   blogs: BlogResponse[]
@@ -42,13 +43,16 @@ const BlogShowcase: FC<BlogShowcaseProps> = ({ blogs }) => {
       "grid-cols-cards": layout === "grid",
       "grid-cols-1": layout === "list"
     })}>
-      {blogs.map(blog => (
-        <BlogCard
-          key={blog.id}
-          blog={blog}
-          layout={layout}
-        />
-      ))}
+      {blogs.length === 0
+        ? <BlogCardEmpty />
+        : blogs.map(blog => (
+          <BlogCard
+            key={blog.id}
+            blog={blog}
+            layout={layout}
+          />
+        ))
+      }
     </div>
   </>
 }

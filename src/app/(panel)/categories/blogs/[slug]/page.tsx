@@ -1,5 +1,6 @@
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
+import BlogShowcase from "@/components/pages/blogs/BlogShowcase"
 import dictionary from "@/i18n"
 import { getCategory, getCategoryBlogs } from "@/services/category"
 import Message from "@/utilities/Message"
@@ -17,7 +18,7 @@ const CategoryBlogsPage: FC<PageComponent<Context>> = async ({
 
   return <Content breadcrumbs={[
     { name: "categories", href: "/categories" },
-    { name: "relatedBlogs", href: "/categories/blogs" }
+    { text: category.name, href: "/categories/blogs" }
   ]}>
     <Container
       title={dictionary.categories.blogs.title}
@@ -25,12 +26,7 @@ const CategoryBlogsPage: FC<PageComponent<Context>> = async ({
         category: category.name
       })}
     >
-      <ul>
-        {relatedBlogs.map(blog => <li key={blog.id}>
-          <h2>{blog.title}</h2>
-          <p>{blog.content}</p>
-        </li>)}
-      </ul>
+      <BlogShowcase blogs={relatedBlogs} />
     </Container>
   </Content>
 }

@@ -10,13 +10,13 @@ export const GET = ApiEndpoint<Context>(async (
   request,
   context
 ) => {
-  const category = await db.category.findUnique({
-    where: { slug: (await context.params).slug }
+  const blogs = await db.blog.findMany({
+    where: { category: { slug: { equals: (await context.params).slug } } }
   })
 
-  if (!category) return Response.json({
+  if (!Array.isArray(blogs)) return Response.json({
     message: dictionary.api.error.notFound
   })
 
-  return Response.json(category, { status: 200 })
+  return Response.json(blogs, { status: 200 })
 }, ApiType.public)
