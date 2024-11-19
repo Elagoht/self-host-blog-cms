@@ -51,7 +51,7 @@ export const PATCH = ApiEndpoint<Context>(async (
   })
 
   let cover
-  if (validated.cover) {
+  if (validated.cover instanceof File) {
     // Delete existing cover image
     await Bucket.deleteMatchingFiles(
       "covers",

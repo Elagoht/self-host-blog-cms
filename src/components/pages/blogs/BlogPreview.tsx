@@ -7,9 +7,9 @@ import { FC } from "react"
 interface IBlogPreviewProps {
   dictionary: Dictionary
   preview: {
-    title: string
-    cover: File | null
-    content: string
+    title: BlogFormModel["title"]
+    cover: BlogFormModel["cover"]
+    content: BlogFormModel["content"]
   }
 }
 

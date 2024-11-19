@@ -118,7 +118,8 @@
       "max": "{{field}} field must be at most {{max}} characters.",
       "image": "{{field}} field must be an image.",
       "large": "{{field}} field must be less than {{size}}.",
-      "date": "{{field}} field must be a valid date."
+      "date": "{{field}} field must be a valid date.",
+      "url": "{{field}} field must be a valid URL."
     },
     "field": {
       "username": "User Name",

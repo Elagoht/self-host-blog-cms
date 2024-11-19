@@ -1,7 +1,7 @@
 type BlogFormModel = {
   title: string
   content: string
-  cover: File | null
+  cover: File | null | string
   description: string
   spot: string
   keywords: string
@@ -10,7 +10,7 @@ type BlogFormModel = {
 }
 
 type BlogRequest = BlogFormModel & {
-  cover: File
+  cover: File | string
 }
 
 type BlogResponse = BlogRequest & {

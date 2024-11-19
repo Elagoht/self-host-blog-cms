@@ -44,6 +44,7 @@ const FormBlog: FC<FormBlogProps> = ({
   return <Formik<BlogFormModel>
     initialValues={initialValues ? {
       ...initialValues,
+      cover: String(initialValues.cover),
       category: initialValues.category.slug
     } : {
       title: "",

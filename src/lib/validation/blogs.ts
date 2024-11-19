@@ -7,12 +7,24 @@ const rules = {
   content: string()
     .min(100, Message.errorMessage("min", "content", 100)),
   cover: mixed()
-    .test("file must be an image",
+    .test(
+      "file must be an image",
       Message.errorMessage("image", "cover"),
-      (value) => value instanceof File && value.type.startsWith("image/")
-    ).test("file must be less than 10 MB",
+      (value) =>
+        !(value instanceof File) ||
+        value.type.startsWith("image/")
+    ).test(
+      "file must be less than 10 MB",
       Message.errorMessage("large", "cover", "10 MB"),
-      (value) => value instanceof File && value.size < 10 * 1024 * 1024
+      (value) =>
+        !(value instanceof File) ||
+        value.size < 10 * 1024 * 1024
+    ).test(
+      "string must be a valid URL",
+      Message.errorMessage("url", "cover"),
+      (value) =>
+        !(typeof value === "string") ||
+        /^\/uploads\/covers\//.test(value)
     ),
   keywords: string(),
   description: string()
