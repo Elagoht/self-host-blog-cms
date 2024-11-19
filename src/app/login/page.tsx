@@ -9,7 +9,7 @@ const LoginPage: FC<PageComponent> = async ({
   const { next } = await searchParams
 
   return <main className="p-4 gap-4 max-w-screen-sm w-full bg-neutral-100
-  dark:bg-neutral-900 rounded-xl items-center flex flex-col shadow-lg"
+    dark:bg-neutral-900 rounded-xl items-center flex flex-col shadow-lg"
   >
     <IconUserScan size={96} />
 
