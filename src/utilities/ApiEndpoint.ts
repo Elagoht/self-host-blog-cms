@@ -36,6 +36,7 @@ const ApiEndpoint = <T>(
 
       return await handler(request, context)
     } catch (error) {
+      console.error(error)
       return error instanceof FormBodyError
         ? Response.json({
           message: error.message,

@@ -32,7 +32,7 @@ export const POST = ApiEndpoint(async (
         updatedAt: new Date(),
         cover: await Bucket.uploadFile(
           validated.cover,
-          `covers/${slug}.webp`
+          `/covers/${slug}---${Date.now()}.webp`
         ),
         readTime: TypeWriter.readTime(validated.content),
         published: String(validated.published) !== "false",
