@@ -52,21 +52,18 @@ export const PATCH = ApiEndpoint<Context>(async (
 
   let cover
   if (validated.cover) {
-    console.log("Deleting existing cover")
-    console.log(existing.cover.replace(
-      /^\/uploads\/covers\//,
-      ""
-    ).replace(/---\d+.*/, ""))
+    // Delete existing cover image
     await Bucket.deleteMatchingFiles(
       "covers",
       new RegExp(existing.cover.replace(
         /^\/uploads\/covers\//,
         ""
-      ).replace(/---\d+.*/, ""))
+      ).replace(/\+\d+.*/, ""))
     )
+    // Upload new cover image
     cover = await Bucket.uploadFile(
       validated.cover,
-      `covers/${slug}---${Date.now()}.webp`
+      `covers/${slug}+${Date.now()}.webp`
     )
   }
 
