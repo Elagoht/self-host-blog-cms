@@ -18,7 +18,9 @@ export const POST = ApiEndpoint(async (
     )
   ).validate(blogAddScheme)
 
-  const slug = slugify(validated.title, { lower: true, trim: true })
+  const slug = slugify(validated.title, {
+    lower: true, trim: true, strict: true
+  })
 
   return Response.json(
     await db.blog.create({
@@ -34,7 +36,7 @@ export const POST = ApiEndpoint(async (
         ),
         readTime: TypeWriter.readTime(validated.content),
         published: String(validated.published) !== "false",
-        category: { connect: { id: Number(validated.category) } }
+        category: { connect: { slug: validated.category } }
       }
     }), {
     status: 201

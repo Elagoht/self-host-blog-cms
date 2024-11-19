@@ -45,7 +45,7 @@ class Bucket {
         Buffer.from(await file.arrayBuffer())
       )
       else await file.toFile(path.join(Bucket.path, filePath))
-      return filePath
+      return `/uploads/${filePath}`
     } catch {
       throw new BucketError("save")
     }

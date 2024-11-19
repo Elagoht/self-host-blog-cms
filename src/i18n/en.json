@@ -13,6 +13,12 @@
     }
   },
   "blogs": {
+    "card": {
+      "status": {
+        "published": "Published",
+        "draft": "Draft"
+      }
+    },
     "main": {
       "title": "Blogs",
       "description": "Here are the list of your blogs.",
@@ -135,7 +141,8 @@
     "error": {
       "server": "Server encountered an error. Please try again later.",
       "badRequest": "Please check your input.",
-      "unauthorized": "You are not authorized to perform this action."
+      "unauthorized": "You are not authorized to perform this action.",
+      "notFound": "Resource not found."
     }
   },
   "breadcrumbs": {

@@ -42,14 +42,17 @@ const FormBlog: FC<FormBlogProps> = ({
   >("vertical")
 
   return <Formik<BlogFormModel>
-    initialValues={initialValues || {
+    initialValues={initialValues ? {
+      ...initialValues,
+      category: initialValues.category.slug
+    } : {
       title: "",
       content: "",
       cover: null,
       keywords: "",
       description: "",
       spot: "",
-      category: -1,
+      category: categories[0].slug,
       published: false
     }}
     validationSchema={blogAddScheme}
@@ -57,8 +60,7 @@ const FormBlog: FC<FormBlogProps> = ({
       const response = await (mode === "add"
         ? postBlog(values as BlogRequest)
         : patchBlog(
-          slug,
-          Object.fromEntries(Object.entries(
+          slug, Object.fromEntries(Object.entries(
             initialValues
           ).filter(([key]) => values[
             key as keyof BlogFormModel
@@ -195,7 +197,7 @@ const FormBlog: FC<FormBlogProps> = ({
                 {categories.map((category) =>
                   <option
                     key={category.id}
-                    value={category.id}
+                    value={category.slug}
                   >
                     {category.name}
                   </option>
@@ -219,7 +221,10 @@ const FormBlog: FC<FormBlogProps> = ({
                   : <IconDeviceFloppy />
                 }
               >
-                {dictionary.blogs.new.submit}
+                {dictionary.blogs[mode === "edit"
+                  ? "edit"
+                  : "new"
+                ].submit}
               </Button>
             </section>
 

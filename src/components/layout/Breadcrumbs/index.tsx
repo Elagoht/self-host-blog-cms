@@ -29,9 +29,12 @@ const Breadcrumbs: FC = () => {
             dark:hover:bg-neutral-700 transition-all first:ml-2 last:pr-4
             last:rounded-r-full whitespace-nowrap"
           >
-            {dictionary.breadcrumbs[
+            {breadcrumb.name
+              ? dictionary.breadcrumbs[
               breadcrumb.name as keyof Dictionary["breadcrumbs"]
-            ] || breadcrumb.name}
+              ] || breadcrumb.name
+              : breadcrumb.text
+            }
           </Link>
 
           {index !== breadcrumbs.length - 1 &&

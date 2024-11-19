@@ -20,7 +20,9 @@ export const POST = ApiEndpoint(async (
       description: validated.description,
       spot: validated.spot,
       keywords: validated.keywords,
-      slug: slugify(validated.name, { lower: true, trim: true })
+      slug: slugify(validated.name, {
+        lower: true, trim: true, strict: true
+      })
     }
   }))
 })

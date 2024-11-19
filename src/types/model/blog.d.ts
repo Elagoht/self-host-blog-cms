@@ -5,7 +5,7 @@ type BlogFormModel = {
   description: string
   spot: string
   keywords: string
-  category: number
+  category: string
   published: boolean
 }
 
@@ -18,4 +18,11 @@ type BlogResponse = BlogRequest & {
   readonly slug: string
   readonly createdAt: string
   readonly updatedAt: string
+  readonly cover: string
+  readonly readTime: number
+  readonly readCount: number
+  readonly category: {
+    readonly slug: string
+    readonly name: string
+  }
 }

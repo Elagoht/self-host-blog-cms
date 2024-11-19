@@ -32,7 +32,10 @@ const BlogPreview: FC<IBlogPreviewProps> = ({ preview }) => {
         unoptimized
         width={1024}
         height={576}
-        src={URL.createObjectURL(preview.cover || new Blob())}
+        src={preview.cover instanceof File
+          ? URL.createObjectURL(preview.cover || new Blob())
+          : preview.cover
+        }
         alt={preview.title}
         className="rounded-lg border-2 aspect-video
         border-neutral-200 dark:border-neutral-800"
