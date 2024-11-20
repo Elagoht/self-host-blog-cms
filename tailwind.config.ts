@@ -11,6 +11,15 @@ const config: Config = {
       backgroundImage: {
         "spiral": "url('/assets/design/ssspiral.svg')"
       },
+      animation: {
+        "fade-in": "fadeIn .3s ease-in-out"
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" }
+        }
+      },
       colors: {
         primary: {
           50: "#fef2f4",

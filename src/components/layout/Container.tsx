@@ -12,7 +12,7 @@ const Container: FC<ParentComponent<ContainerProps>> = ({
   <div
     {...props}
     className={classNames(
-      "max-w-screen-lg mx-auto w-full space-y-4",
+      "max-w-screen-lg mx-auto w-full space-y-4 animate-fade-in",
       props.className
     )}
   >
