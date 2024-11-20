@@ -24,8 +24,7 @@
       "title": "Blogs",
       "description": "Here are the list of your blogs.",
       "new": "New Blog",
-      "edit": "Edit Blog",
-      "delete": "Delete Blog"
+      "edit": "Edit Blog"
     },
     "new": {
       "title": "New Blog",
@@ -53,7 +52,17 @@
       "description": "Edit the blog details.",
       "submit": "Update Blog",
       "success": "Blog updated successfully.",
-      "failure": "Failed to update blog."
+      "failure": "Failed to update blog.",
+      "delete": {
+        "title": "Confirm Delete",
+        "message": "You are about to delete the blog named <b>\"{{title}}\"</b>. This action cannot be undone.",
+        "buttons": {
+          "confirm": "Delete",
+          "cancel": "Cancel"
+        },
+        "success": "Blog deleted successfully.",
+        "failure": "Failed to delete blog."
+      }
     },
     "preview": {
       "title": "Blog Preview",
@@ -142,6 +151,11 @@
     }
   },
   "api": {
+    "success": {
+      "created": "Resource created successfully.",
+      "updated": "Resource updated successfully.",
+      "deleted": "Resource deleted successfully."
+    },
     "error": {
       "server": "Server encountered an error. Please try again later.",
       "badRequest": "Please check your input.",

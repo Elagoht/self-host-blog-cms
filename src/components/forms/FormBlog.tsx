@@ -94,8 +94,17 @@ const FormBlog: FC<FormBlogProps> = ({
       <Form>
         <div className="flex gap-4 items-start max-md:flex-col">
           <BlogActions
-            preview={preview}
-            setPreview={setPreview}
+            {...{
+              preview,
+              setPreview,
+              ...(mode === "edit" ? {
+                mode: "edit",
+                slug,
+                title: values.title,
+              } : {
+                mode: "add"
+              })
+            }}
           />
 
           <div className={classNames(

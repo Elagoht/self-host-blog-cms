@@ -88,3 +88,30 @@ export const PATCH = ApiEndpoint<Context>(async (
 
   return Response.json(blog, { status: 200 })
 })
+
+export const DELETE = ApiEndpoint<Context>(async (
+  request,
+  context
+) => {
+  const existing = await db.blog.findUnique({
+    where: { slug: (await context.params).slug }
+  })
+
+  if (!existing) return Response.json({
+    message: dictionary.api.error.notFound
+  })
+
+  await db.blog.delete({
+    where: { slug: (await context.params).slug }
+  })
+
+  await Bucket.deleteMatchingFiles(
+    "covers",
+    new RegExp(existing.cover.replace(
+      /^\/uploads\/covers\//,
+      ""
+    ).replace(/\+\d+.*/, ""))
+  )
+
+  return new Response(null, { status: 204 })
+})

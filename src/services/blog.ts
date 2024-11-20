@@ -47,3 +47,9 @@ export const patchBlog = (
     formData
   )
 }
+
+export const deleteBlog = (
+  slug: string
+) => ApiCall.delete(
+  `/api/blogs/${slug}`
+)

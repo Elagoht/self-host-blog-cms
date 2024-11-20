@@ -1,3 +1,5 @@
+"use client"
+
 import {
   IconEyeOff, IconLayoutBottombarFilled,
   IconLayoutSidebarRightFilled
@@ -22,7 +24,7 @@ const BlogActionLayout: FC<BlogActionLayoutProps> = ({
 
   return <button
     type="button"
-    className="p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+    className="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 shadow-inner"
     onClick={() => {
       const currentIndex = layouts.findIndex(
         layout => layout.key === preview
