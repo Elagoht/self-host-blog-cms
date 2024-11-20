@@ -77,7 +77,8 @@
         "blogs": "Blogs",
         "edit": "Edit",
         "delete": "Delete"
-      }
+      },
+      "empty": "No categories found. Add one now."
     },
     "new": {
       "title": "New Category",
