@@ -13,25 +13,31 @@ type BlogActionLayoutProps = {
 
 const BlogActionLayout: FC<BlogActionLayoutProps> = ({
   preview, setPreview
-}) =>
-  <button
+}) => {
+  const layouts = [
+    <IconLayoutBottombarFilled key="horizontal" />,
+    <IconLayoutSidebarRightFilled key="vertical" />,
+    <IconEyeOff key="disabled" />
+  ]
+
+  return <button
     type="button"
-    className="shadow-md p-2 rounded-full
-  bg-neutral-200 dark:bg-neutral-800"
-    onClick={() => setPreview(
-      preview === "horizontal"
-        ? "vertical"
-        : preview === "vertical"
-          ? "disabled"
-          : "horizontal"
-    )}
+    className="p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+    onClick={() => {
+      const currentIndex = layouts.findIndex(
+        layout => layout.key === preview
+      )
+      const nextIndex = (currentIndex + 1) % layouts.length
+      setPreview(
+        layouts[nextIndex].key as
+        | "horizontal"
+        | "vertical"
+        | "disabled"
+      )
+    }}
   >
-    {preview === "horizontal"
-      ? <IconLayoutBottombarFilled />
-      : preview === "vertical"
-        ? <IconLayoutSidebarRightFilled />
-        : <IconEyeOff />
-    }
+    {layouts.find(layout => layout.key === preview)}
   </button>
+}
 
 export default BlogActionLayout
