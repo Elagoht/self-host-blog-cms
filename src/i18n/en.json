@@ -2,6 +2,13 @@
   "branding": {
     "title": "OwnBlog"
   },
+  "panel": {
+    "notFound": {
+      "title": "404",
+      "message": "Page not found.",
+      "back": "Back to Dashboard"
+    }
+  },
   "auth": {
     "login": {
       "title": "Welcome Back!",

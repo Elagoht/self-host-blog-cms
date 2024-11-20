@@ -4,6 +4,7 @@ import "@/design/article.css"
 import "@/design/highlight.css"
 import { getBlog } from "@/services/blog"
 import { getCategories } from "@/services/category"
+import { notFound } from "next/navigation"
 import { FC } from "react"
 
 type Context = { slug: string }
@@ -15,6 +16,8 @@ const BlogEditPage: FC<PageComponent<Context>> = async ({
 
   const blog = await (await getBlog(slug)).json()
   const categories = await (await getCategories()).json()
+
+  if (!blog.id) notFound()
 
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" },
