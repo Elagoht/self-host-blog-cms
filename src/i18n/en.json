@@ -45,7 +45,8 @@
         "cover": "Cover Image",
         "category": "Category",
         "published": "Published"
-      }
+      },
+      "noCategory": "No categories found. Please create a category first."
     },
     "edit": {
       "title": "Edit Blog",
