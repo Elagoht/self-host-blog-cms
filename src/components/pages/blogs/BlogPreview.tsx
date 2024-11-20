@@ -14,7 +14,9 @@ interface IBlogPreviewProps {
 }
 
 const BlogPreview: FC<IBlogPreviewProps> = ({ preview }) => {
-  return <article className="prose prose-neutral dark:prose-invert w-full">
+  return <article className="prose prose-neutral dark:prose-invert
+    w-full mx-auto"
+  >
     <span className="text-2xl text-neutral-500 font-bold">
       {dictionary.blogs.preview.title}
     </span>

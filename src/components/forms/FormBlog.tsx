@@ -7,18 +7,16 @@ import Select from "@/components/formElements/Select"
 import TextArea from "@/components/formElements/TextArea"
 import BlogPreview from "@/components/pages/blogs/BlogPreview"
 import dictionary from "@/i18n"
+import { blogAddScheme } from "@/lib/validation/blogs"
 import { patchBlog, postBlog } from "@/services/blog"
-import {
-  IconDeviceFloppy, IconEyeOff, IconLayoutBottombarFilled,
-  IconLayoutSidebarRightFilled, IconLoader
-} from "@tabler/icons-react"
+import { IconDeviceFloppy, IconLoader } from "@tabler/icons-react"
 import classNames from "classnames"
 import { Form, Formik } from "formik"
 import { useRouter } from "next/navigation"
 import { FC, useState } from "react"
 import toast from "react-hot-toast"
 import Switch from "../formElements/Switch"
-import { blogAddScheme } from "@/lib/validation/blogs"
+import BlogActions from "../pages/blogs/BlogActions"
 
 type FormBlogProps = {
   categories: CategoryResponse[]
@@ -95,31 +93,16 @@ const FormBlog: FC<FormBlogProps> = ({
     {({ values, errors, touched, handleChange, setValues, isSubmitting }) =>
       <Form>
         <div className="flex gap-4 items-start max-md:flex-col">
-          <div className="flex gap-4 items-center flex-col sticky top-0">
-            <button
-              type="button"
-              className="shadow-md p-2 rounded-full
-              bg-neutral-200 dark:bg-neutral-800"
-              onClick={() => setPreview(
-                preview === "horizontal"
-                  ? "vertical"
-                  : preview === "vertical"
-                    ? "disabled"
-                    : "horizontal"
-              )}
-            >
-              {preview === "horizontal"
-                ? <IconLayoutBottombarFilled />
-                : preview === "vertical"
-                  ? <IconLayoutSidebarRightFilled />
-                  : <IconEyeOff />
-              }
-            </button>
-          </div>
+          <BlogActions
+            preview={preview}
+            setPreview={setPreview}
+          />
 
           <div className={classNames(
-            "flex gap-4 w-full", {
-            "flex-col max-w-screen-lg mx-auto": preview !== "vertical"
+            "flex gap-4 w-full mx-auto transition-all", {
+            "flex-col max-w-screen-lg": preview !== "vertical",
+            "gap-12": preview === "horizontal",
+            "max-w-screen-2xl": preview === "vertical"
           })}>
             <section className="flex flex-col gap-4 w-full">
               <Input
