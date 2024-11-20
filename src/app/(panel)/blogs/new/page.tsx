@@ -4,9 +4,12 @@ import "@/design/article.css"
 import "@/design/highlight.css"
 import Content from "@/components/layout/Content"
 import { getCategories } from "@/services/category"
+import NoCategoryWarning from "@/components/pages/blogs/NoCategoryWarning"
 
 const NewBlogPage: FC<PageComponent> = async () => {
   const categories = await (await getCategories()).json()
+
+  if (categories.length === 0) return <NoCategoryWarning />
 
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" },
