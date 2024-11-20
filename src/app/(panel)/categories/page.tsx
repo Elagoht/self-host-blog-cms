@@ -1,11 +1,10 @@
 import Button from "@/components/formElements/Button"
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
+import CategoriesTable from "@/components/pages/categories/CategoriesTable"
 import dictionary from "@/i18n"
 import { getCategories } from "@/services/category"
-import { IconEdit, IconEye, IconPlus, IconTrash } from "@tabler/icons-react"
-import classNames from "classnames"
-import Link from "next/link"
+import { IconPlus } from "@tabler/icons-react"
 import { FC } from "react"
 
 const CategoriesPage: FC<PageComponent> = async () => {
@@ -18,94 +17,7 @@ const CategoriesPage: FC<PageComponent> = async () => {
       title={dictionary.categories.main.title}
       description="List of categories"
     >
-      <table className="w-full overflow-clip rounded-lg
-        border-neutral-300 dark:border-neutral-700
-        shadow dark:shadow-neutral-950"
-      >
-        <thead>
-          <tr className="bg-neutral-950 text-neutral-100
-            divide-x divide-neutral-900"
-          >
-            {[
-              dictionary.categories.main.table.name,
-              dictionary.categories.main.table.spot,
-              dictionary.categories.main.table.keywords,
-              dictionary.categories.main.table.blogs,
-              dictionary.categories.main.table.edit,
-              dictionary.categories.main.table.delete
-            ].map((column) =>
-              <th
-                key={column}
-                className="py-2 px-4"
-              >
-                {column}
-              </th>
-            )}
-          </tr>
-        </thead>
-
-        <tbody>
-          {categories.map((category: CategoryResponse) =>
-            <tr
-              key={category.id}
-              className="odd:bg-neutral-200 dark:odd:bg-neutral-800
-              divide-x divide-neutral-300 dark:divide-neutral-950"
-            >
-              {[
-                category.name,
-                category.spot,
-                category.keywords,
-                <Link
-                  key="blogs"
-                  href={`/categories/blogs/${category.slug}`}
-                  className="absolute inset-0 grid place-items-center group"
-                >
-                  <div className="transition-all p-3 rounded-full 
-                    group-hover:bg-sky-500 group-hover:text-neutral-100
-                    group-hover:shadow"
-                  >
-                    <IconEye />
-                  </div>
-                </Link>,
-                <Link
-                  key="edit"
-                  href={`/categories/edit/${category.slug}`}
-                  className="absolute inset-0 grid place-items-center group"
-                >
-                  <div className="transition-all p-3 rounded-full
-                    group-hover:bg-secondary-500 group-hover:text-neutral-100
-                    group-hover:shadow"
-                  >
-                    <IconEdit />
-                  </div>
-                </Link>,
-                <Link
-                  key="delete"
-                  className="absolute inset-0 grid place-items-center group"
-                  href={`/categories/delete/${category.slug}`}
-                >
-                  <div className="transition-all p-3 rounded-full
-                    group-hover:bg-red-500 group-hover:text-neutral-100
-                    group-hover:shadow"
-                  >
-                    <IconTrash />
-                  </div>
-                </Link>
-              ].map((cell, index) =>
-                <td
-                  key={index}
-                  className={classNames({
-                    "px-4 py-2": typeof cell === "string",
-                    "relative": typeof cell !== "string"
-                  })}
-                >
-                  {cell}
-                </td>
-              )}
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <CategoriesTable categories={categories} />
 
       <Button
         href={"/categories/new"}
@@ -115,8 +27,8 @@ const CategoriesPage: FC<PageComponent> = async () => {
       >
         {dictionary.categories.main.new}
       </Button>
-    </Container>
-  </Content>
+    </Container >
+  </Content >
 }
 
 export default CategoriesPage
