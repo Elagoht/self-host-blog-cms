@@ -12,8 +12,8 @@ type BlogCardProps = {
 }
 
 const BlogCard: FC<BlogCardProps> = ({
-      blog, layout = "grid"
-    }) =>
+  blog, layout = "grid"
+}) =>
   <Link
     href={`/blogs/edit/${blog.slug}`}
     className={classNames(
