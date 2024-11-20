@@ -4,7 +4,8 @@ import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, ReactNode } from "react
 
 type ButtonProps = {
   icon?: ReactNode
-  color?: "primary" | "secondary" | "danger" | "success" | "warning",
+  color?: "primary" | "secondary" | "danger" | "success" | "warning"
+  reverse?: boolean
 } & ((ButtonHTMLAttributes<HTMLButtonElement> & {
   href?: never
 }) | (LinkProps & AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -14,7 +15,7 @@ type ButtonProps = {
 
 
 const Button: FC<ButtonProps> = ({
-  color = "primary", icon, href, ...props
+  color = "primary", icon, href, reverse, ...props
 }) => {
   const buttonClass = classNames(
     "p-2 rounded-lg flex items-center gap-2 shadow",
@@ -22,6 +23,7 @@ const Button: FC<ButtonProps> = ({
     "hover:ring-2 hover:ring-offset-2",
     "ring-offset-neutral-50 dark:ring-offset-neutral-900",
     props.className, {
+    "flex-row-reverse": reverse,
     "ring-primary-500 bg-primary-500 text-white": color === "primary",
     "ring-secondary-500 bg-secondary-500 text-white": color === "secondary",
     "ring-red-500 bg-red-500 text-white": color === "danger",
