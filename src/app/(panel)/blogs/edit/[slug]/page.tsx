@@ -34,7 +34,7 @@ const BlogEditPage: FC<PageComponent<Context>> = async ({
       initialValues={blog}
       slug={slug}
     />
-  </Content >
+  </Content>
 }
 
 export default BlogEditPage
