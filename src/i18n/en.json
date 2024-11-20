@@ -117,6 +117,13 @@
       "success": "Category updated successfully.",
       "failure": "Failed to update category."
     },
+    "delete": {
+      "title": "Confirm Delete",
+      "description": {
+        "hasNoBlogs": "The {{name}} category has no blogs associated with it. You can safely delete this category.",
+        "hasBlogs": "The {{name}} category has {{count}} blogs associated with it. You cannot delete this category directly. You can either delete the associated blogs or move them to another category."
+      }
+    },
     "blogs": {
       "title": "Blogs",
       "description": "Here are the list of blogs under \"{{category}}\" category."
@@ -176,6 +183,7 @@
     "categories": "Categories",
     "new": "New",
     "edit": "Edit",
+    "delete": "Delete",
     "relatedBlogs": "Related Blogs"
   },
   "navbar": {
