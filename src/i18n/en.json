@@ -118,11 +118,22 @@
       "failure": "Failed to update category."
     },
     "delete": {
-      "title": "Confirm Delete",
+      "title": "Confirm Deletion of Category \"{{name}}\"",
       "description": {
-        "hasNoBlogs": "The {{name}} category has no blogs associated with it. You can safely delete this category.",
-        "hasBlogs": "The {{name}} category has {{count}} blogs associated with it. You cannot delete this category directly. You can either delete the associated blogs or move them to another category."
-      }
+        "hasNoBlogs": "The \"{{name}}\" category has no blogs associated with it. You can safely delete this category.",
+        "hasOneBlog": "The \"{{name}}\" category has 1 blog associated with it. You can either delete the associated blog or move it to another category.",
+        "hasManyBlogs": "The \"{{name}}\" category has {{count}} blogs associated with it. You can either delete the associated blogs or move them to another category."
+      },
+      "table": {
+        "title": "Title",
+        "cover": "Cover",
+        "action": "Action",
+        "delete": "Delete",
+        "move": "Move",
+        "newCategory": "New Category: {{name}}",
+        "noOtherCategory": "No other categories found."
+      },
+      "submit": "Confirm Changes & Delete"
     },
     "blogs": {
       "title": "Blogs",

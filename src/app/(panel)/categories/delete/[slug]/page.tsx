@@ -1,7 +1,8 @@
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
+import CategoryDeleteTable from "@/components/pages/categories/CategoryDeleteTable"
 import dictionary from "@/i18n"
-import { getCategory, getCategoryBlogs } from "@/services/category"
+import { getCategories, getCategory, getCategoryBlogs } from "@/services/category"
 import Message from "@/utilities/Message"
 import { notFound } from "next/navigation"
 import { FC } from "react"
@@ -16,32 +17,36 @@ const CategoryDeletePage: FC<PageComponent<Context>> = async ({
   if (!category.id) notFound()
 
   const blogs = await (await getCategoryBlogs(slug)).json()
+  const categories = await (await getCategories()).json()
+
+
 
   return <Content breadcrumbs={[
     { name: "categories", href: "/categories" },
     { name: "delete", href: "/categories/delete" }
   ]}>
     <Container
-      title={dictionary.categories.delete.title}
-      description=""
-    >
-      <code className="prose dark:prose-invert">
-        <pre>
-          {JSON.stringify(category, null, 2)}<br />
-
-          {JSON.stringify(blogs, null, 2)}
-        </pre>
-      </code>
-
-      {Message.format(
+      title={Message.format(
+        dictionary.categories.delete.title, {
+        name: category.name
+      })}
+      description={Message.format(
         dictionary.categories.delete.description[blogs.length === 0
           ? "hasNoBlogs"
-          : "hasBlogs"
+          : blogs.length === 1
+            ? "hasOneBlog"
+            : "hasManyBlogs"
         ], {
         name: category.name,
         count: blogs.length
       })}
-
+    >
+      <CategoryDeleteTable
+        blogs={blogs}
+        categories={categories.filter(({ id }) =>
+          id !== category.id
+        )}
+      />
     </Container>
   </Content>
 }
