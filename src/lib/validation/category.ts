@@ -3,12 +3,12 @@ import { object, string } from "yup"
 
 const rules = {
   name: string()
-    .max(50, Message.errorMessage("max", "name", { length: 50 })),
+    .max(50, Message.errorMessage("max", "name", { max: 50 })),
   description: string()
-    .min(75, Message.errorMessage("min", "description", { length: 75 }))
-    .max(155, Message.errorMessage("max", "description", { length: 155 })),
+    .min(75, Message.errorMessage("min", "description", { min: 75 }))
+    .max(155, Message.errorMessage("max", "description", { max: 155 })),
   spot: string()
-    .max(75, Message.errorMessage("max", "spot", { length: 75 })),
+    .max(75, Message.errorMessage("max", "spot", { max: 75 })),
   keywords: string()
 }
 

@@ -3,9 +3,9 @@ import { mixed, object, string } from "yup"
 
 const rules = {
   title: string()
-    .max(255, Message.errorMessage("max", "title", 255)),
+    .max(255, Message.errorMessage("max", "title", { max: 255 })),
   content: string()
-    .min(100, Message.errorMessage("min", "content", 100)),
+    .min(100, Message.errorMessage("min", "content", { min: 100 })),
   cover: mixed()
     .test(
       "file must be an image",
@@ -15,7 +15,7 @@ const rules = {
         value.type.startsWith("image/")
     ).test(
       "file must be less than 10 MB",
-      Message.errorMessage("large", "cover", "10 MB"),
+      Message.errorMessage("large", "cover", { size: "10 MB" }),
       (value) =>
         !(value instanceof File) ||
         value.size < 10 * 1024 * 1024
@@ -28,10 +28,10 @@ const rules = {
     ),
   keywords: string(),
   description: string()
-    .min(75, Message.errorMessage("min", "description", 75))
-    .max(155, Message.errorMessage("max", "description", 155)),
+    .min(75, Message.errorMessage("min", "description", { min: 75 }))
+    .max(155, Message.errorMessage("max", "description", { max: 155 })),
   spot: string()
-    .max(75, Message.errorMessage("max", "spot", 75)),
+    .max(75, Message.errorMessage("max", "spot", { max: 75 })),
   category: string()
 }
 
