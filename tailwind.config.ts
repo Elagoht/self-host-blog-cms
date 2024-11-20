@@ -54,7 +54,10 @@ const config: Config = {
       gridTemplateColumns: {
         "dashboard": "16rem 1fr",
         "cards": "repeat(auto-fill, minmax(16rem, 1fr))"
-      }
+      },
+      content: {
+        empty: "''"
+      },
     }
   },
   plugins: [typography]
