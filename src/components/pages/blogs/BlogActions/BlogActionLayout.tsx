@@ -24,7 +24,8 @@ const BlogActionLayout: FC<BlogActionLayoutProps> = ({
 
   return <button
     type="button"
-    className="p-2 rounded-full bg-neutral-200 dark:bg-neutral-800 shadow-inner"
+    className="p-2 rounded-full  shadow-inner
+    bg-neutral-200 dark:bg-neutral-800"
     onClick={() => {
       const currentIndex = layouts.findIndex(
         layout => layout.key === preview
