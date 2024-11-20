@@ -1,12 +1,16 @@
 import { blogAddScheme } from "@/lib/validation/blogs"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Bucket from "@/utilities/Bucket"
-import FormBody, { FormBodyType } from "@/utilities/FormBody"
+import FormBody, { FormBodyError, FormBodyType } from "@/utilities/FormBody"
+import Message from "@/utilities/Message"
+import Studio from "@/utilities/Studio"
 import TypeWriter from "@/utilities/TypeWriter"
 import { PrismaClient } from "@prisma/client"
 import slugify from "slugify"
 
-const db = new PrismaClient()
+const db = new PrismaClient({
+  log: ["query", "info", "warn", "error"]
+})
 
 export const POST = ApiEndpoint(async (
   request
@@ -18,6 +22,12 @@ export const POST = ApiEndpoint(async (
     )
   ).validate(blogAddScheme)
 
+  if (
+    !(validated.cover instanceof File)
+  ) throw new FormBodyError(
+    Message.errorMessage("image", "cover")
+  )
+
   const slug = slugify(validated.title, {
     lower: true, trim: true, strict: true
   })
@@ -28,10 +38,8 @@ export const POST = ApiEndpoint(async (
         ...validated,
         slug,
         readCount: 0,
-        createdAt: new Date(),
-        updatedAt: new Date(),
         cover: await Bucket.uploadFile(
-          validated.cover,
+          await new Studio(validated.cover).printPhoto(),
           /**
            * A timestamp is added with a separator
            * to prevent caching issues.
@@ -39,7 +47,7 @@ export const POST = ApiEndpoint(async (
            * URL-safe and won't be included when
            * slugifying the filename.
            */
-          `/covers/${slug}+${Date.now()}.webp`
+          `covers/${slug}+${Date.now()}.webp`
         ),
         readTime: TypeWriter.readTime(validated.content),
         published: String(validated.published) !== "false",

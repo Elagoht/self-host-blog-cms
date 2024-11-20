@@ -8,7 +8,7 @@ generator client {
 }
 
 model Blog {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   title       String
   slug        String   @unique
   content     String
@@ -22,7 +22,8 @@ model Blog {
   readTime    Int
   readCount   Int
 
-  category Category @relation(fields: [id], references: [id])
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
 }
 
 model Category {

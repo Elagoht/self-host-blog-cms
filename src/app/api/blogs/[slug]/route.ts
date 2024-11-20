@@ -3,6 +3,7 @@ import { blogEditScheme } from "@/lib/validation/blogs"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Bucket from "@/utilities/Bucket"
 import FormBody, { FormBodyType } from "@/utilities/FormBody"
+import Studio from "@/utilities/Studio"
 import TypeWriter from "@/utilities/TypeWriter"
 import { PrismaClient } from "@prisma/client"
 import slugify from "slugify"
@@ -50,7 +51,7 @@ export const PATCH = ApiEndpoint<Context>(async (
     lower: true, trim: true, strict: true
   })
 
-  let cover
+  let { cover } = existing
   if (validated.cover instanceof File) {
     // Delete existing cover image
     await Bucket.deleteMatchingFiles(
@@ -60,9 +61,9 @@ export const PATCH = ApiEndpoint<Context>(async (
         ""
       ).replace(/\+\d+.*/, ""))
     )
-    // Upload new cover image
+    // Optimize and upload new cover image
     cover = await Bucket.uploadFile(
-      validated.cover,
+      await new Studio(validated.cover).printPhoto(),
       `covers/${slug}+${Date.now()}.webp`
     )
   }
@@ -77,9 +78,10 @@ export const PATCH = ApiEndpoint<Context>(async (
     data: {
       ...validated,
       slug,
+      cover,
       readTime,
-      cover: cover || existing.cover,
       published: String(validated.published) !== "false",
+      updatedAt: new Date(),
       category: { connect: { slug: validated.category } }
     }
   })
