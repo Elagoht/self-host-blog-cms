@@ -28,8 +28,7 @@ const Switch: FC<SwitchProps> = ({
       />
 
       <div className={classNames(
-        "w-10 h-6 ",
-        "rounded-full p-1 relative transition-all", {
+        "w-10 h-6 rounded-full p-1 relative transition-all", {
         "bg-primary-500": props.checked,
         "bg-neutral-200 dark:bg-neutral-700": !props.checked,
         "cursor-not-allowed": props.disabled
@@ -44,8 +43,9 @@ const Switch: FC<SwitchProps> = ({
       </div>
     </label>
 
-    {error && touched && <small className="text-red-500">{error}</small>}
-
+    {error && touched &&
+      <small className="text-red-500">{error}</small>
+    }
   </div>
 }
 
