@@ -1,5 +1,7 @@
 import FormBlog from "@/components/forms/FormBlog"
 import Content from "@/components/layout/Content"
+import "@/design/article.css"
+import "@/design/highlight.css"
 import { getBlog } from "@/services/blog"
 import { getCategories } from "@/services/category"
 import { FC } from "react"
