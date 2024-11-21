@@ -17,8 +17,14 @@ import { escapeHtml } from "markdown-it/lib/common/utils.mjs"
 
 const convertMarkdownToHtml = (content: string): string => {
   const converter = new MarkdownIt({
-    highlight: function (str, lang) {
-      const begin = `<div class="code-container"><div class="code-header"><span class="code-lang">${lang}</span><button type="button" class="code-copy" onclick="navigator.clipboard.writeText(\`${escapeHtml(str).replace(/`/g, "\\`").replace(/\$/g, "\\$")}\`)">📋</button></div><div class="hljs">`
+    highlight: (str, lang) => {
+      const begin = `<div class="code-container"><div class="code-header"><span class="code-lang">${lang}</span><button type="button" class="code-copy" onclick="navigator.clipboard.writeText(\`${escapeHtml(
+        str
+      ).replace(
+        /`/g, "\\`"
+      ).replace(
+        /\$/g, "\\$"
+      )}\`)">📋</button></div><div class="hljs">`
       const end = "</div></div>"
 
       if (lang && hljs.getLanguage(lang))
