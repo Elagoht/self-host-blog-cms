@@ -22,7 +22,8 @@ const CategoryBlogsPage: FC<PageComponent<Context>> = async ({
   ]}>
     <Container
       title={dictionary.categories.blogs.title}
-      description={Message.format(dictionary.categories.blogs.description, {
+      description={Message.format(
+        dictionary.categories.blogs.description, {
         category: category.name
       })}
     >
