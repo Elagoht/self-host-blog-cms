@@ -9,6 +9,14 @@ type Context = Promise<{ slug: string }>
 
 const db = new PrismaClient()
 
+/**
+ * This API route is a POST request because
+ * it takes a body with a list of categories
+ * to transfer or delete.
+ *
+ * DELETE requests are not allowed to have
+ * a body, so we use POST instead.
+ */
 export const POST = ApiEndpoint<Context>(async (
   request, context
 ) => {
