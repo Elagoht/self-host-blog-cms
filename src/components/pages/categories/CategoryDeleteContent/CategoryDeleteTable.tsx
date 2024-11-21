@@ -24,7 +24,7 @@ type CategoryDeleteTableProps = {
 const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
   categories, blogs, name, slug, list, handleTransfer
 }) => {
-  const [target, setTarget] = useState<CategoryResponse["id"]>(categories[0].slug)
+  const [target, setTarget] = useState<CategoryResponse["id"]>(categories?.[0]?.slug)
   const [selected, setSelected] = useState<Selection>(
     blogs.reduce((all, blog) => {
       all[blog.id] = false
@@ -76,7 +76,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
 
         <Select
           className="!bg-neutral-700"
-          disabled={!someSelected}
+          disabled={!someSelected || !target}
           value={target}
           onChange={({ target }) => setTarget(target.value)}
         >
@@ -96,8 +96,9 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
         <Button
           type="button"
           color="secondary"
-          disabled={!someSelected}
+          disabled={!someSelected || !target}
           onClick={() => {
+            if (!target) return
             setSelected({})
             handleTransfer(
               slug, target, blogs.filter(
