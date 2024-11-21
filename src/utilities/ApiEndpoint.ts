@@ -2,6 +2,7 @@ import { NextRequest } from "next/server"
 import { FormBodyError } from "./FormBody"
 import dictionary from "@/i18n"
 import Auth from "./Auth"
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 
 export enum ApiType {
   public,
@@ -36,13 +37,27 @@ const ApiEndpoint = <T>(
 
       return await handler(request, context)
     } catch (error) {
-      return error instanceof FormBodyError
-        ? Response.json({
-          message: error.message,
-        }, { status: 400 })
-        : Response.json({
-          message: dictionary.api.error.server
-        }, { status: 500 })
+      switch (true) {
+        case error instanceof FormBodyError:
+          return Response.json({
+            message: error.message,
+          }, { status: 400 })
+        case error instanceof PrismaClientKnownRequestError:
+          switch (error.code) {
+            case "P2002":
+              return Response.json({
+                message: dictionary.api.error.uniqueSlug
+              }, { status: 404 })
+            default:
+              return Response.json({
+                message: dictionary.api.error.server
+              }, { status: 500 })
+          }
+        default:
+          return Response.json({
+            message: dictionary.api.error.server
+          }, { status: 500 })
+      }
     }
   }
 

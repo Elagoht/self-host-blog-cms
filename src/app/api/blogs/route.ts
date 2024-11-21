@@ -8,9 +8,7 @@ import TypeWriter from "@/utilities/TypeWriter"
 import { PrismaClient } from "@prisma/client"
 import slugify from "slugify"
 
-const db = new PrismaClient({
-  log: ["query", "info", "warn", "error"]
-})
+const db = new PrismaClient()
 
 export const POST = ApiEndpoint(async (
   request
@@ -31,6 +29,12 @@ export const POST = ApiEndpoint(async (
   const slug = slugify(validated.title, {
     lower: true, trim: true, strict: true
   })
+
+  if (await db.blog.findUnique({
+    where: { slug }
+  })) throw new FormBodyError(
+    Message.errorMessage("uniqueSlug", "title")
+  )
 
   return Response.json(
     await db.blog.create({

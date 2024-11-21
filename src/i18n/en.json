@@ -160,7 +160,8 @@
       "image": "{{field}} field must be an image.",
       "large": "{{field}} field must be less than {{size}}.",
       "date": "{{field}} field must be a valid date.",
-      "url": "{{field}} field must be a valid URL."
+      "url": "{{field}} field must be a valid URL.",
+      "uniqueSlug": "Slug must be unique. Try changing the {{field}} field."
     },
     "field": {
       "username": "User Name",
@@ -189,7 +190,8 @@
       "server": "Server encountered an error. Please try again later.",
       "badRequest": "Please check your input.",
       "unauthorized": "You are not authorized to perform this action.",
-      "notFound": "Resource not found."
+      "notFound": "Resource not found.",
+      "uniqueSlug": "Slug must be unique. Try changing the title."
     }
   },
   "breadcrumbs": {

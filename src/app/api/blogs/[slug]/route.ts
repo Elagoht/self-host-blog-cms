@@ -51,6 +51,12 @@ export const PATCH = ApiEndpoint<Context>(async (
     lower: true, trim: true, strict: true
   })
 
+  if (slug !== existing.slug && await db.blog.findUnique({
+    where: { slug }
+  })) return Response.json({
+    message: dictionary.api.error.uniqueSlug
+  })
+
   let { cover } = existing
   if (validated.cover instanceof File) {
     // Delete existing cover image
