@@ -6,6 +6,8 @@ import Button from "../formElements/Button"
 import CategoryDeleteTable from "../pages/categories/CategoryDeleteContent/CategoryDeleteTable"
 import dictionary from "@/i18n"
 import Message from "@/utilities/Message"
+import { deleteCategory } from "@/services/category"
+import toast from "react-hot-toast"
 
 type FormCategoryDeleteProps = {
   blogs: BlogResponse[]
@@ -16,7 +18,7 @@ type FormCategoryDeleteProps = {
 const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
   blogs, category, categories
 }) => {
-  return <Formik<FormikType>
+  return <Formik<CategoryDeleteModel>
     initialValues={{
       // "" represents the blogs to be deleted
       "": blogs.map(({ slug }) => slug),
@@ -26,7 +28,21 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
         ).map(({ slug }) => [slug, []])
       )
     }}
-    onSubmit={() => { }}
+    onSubmit={async (values, { setSubmitting }) => {
+      const response = await deleteCategory(
+        category.slug, values
+      )
+
+      if (!response.ok) {
+        try {
+          const { message } = await response.json() as { message: string }
+          toast.error(message)
+        } catch {
+          toast.error(dictionary.categories.delete.failure)
+        }
+        return setSubmitting(false)
+      }
+    }}
   >
     {({ values, setValues }) => {
       const handleTransfer = (
@@ -92,5 +108,3 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
 }
 
 export default FormCategoryDelete
-
-type FormikType = Record<CategoryResponse["slug"], BlogResponse["slug"][]>

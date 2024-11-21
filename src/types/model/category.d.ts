@@ -11,3 +11,8 @@ type CategoryResponse = CategoryFormModel & {
   readonly id: string
   readonly slug: string
 }
+
+type CategoryDeleteModel = Record<
+  CategoryResponse["slug"],
+  BlogResponse["slug"][]
+>

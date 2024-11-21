@@ -29,3 +29,11 @@ export const getCategoryBlogs = (
 ) => ApiCall.get<BlogResponse[]>(
   `/api/categories/${slug}/blogs`
 )
+
+export const deleteCategory = (
+  slug: string,
+  data: CategoryDeleteModel
+) => ApiCall.post(
+  `/api/categories/${slug}/delete`,
+  data
+)

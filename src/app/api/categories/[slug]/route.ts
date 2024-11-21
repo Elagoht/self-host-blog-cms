@@ -23,3 +23,4 @@ export const PATCH = ApiEndpoint<Context>(async (
     await FormBody.fromRequest<Partial<CategoryFormModel>>(request)
   ).validate(categoryEditScheme)
 })))
+

@@ -137,7 +137,9 @@
         "newCategory": "New Category: {{name}}",
         "noOtherCategory": "No other categories found."
       },
-      "submit": "Confirm Changes & Delete"
+      "submit": "Confirm Changes & Delete",
+      "success": "Category deleted successfully.",
+      "failure": "Failed to delete category."
     },
     "blogs": {
       "title": "Blogs",
@@ -161,7 +163,8 @@
       "large": "{{field}} field must be less than {{size}}.",
       "date": "{{field}} field must be a valid date.",
       "url": "{{field}} field must be a valid URL.",
-      "uniqueSlug": "Slug must be unique. Try changing the {{field}} field."
+      "uniqueSlug": "Slug must be unique. Try changing the {{field}} field.",
+      "object": "{{field}} field must be an object."
     },
     "field": {
       "username": "User Name",

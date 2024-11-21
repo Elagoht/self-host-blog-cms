@@ -1,3 +1,4 @@
+import dictionary from "@/i18n"
 import Message from "@/utilities/Message"
 import { object, string } from "yup"
 
@@ -33,3 +34,29 @@ export const categoryEditScheme = object({
   keywords: rules.keywords
     .optional()
 })
+
+export const categoryDeleteScheme = object().test(
+  "values-are-string-arrays",
+  dictionary.api.error.badRequest,
+  function (obj: Record<string, string[]>) {
+    if (
+      typeof obj !== "object" || obj === null
+    ) return this.createError({
+      message: dictionary.api.error.badRequest
+    })
+
+    const values = Object.values(obj)
+
+    for (let i = 0; i < values.length; i++) {
+      const value = values[i]
+      if (
+        !Array.isArray(value) ||
+        !value.every((item) => typeof item === "string")
+      ) return this.createError({
+        message: dictionary.api.error.badRequest
+      })
+    }
+
+    return true
+  }
+)
