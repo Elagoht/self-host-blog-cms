@@ -125,10 +125,14 @@
         "hasManyBlogs": "The \"{{name}}\" category has {{count}} blogs associated with it. You can either delete the associated blogs or move them to another category."
       },
       "table": {
+        "select": {
+          "all": "Select All",
+          "none": "Clear Selection"
+        },
         "title": "Title",
         "cover": "Cover",
-        "action": "Action",
-        "delete": "Delete",
+        "actions": "Actions",
+        "delete": "Delete (Unrecoverable)",
         "move": "Move",
         "newCategory": "New Category: {{name}}",
         "noOtherCategory": "No other categories found."

@@ -11,7 +11,8 @@ export const GET = ApiEndpoint<Context>(async (
   context
 ) => {
   const blogs = await db.blog.findMany({
-    where: { category: { slug: { equals: (await context.params).slug } } }
+    where: { category: { slug: { equals: (await context.params).slug } } },
+    include: { category: { select: { name: true, slug: true } } }
   })
 
   if (!Array.isArray(blogs)) return Response.json({

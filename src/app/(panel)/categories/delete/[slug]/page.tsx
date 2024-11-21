@@ -1,6 +1,6 @@
+import FormCategoryDelete from "@/components/forms/FormCategoryDelete"
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
-import CategoryDeleteTable from "@/components/pages/categories/CategoryDeleteTable"
 import dictionary from "@/i18n"
 import { getCategories, getCategory, getCategoryBlogs } from "@/services/category"
 import Message from "@/utilities/Message"
@@ -18,8 +18,6 @@ const CategoryDeletePage: FC<PageComponent<Context>> = async ({
 
   const blogs = await (await getCategoryBlogs(slug)).json()
   const categories = await (await getCategories()).json()
-
-
 
   return <Content breadcrumbs={[
     { name: "categories", href: "/categories" },
@@ -41,11 +39,10 @@ const CategoryDeletePage: FC<PageComponent<Context>> = async ({
         count: blogs.length
       })}
     >
-      <CategoryDeleteTable
+      <FormCategoryDelete
         blogs={blogs}
-        categories={categories.filter(({ id }) =>
-          id !== category.id
-        )}
+        category={category}
+        categories={categories}
       />
     </Container>
   </Content>

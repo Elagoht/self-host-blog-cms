@@ -2,7 +2,7 @@ import classNames from "classnames"
 import { FC, InputHTMLAttributes } from "react"
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
-  label: string
+  label?: string
   message?: string
   error?: string
   touched?: boolean
@@ -12,9 +12,9 @@ const Checkbox: FC<CheckboxProps> = ({
   label, message, error, touched, ...props
 }) => {
   return <div className="flex flex-col gap-1">
-    <label className="flex items-center gap-2 cursor-pointer select-none"
-    >
+    <label className="flex items-center gap-2 cursor-pointer select-none">
       <input
+        {...props}
         type="checkbox"
         className={classNames(
           "appearance-none w-5 h-5 border-2 rounded overflow-clip",
@@ -27,11 +27,11 @@ const Checkbox: FC<CheckboxProps> = ({
           "after:opacity-0 after:border-b-2 after:origin-bottom",
           "after:-translate-x-full after:-translate-y-1/2 after:bottom-0",
           "checked:after:left-1/2 after:left-0  after:border-white",
-          "focus:ring-2 focus:ring-offset-2 ring-primary-500", {
+          "focus:ring-2 focus:ring-offset-2 ring-primary-500",
+          props.className, {
           "border-red-500": error && touched,
           "border-neutral-300 dark:border-neutral-700": !error || !touched
         })}
-        {...props}
       />
 
       {label}
@@ -48,7 +48,7 @@ const Checkbox: FC<CheckboxProps> = ({
         {error}
       </small>
     }
-  </div >
+  </div>
 }
 
 export default Checkbox

@@ -29,6 +29,7 @@ const Select: FC<SelectProps> = ({
         "focus:outline-none ring-2 ring-transparent min-w-0",
         "transition-all focus:outline-primary-500 rounded-lg",
         "read-only:bg-neutral-50 disabled:bg-opacity-50 p-2",
+        "disabled:cursor-not-allowed disabled:text-neutral-500",
         "dark:read-only:bg-neutral-950 disabled:bg-neutral-50",
         "dark:disabled:bg-neutral-950 disabled:cursor-not-allowed",
         props.className
