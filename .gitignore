@@ -44,4 +44,4 @@ next-env.d.ts
 *.db
 
 # uploads
-uploads
+/uploads
