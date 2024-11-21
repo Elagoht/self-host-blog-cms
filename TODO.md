@@ -5,7 +5,7 @@
 - [ ] Read count increase API endpoints
 - [ ] Pagination for API endpoints
 - [ ] Pagination for CMS UI
-- [ ] Published blogs endpoints
+- [X] Published blogs endpoints
 
 [REFACTOR]
 
