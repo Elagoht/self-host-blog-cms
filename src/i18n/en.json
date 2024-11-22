@@ -79,7 +79,8 @@
         "content": "Here goes the content of the blog. You can write your blog in markdown format.",
         "cover": "Upload a cover image to see it here."
       }
-    }
+    },
+    "read": "{{title}} blog have been read {{count}} times."
   },
   "categories": {
     "main": {
@@ -194,6 +195,7 @@
       "badRequest": "Please check your input.",
       "unauthorized": "You are not authorized to perform this action.",
       "notFound": "Resource not found.",
+      "forbidden": "You are not allowed to perform",
       "uniqueSlug": "Slug must be unique. Try changing the title."
     }
   },
