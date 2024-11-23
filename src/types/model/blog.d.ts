@@ -13,16 +13,42 @@ type BlogRequest = BlogFormModel & {
   cover: File | string
 }
 
-type BlogResponse = BlogRequest & {
-  readonly id: number
-  readonly slug: string
-  readonly createdAt: string
-  readonly updatedAt: string
-  readonly cover: string
-  readonly readTime: number
-  readonly readCount: number
-  readonly category: {
-    readonly slug: string
-    readonly name: string
-  }
+type BlogListResponse = {
+  title: string
+  cover: string
+  category: string
+}
+
+type BlogCardResponse = {
+  title: string
+  slug: string
+  spot: string
+  cover: string
+  published: boolean
+  createdAt: Date
+  updatedAt: Date
+  category: string
+}
+
+type BlogDetailedResponse = {
+  id: string
+  title: string
+  slug: string
+  content: string
+  keywords: string
+  description: string
+  spot: string
+  cover: string
+  published: boolean
+  createdAt: Date
+  updatedAt: Date
+  readTime: number
+  readCount: number
+  category: string
+}
+
+type BlogFilters = {
+  category?: string
+  published?: boolean
+  search?: string
 }
