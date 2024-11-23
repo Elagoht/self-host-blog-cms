@@ -1,13 +1,7 @@
-import { NextRequest } from "next/server"
-import { FormBodyError } from "./FormBody"
 import dictionary from "@/i18n"
-import Auth from "./Auth"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
-
-export enum ApiType {
-  public,
-  private
-}
+import { NextRequest } from "next/server"
+import Auth from "./Auth"
 
 const ApiEndpoint = <T>(
   /**
@@ -60,5 +54,10 @@ const ApiEndpoint = <T>(
       }
     }
   }
+
+export enum ApiType {
+  public,
+  private
+}
 
 export default ApiEndpoint
