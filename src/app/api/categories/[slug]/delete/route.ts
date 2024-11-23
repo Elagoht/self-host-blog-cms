@@ -27,7 +27,7 @@ export const POST = ApiEndpoint<Context>(async (
     await FormBody.fromRequest<CategoryDeleteModel>(request)
   ).validate(categoryDeleteScheme)
 
-  const blogsToDelete = validated[""] || []
+  const blogsToDelete = validated[slug]
   const blogsToTransfer = Object.entries(
     validated
   ).filter(([key]) => key !== "")

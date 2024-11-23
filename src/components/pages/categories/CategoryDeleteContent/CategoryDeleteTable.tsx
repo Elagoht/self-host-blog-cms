@@ -145,6 +145,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
           <CategoryDeleteRow
             key={blog.id}
             blog={blog}
+            isTrash={isTrash}
             selected={selected[blog.id]}
             setSelected={() => setSelected({
               ...selected,

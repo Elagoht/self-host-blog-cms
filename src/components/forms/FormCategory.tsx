@@ -56,8 +56,8 @@ const FormCategory: FC<FormCategoryProps> = ({
           toast.error(message)
         } catch {
           toast.error(mode === "edit"
-            ? dictionary.blogs.edit.failure
-            : dictionary.blogs.new.failure
+            ? dictionary.categories.edit.failure
+            : dictionary.categories.new.failure
           )
         }
         return setSubmitting(false)

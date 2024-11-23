@@ -1,6 +1,6 @@
 import dictionary from "@/i18n"
 import { FC } from "react"
-import CategoriesEmptyMessage from "../CategoriesEmptyMessage"
+import CategoriesEmptyMessage from "./CategoriesEmptyMessage"
 import CategoriesTableRow from "./CategoriesTableRow"
 
 type CategoriesTableProps = {
