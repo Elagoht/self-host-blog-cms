@@ -32,16 +32,15 @@ const BlogCard: FC<BlogCardProps> = ({
         width={512}
         height={288}
         className={classNames(
-          "rounded-lg bg-neutral-200 dark:bg-neutral-700", {
-          "w-full h-40": layout === "grid",
+          "rounded-lg bg-neutral-200 dark:bg-neutral-700 aspect-video", {
+          "w-full": layout === "grid",
           "max-lg:w-full lg:max-w-64": layout === "list"
         })}
       />
 
-      <div className={classNames(
-        "absolute top-2 left-2 p-1 rounded-md",
-        "flex items-center gap-1 pr-2 text-white",
-        "bg-opacity-80 dark:bg-opacity-80", {
+      <span className={classNames(
+        "absolute top-2 left-2 p-1 rounded-md flex items-center gap-1 pr-2",
+        "line-clamp-1 text-white bg-opacity-80 dark:bg-opacity-80", {
         "bg-green-500": blog.published,
         "bg-yellow-500": !blog.published
       })}>
@@ -49,14 +48,18 @@ const BlogCard: FC<BlogCardProps> = ({
           ? <IconCheck size={24} />
           : <IconEdit size={24} />
         }
+        {dictionary.blogs.card.status[blog.published
+          ? "published"
+          : "draft"
+        ]}
+      </span>
 
-        <span>
-          {dictionary.blogs.card.status[blog.published
-            ? "published"
-            : "draft"
-          ]}
-        </span>
-      </div>
+      <span className={classNames(
+        "absolute bottom-2 right-2 p-1 rounded-md text-sm",
+        "bg-primary-500 bg-opacity-80 text-white line-clamp-1"
+      )}>
+        {blog.category.name}
+      </span>
     </div>
 
     <div className={classNames(
