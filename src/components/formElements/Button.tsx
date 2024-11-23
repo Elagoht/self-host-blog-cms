@@ -4,7 +4,7 @@ import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC, ReactNode } from "react
 
 type ButtonProps = {
   icon?: ReactNode
-  color?: "primary" | "secondary" | "danger" | "success" | "warning"
+  color?: "primary" | "secondary" | "danger" | "success" | "warning" | "info"
   reverse?: boolean
 } & ((ButtonHTMLAttributes<HTMLButtonElement> & {
   href?: never
@@ -29,6 +29,7 @@ const Button: FC<ButtonProps> = ({
     "ring-red-500 bg-red-500 text-white": color === "danger",
     "ring-green-500 bg-green-500 text-white": color === "success",
     "ring-amber-500 bg-amber-500 text-white": color === "warning",
+    "ring-blue-500 bg-blue-500 text-white": color === "info",
     "cursor-not-allowed opacity-50": !href && props.disabled
   })
 
