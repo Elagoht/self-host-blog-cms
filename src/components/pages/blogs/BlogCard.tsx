@@ -45,8 +45,8 @@ const BlogCard: FC<BlogCardProps> = ({
         "bg-yellow-500": !blog.published
       })}>
         {blog.published
-          ? <IconCheck size={24} />
-          : <IconEdit size={24} />
+          ? <IconCheck />
+          : <IconEdit />
         }
         {dictionary.blogs.card.status[blog.published
           ? "published"
