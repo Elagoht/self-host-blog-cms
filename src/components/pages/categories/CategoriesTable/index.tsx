@@ -1,7 +1,10 @@
+"use client"
+
 import dictionary from "@/i18n"
-import { FC } from "react"
+import { FC, useState } from "react"
 import CategoriesEmptyMessage from "./CategoriesEmptyMessage"
 import CategoriesTableRow from "./CategoriesTableRow"
+import CategoriesEditModal from "./CategoryEditModal"
 
 type CategoriesTableProps = {
   categories: CategoryResponse[]
@@ -9,8 +12,16 @@ type CategoriesTableProps = {
 
 const CategoriesTable: FC<CategoriesTableProps> = ({
   categories
-}) =>
-  <div className="overflow-x-auto p-1">
+}) => {
+  const [editModal, setEditModal] = useState<{
+    isOpen: boolean
+    category?: CategoryResponse
+  }>({
+    isOpen: false,
+    category: undefined
+  })
+
+  return <div className="overflow-x-auto p-1">
     <table className="w-full overflow-clip rounded-lg
       border-neutral-300 dark:border-neutral-700
       shadow dark:shadow-neutral-950"
@@ -45,10 +56,24 @@ const CategoriesTable: FC<CategoriesTableProps> = ({
           <CategoriesTableRow
             key={category.id}
             category={category}
+            openEditModal={() => setEditModal({
+              isOpen: true,
+              category
+            })}
           />
         )}
       </tbody>
     </table>
+
+    <CategoriesEditModal
+      isOpen={editModal.isOpen}
+      category={editModal.category}
+      close={() => setEditModal({
+        isOpen: false,
+        category: undefined
+      })}
+    />
   </div>
+}
 
 export default CategoriesTable

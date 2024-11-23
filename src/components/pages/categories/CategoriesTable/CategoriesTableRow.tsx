@@ -5,11 +5,12 @@ import { FC } from "react"
 
 type CategoriesTableRowProps = {
   category: CategoryResponse
+  openEditModal: () => void
 }
 
 const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
-      category
-    }) =>
+  category, openEditModal
+}) =>
   <tr className="odd:bg-neutral-200 dark:odd:bg-neutral-800
     divide-x divide-neutral-300 dark:divide-neutral-950"
   >
@@ -28,8 +29,8 @@ const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
         className="flex justify-center gap-2"
       >
         <Button
-          href={`/categories/${category.id}`}
           color="secondary"
+          onClick={openEditModal}
         >
           <IconEdit />
         </Button>
