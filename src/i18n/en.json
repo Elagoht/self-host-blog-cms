@@ -136,7 +136,11 @@
         "delete": "Delete (Unrecoverable)",
         "move": "Move",
         "newCategory": "New Category: {{name}}",
-        "noOtherCategory": "No other categories found."
+        "noOtherCategory": {
+          "title": "No other categories found.",
+          "description": "There are no categories to transfer the blogs to. Please create a new category if you don't want to delete the blogs.",
+          "create": "Create New Category"
+        }
       },
       "submit": "Confirm Changes & Delete",
       "success": "Category deleted successfully.",

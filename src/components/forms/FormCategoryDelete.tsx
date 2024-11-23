@@ -1,13 +1,14 @@
 "use client"
 
+import dictionary from "@/i18n"
+import { deleteCategory } from "@/services/category"
 import { Form, Formik } from "formik"
 import { FC } from "react"
+import toast from "react-hot-toast"
 import Button from "../formElements/Button"
 import CategoryDeleteTable from "../pages/categories/CategoryDeleteContent/CategoryDeleteTable"
-import dictionary from "@/i18n"
-import Message from "@/utilities/Message"
-import { deleteCategory } from "@/services/category"
-import toast from "react-hot-toast"
+import CategoryDeleteNoAlternatives from "../pages/categories/CategoryDeleteContent/CategoryDeleteNoAlternatives"
+import { useRouter } from "next/navigation"
 
 type FormCategoryDeleteProps = {
   blogs: BlogResponse[]
@@ -18,10 +19,12 @@ type FormCategoryDeleteProps = {
 const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
   blogs, category, categories
 }) => {
+  const router = useRouter()
+
   return <Formik<CategoryDeleteModel>
     initialValues={{
       // "" represents the blogs to be deleted
-      "": blogs.map(({ slug }) => slug),
+      [category.slug]: blogs.map(({ slug }) => slug),
       ...Object.fromEntries(
         categories.filter((current) =>
           current.slug !== category.slug
@@ -39,9 +42,13 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
           toast.error(message)
         } catch {
           toast.error(dictionary.categories.delete.failure)
+        } finally {
+          setSubmitting(false)
         }
-        return setSubmitting(false)
       }
+
+      toast.success(dictionary.categories.delete.success)
+      router.push("/categories")
     }}
   >
     {({ values, setValues }) => {
@@ -62,37 +69,28 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
 
       return <Form className="flex flex-col gap-4">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <CategoryDeleteTable
-            categories={categories.filter(({ slug }) =>
-              slug !== category.slug
-            )}
-            name={dictionary.categories.delete.table.delete}
-            slug=""
-            blogs={blogs}
-            list={values[""]}
-            handleTransfer={handleTransfer}
-          />
-
-          {categories.filter((current) =>
-            current.slug !== category.slug
+          {categories.sort((a) =>
+            a.slug === category.slug ? -1 : 1
           ).map((current) =>
             <CategoryDeleteTable
               key={current.slug}
               categories={categories.filter(({ slug }) =>
                 ![current.slug, category.slug].includes(slug)
               )}
-              name={Message.format(
-                dictionary.categories.delete.table.newCategory, {
-                name: current.name
-              })}
+              name={current.name}
               slug={current.slug}
               list={values[current.slug]}
               blogs={blogs.filter((blog) =>
                 values[current.slug].includes(blog.slug)
               )}
               handleTransfer={handleTransfer}
+              isTrash={current.slug === category.slug}
             />
           )}
+
+          {categories.length === 1 &&
+            <CategoryDeleteNoAlternatives />
+          }
         </div>
 
         <Button
@@ -104,7 +102,7 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
         </Button>
       </Form>
     }}
-  </Formik >
+  </Formik>
 }
 
 export default FormCategoryDelete
