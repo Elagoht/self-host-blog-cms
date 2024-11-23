@@ -164,8 +164,6 @@ const FormBlog: FC<FormBlogProps> = ({
                 error={errors.description}
                 touched={touched.description}
                 onChange={handleChange}
-                minLength={75}
-                maxLength={155}
               />
 
               <Input
@@ -176,7 +174,6 @@ const FormBlog: FC<FormBlogProps> = ({
                 error={errors.spot}
                 touched={touched.spot}
                 onChange={handleChange}
-                maxLength={75}
               />
 
               <Select

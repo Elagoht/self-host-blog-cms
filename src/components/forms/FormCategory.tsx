@@ -87,8 +87,6 @@ const FormCategory: FC<FormCategoryProps> = ({
           onChange={handleChange}
           error={errors.description}
           touched={touched.description}
-          minLength={70}
-          maxLength={155}
         />
 
         <Input
