@@ -1,70 +1,34 @@
-import { blogAddScheme } from "@/lib/validation/blogs"
+import Blogger from "@/data/Blogger"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
-import Bucket from "@/utilities/Bucket"
-import FormBody, { FormBodyError, FormBodyType } from "@/utilities/FormBody"
-import Message from "@/utilities/Message"
-import Studio from "@/utilities/Studio"
-import TypeWriter from "@/utilities/TypeWriter"
 import { PrismaClient } from "@prisma/client"
-import slugify from "slugify"
 
 const db = new PrismaClient()
 
 export const POST = ApiEndpoint(async (
   request
+) => Response.json(
+  await new Blogger(db).createBlog(request), {
+  status: 201
+}))
+
+export const GET = ApiEndpoint(async (
+  request
 ) => {
-  const validated = await (
-    await FormBody.fromRequest<BlogRequest>(
-      request,
-      FormBodyType.FORM_DATA
-    )
-  ).validate(blogAddScheme)
+  const { searchParams } = request.nextUrl
+  const page = Number(searchParams.get("page")) || undefined
+  const take = Number(searchParams.get("take")) || undefined
+  const category = searchParams.get("category") || undefined
+  const query = searchParams.get("query") || undefined
+  const type = ((
+    ["detailed", "card", "list"].includes(
+      searchParams.get("type") || ""
+    ) ? searchParams.get("type")
+      : "detailed"
+  ) ?? "detailed") as BlogType
 
-  if (
-    !(validated.cover instanceof File)
-  ) throw new FormBodyError(
-    Message.errorMessage("image", "cover")
-  )
-
-  const slug = slugify(validated.title, {
-    lower: true, trim: true, strict: true
-  })
-
-  if (await db.blog.findUnique({
-    where: { slug }
-  })) throw new FormBodyError(
-    Message.errorMessage("uniqueSlug", "title")
-  )
-
-  return Response.json(
-    await db.blog.create({
-      data: {
-        ...validated,
-        slug,
-        readCount: 0,
-        cover: await Bucket.uploadFile(
-          await new Studio(validated.cover).printPhoto(),
-          /**
-           * A timestamp is added with a separator
-           * to prevent caching issues.
-           * "+" is used as a separator because it's
-           * URL-safe and won't be included when
-           * slugifying the filename.
-           */
-          `covers/${slug}+${Date.now()}.webp`
-        ),
-        readTime: TypeWriter.readTime(validated.content),
-        published: String(validated.published) !== "false",
-        category: { connect: { slug: validated.category } }
-      }
-    }), {
-    status: 201
-  })
-})
-
-export const GET = ApiEndpoint(async () => Response.json(
-  await db.blog.findMany({
-    include: { category: true }
-  }), { status: 200 }
-), ApiType.public)
-
+  return Response.json(await new Blogger(db).getBlogs({
+    category,
+    search: query,
+    published: true
+  }, type, page, take))
+}, ApiType.public)
