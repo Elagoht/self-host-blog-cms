@@ -23,7 +23,6 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
 
   return <Formik<CategoryDeleteModel>
     initialValues={{
-      // "" represents the blogs to be deleted
       [category.slug]: blogs.map(({ slug }) => slug),
       ...Object.fromEntries(
         categories.filter((current) =>
@@ -89,7 +88,7 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
           )}
 
           {categories.length === 1 &&
-            <CategoryDeleteNoAlternatives />
+            <CategoryDeleteNoAlternatives slug={category.slug} />
           }
         </div>
 

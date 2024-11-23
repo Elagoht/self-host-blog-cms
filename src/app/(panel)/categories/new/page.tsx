@@ -4,7 +4,11 @@ import Content from "@/components/layout/Content"
 import dictionary from "@/i18n"
 import { FC } from "react"
 
-const NewCategoryPage: FC = () => {
+const NewCategoryPage: FC<PageComponent> = async ({
+  searchParams
+}) => {
+  const { deleting } = await searchParams
+
   return <Content breadcrumbs={[
     { name: "categories", href: "/categories" },
     { name: "new", href: "/categories/new" }
@@ -13,7 +17,10 @@ const NewCategoryPage: FC = () => {
       title={dictionary.categories.new.title}
       description={dictionary.categories.new.description}
     >
-      <FormCategory mode="add" />
+      <FormCategory
+        mode="add"
+        deleting={deleting}
+      />
     </Container>
   </Content>
 }

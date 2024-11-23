@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation"
 import { categoryAddScheme as categoryScheme } from "@/lib/validation/category"
 
 type FormCategoryProps = {
+  deleting?: string
+} & ({
   mode: "add"
   slug?: never
   initialValues?: never
@@ -18,10 +20,10 @@ type FormCategoryProps = {
   mode: "edit"
   slug: CategoryResponse["slug"]
   initialValues: CategoryFormModel
-}
+})
 
 const FormCategory: FC<FormCategoryProps> = ({
-  mode, initialValues, slug
+  deleting, mode, initialValues, slug
 }) => {
   const router = useRouter()
 
@@ -65,7 +67,10 @@ const FormCategory: FC<FormCategoryProps> = ({
         ? dictionary.categories.edit.success
         : dictionary.categories.new.success
       )
-      router.push("/categories")
+      router.push(deleting
+        ? `/categories/delete/${deleting}`
+        : "/categories"
+      )
       router.refresh()
     }}
   >

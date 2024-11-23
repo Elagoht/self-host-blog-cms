@@ -89,11 +89,9 @@
       "new": "New Category",
       "table": {
         "name": "Name",
-        "keywords": "Keywords",
         "spot": "Spot",
         "blogs": "Blogs",
-        "edit": "Edit",
-        "delete": "Delete"
+        "actions": "Actions"
       },
       "empty": "No categories found. Add one now."
     },
