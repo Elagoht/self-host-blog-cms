@@ -1,3 +1,4 @@
+import dictionary from "@/i18n"
 import { categoryEditScheme } from "@/lib/validation/category"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import FormBody from "@/utilities/FormBody"
@@ -10,18 +11,21 @@ const db = new PrismaClient()
 export const GET = ApiEndpoint<Context>(async (
   request, context
 ) => {
-  const data = await db.category.findMany({
+  const data = await db.category.findUnique({
     where: { slug: (await context.params).slug },
     include: { _count: { select: { blogs: true } } }
   })
 
-  const model: CategoryResponse[] = data.map(({
-    _count: { blogs, ...count }, ...rest
-  }) => ({
-    ...rest,
-    ...count,
-    blogCount: blogs, id: rest.id.toString()
-  }))
+  if (!data) return Response.json({
+    message: dictionary.api.error.notFound
+  }, { status: 404 })
+
+  const model = {
+    ...data,
+    _count: undefined,
+    blogCount: data._count.blogs,
+    id: data.id.toString()
+  }
 
   return Response.json(
     model, { status: 200 }
