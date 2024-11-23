@@ -9,11 +9,24 @@ const db = new PrismaClient()
 
 export const GET = ApiEndpoint<Context>(async (
   request, context
-) => Response.json(
-  await db.category.findUnique({
-    where: { slug: (await (context.params)).slug }
+) => {
+  const data = await db.category.findMany({
+    where: { slug: (await context.params).slug },
+    include: { _count: { select: { blogs: true } } }
   })
-), ApiType.public)
+
+  const model: CategoryResponse[] = data.map(({
+    _count: { blogs, ...count }, ...rest
+  }) => ({
+    ...rest,
+    ...count,
+    blogCount: blogs, id: rest.id.toString()
+  }))
+
+  return Response.json(
+    model, { status: 200 }
+  )
+}, ApiType.public)
 
 export const PATCH = ApiEndpoint<Context>(async (
   request, context

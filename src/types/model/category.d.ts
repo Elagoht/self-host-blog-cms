@@ -10,6 +10,7 @@ type CategoryRequest = CategoryFormModel
 type CategoryResponse = CategoryFormModel & {
   readonly id: string
   readonly slug: string
+  readonly blogCount: number
 }
 
 type CategoryDeleteModel = Record<

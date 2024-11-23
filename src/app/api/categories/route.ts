@@ -27,9 +27,18 @@ export const POST = ApiEndpoint(async (
   }))
 })
 
-export const GET = ApiEndpoint(async () =>
-  Response.json(
-    await db.category.findMany(),
-    { status: 200 }
-  ), ApiType.public
-)
+export const GET = ApiEndpoint(async () => {
+  const data = await db.category.findMany({
+    include: { _count: { select: { blogs: true } } }
+  })
+
+  const model: CategoryResponse[] = data.map(({
+    _count: { blogs, ...count }, ...rest
+  }) => ({
+    ...rest,
+    ...count,
+    blogCount: blogs, id: rest.id.toString()
+  }))
+
+  return Response.json(model, { status: 200 })
+}, ApiType.public)
