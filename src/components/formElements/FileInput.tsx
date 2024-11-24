@@ -29,8 +29,8 @@ const FileInput: FC<FileInputProps> = ({
     }
 
     <label className={classNames(
-      "!bg-neutral-200 dark:!bg-neutral-800 shadow-inner p-1 rounded-lg transition-all disabled:bg-neutral-50 dark:disabled:bg-neutral-950 flex items-center gap-2 relative",
-      props.className, {
+      "!bg-neutral-200 dark:!bg-neutral-800 shadow-inner p-1 rounded-lg", "transition-all disabled:bg-neutral-50 dark:disabled:bg-neutral-950",
+      "flex items-center gap-2", props.className, {
       "opacity-50 cursor-not-allowed": props.disabled,
       "outline-none outline-primary-500": focused,
     })}>
@@ -52,7 +52,9 @@ const FileInput: FC<FileInputProps> = ({
         }}
       />
 
-      <div className="text-neutral-500 p-2 shadow bg-neutral-100 dark:bg-neutral-900 rounded-md whitespace-nowrap">
+      <div className="text-neutral-500 p-2 shadow bg-neutral-100
+        dark:bg-neutral-900 rounded-md whitespace-nowrap"
+      >
         {file
           ? dictionary.input.file.change
           : dictionary.input.file.choose
@@ -72,7 +74,8 @@ const FileInput: FC<FileInputProps> = ({
 
       <button
         type="button"
-        className="shadow-md p-2 rounded-md bg-primary-500 dark:bg-primary-400 text-white dark:text-black transition-all"
+        className="shadow-md p-2 rounded-md bg-primary-500 dark:bg-primary-400
+        text-white dark:text-black transition-all"
         onClick={() => {
           setFile(undefined)
           props.onChange?.({
