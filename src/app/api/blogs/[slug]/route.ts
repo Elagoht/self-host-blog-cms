@@ -1,3 +1,4 @@
+import Blogger from "@/data/Blogger"
 import dictionary from "@/i18n"
 import { blogEditScheme } from "@/lib/validation/blogs"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
@@ -16,16 +17,16 @@ export const GET = ApiEndpoint<Context>(async (
   request,
   context
 ) => {
-  const blog = await db.blog.findUnique({
-    where: { slug: (await context.params).slug },
-    include: { category: { select: { slug: true, name: true } } }
-  })
+  const { searchParams } = request.nextUrl
 
-  if (!blog) return Response.json({
-    message: dictionary.api.error.notFound
-  })
-
-  return Response.json(blog, { status: 200 })
+  return Response.json(await new Blogger(db).getBlog((
+    await context.params
+  ).slug, ((
+    ["detailed", "card", "list"].includes(
+      searchParams.get("type") || ""
+    ) ? searchParams.get("type")
+      : "detailed"
+  ) ?? "detailed") as BlogType))
 }, ApiType.public)
 
 export const PATCH = ApiEndpoint<Context>(async (
