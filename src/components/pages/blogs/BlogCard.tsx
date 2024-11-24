@@ -7,7 +7,7 @@ import Link from "next/link"
 import { FC } from "react"
 
 type BlogCardProps = {
-  blog: BlogResponse
+  blog: BlogCardResponse
   layout?: "grid" | "list"
 }
 
@@ -58,7 +58,7 @@ const BlogCard: FC<BlogCardProps> = ({
         "absolute bottom-2 right-2 p-1 rounded-md text-sm",
         "bg-primary-500 bg-opacity-80 text-white line-clamp-1"
       )}>
-        {blog.category.name}
+        {blog.category}
       </span>
     </div>
 

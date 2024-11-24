@@ -10,6 +10,7 @@ class ApiCall {
     : `${process.env.HOST_URL}${url}`, {
     method,
     headers: {
+      "trusted-software-token": process.env.TRUSTED_SOFTWARE_TOKEN!,
       ...(body instanceof FormData
         ? {} // Do not prevent boundary from being set
         : { "Content-Type": "application/json" }

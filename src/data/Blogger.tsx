@@ -143,7 +143,7 @@ class Blogger {
       },
       include: {
         category: {
-          select: { slug: true }
+          select: { slug: true, name: true }
         }
       }
     })).map(blog =>
@@ -165,7 +165,7 @@ class Blogger {
           published: blog.published,
           createdAt: blog.createdAt,
           updatedAt: blog.updatedAt,
-          category: blog.category.slug
+          category: blog.category.name!
         } satisfies BlogCardResponse
       case "list":
         return {
@@ -196,7 +196,7 @@ class Blogger {
 }
 
 declare global {
-  type BlogWithCategory = Blog & { category: { slug: string } }
+  type BlogWithCategory = Blog & { category: { slug: string, name?: string } }
 
   type BlogType = "card" | "list" | "detailed"
 }
