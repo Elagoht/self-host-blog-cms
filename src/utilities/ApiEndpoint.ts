@@ -25,15 +25,17 @@ const ApiEndpoint = <T>(
   context: { params: T }
 ) => {
     try {
-      if ((
-        requireAuth &&
-        !await Auth.isValid(Auth.getAccessToken(request.cookies))
-      ) ||
-        Auth.isTrustedSoftware(request.headers)
-      ) return Response.json({
-        message: dictionary.api.error.unauthorized
-      }, { status: 401 })
-
+      switch (true) {
+        case Auth.isTrustedSoftware(request.headers):
+        case requireAuth === ApiType.public:
+          break
+        default:
+          if (!await Auth.isValid(Auth.getAccessToken(request.cookies)))
+            return Response.json({
+              message: dictionary.api.error.unauthorized
+            }, { status: 401 })
+          break
+      }
       return await handler(request, context)
     } catch (error) {
       switch (true) {
