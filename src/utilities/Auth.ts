@@ -2,6 +2,12 @@ import { SignJWT, jwtVerify } from "jose"
 import { RequestCookies } from "next/dist/compiled/@edge-runtime/cookies"
 
 class Auth {
+  static isTrustedSoftware = (
+    headers: Headers
+  ): boolean => headers.get(
+    "trusted-software-token"
+  ) === process.env.TRUSTED_SOFTWARE_TOKEN
+
   public static authRoutes = ["/login"]
 
   public static createToken = async (
