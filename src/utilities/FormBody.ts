@@ -34,7 +34,7 @@ export default class FormBody<T = Record<string, unknown>> {
   }
 }
 
-class FormBodyError extends Error {
+export class FormBodyError extends Error {
   constructor(message: string, args?: Record<string, string>) {
     super(message)
     this.name = "ValidateError"
@@ -42,13 +42,7 @@ class FormBodyError extends Error {
   }
 }
 
-declare global {
-  enum FormBodyType {
-    JSON = "json",
-    FORM_DATA = "formData"
-  }
-
-  class FormBodyError extends Error {
-    constructor(message: string, args?: Record<string, string>)
-  }
+export enum FormBodyType {
+  JSON = "json",
+  FORM_DATA = "formData"
 }

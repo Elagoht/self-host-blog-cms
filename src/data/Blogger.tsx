@@ -1,6 +1,6 @@
 import { blogAddScheme } from "@/lib/validation/blogs"
 import Bucket from "@/utilities/Bucket"
-import FormBody from "@/utilities/FormBody"
+import FormBody, { FormBodyError, FormBodyType } from "@/utilities/FormBody"
 import Message from "@/utilities/Message"
 import Studio from "@/utilities/Studio"
 import TypeWriter from "@/utilities/TypeWriter"

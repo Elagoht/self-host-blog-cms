@@ -2,6 +2,7 @@ import dictionary from "@/i18n"
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { NextRequest } from "next/server"
 import Auth from "./Auth"
+import { FormBodyError } from "./FormBody"
 
 const ApiEndpoint = <T>(
   /**
