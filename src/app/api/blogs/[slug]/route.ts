@@ -78,10 +78,6 @@ export const PATCH = ApiEndpoint<Context>(async (
     validated.content
   )
 
-  console.log({
-    validated
-  })
-
   const blog = await db.blog.update({
     where: { slug: (await context.params).slug },
     data: {
