@@ -6,7 +6,7 @@ import { getBlogs } from "@/services/blog"
 import { FC } from "react"
 
 const BlogsPage: FC<PageComponent> = async () => {
-  const blogs = await (await getBlogs()).json()
+  const { data: blogs } = await (await getBlogs()).json()
 
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" }

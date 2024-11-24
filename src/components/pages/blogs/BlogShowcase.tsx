@@ -9,7 +9,7 @@ import dictionary from "@/i18n"
 import BlogCardEmpty from "./BlogCardEmpty"
 
 type BlogShowcaseProps = {
-  blogs: BlogResponse[]
+  blogs: BlogCardResponse[]
 }
 
 const BlogShowcase: FC<BlogShowcaseProps> = ({ blogs }) => {
@@ -45,13 +45,13 @@ const BlogShowcase: FC<BlogShowcaseProps> = ({ blogs }) => {
     })}>
       {blogs.length === 0
         ? <BlogCardEmpty />
-        : blogs.map(blog => (
+        : blogs.map(blog =>
           <BlogCard
-            key={blog.id}
+            key={blog.slug}
             blog={blog}
             layout={layout}
           />
-        ))
+        )
       }
     </div>
   </>

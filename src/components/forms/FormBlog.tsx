@@ -27,7 +27,7 @@ type FormBlogProps = {
 } | {
   mode: "edit"
   slug: CategoryResponse["slug"]
-  initialValues: BlogResponse
+  initialValues: BlogDetailedResponse
 })
 
 const FormBlog: FC<FormBlogProps> = ({
@@ -43,7 +43,6 @@ const FormBlog: FC<FormBlogProps> = ({
     initialValues={initialValues ? {
       ...initialValues,
       cover: String(initialValues.cover),
-      category: initialValues.category.slug
     } : {
       title: "",
       content: "",

@@ -1,11 +1,11 @@
 import ApiCall from "@/utilities/ApiCall"
 
 export const getBlogs = () =>
-  ApiCall.get<BlogResponse[]>("/api/blogs")
+  ApiCall.get<Paginated<BlogCardResponse>>("/api/blogs")
 
 export const getBlog = (
   slug: string
-) => ApiCall.get<BlogResponse>(
+) => ApiCall.get<BlogDetailedResponse>(
   `/api/blogs/${slug}`
 )
 
