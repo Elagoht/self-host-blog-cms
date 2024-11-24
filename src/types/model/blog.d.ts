@@ -14,6 +14,8 @@ type BlogRequest = BlogFormModel & {
 }
 
 type BlogListResponse = {
+  id: string
+  slug: string
   title: string
   cover: string
   category: string

@@ -16,7 +16,7 @@ const CategoryDeletePage: FC<PageComponent<Context>> = async ({
   const category = await (await getCategory(slug)).json()
   if (!category.id) notFound()
 
-  const blogs = await (await getCategoryBlogs(slug)).json()
+  const { data: blogs } = await (await getCategoryBlogs(slug)).json()
   const categories = await (await getCategories()).json()
 
   return <Content breadcrumbs={[

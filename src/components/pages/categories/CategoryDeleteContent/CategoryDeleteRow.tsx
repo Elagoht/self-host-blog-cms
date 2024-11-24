@@ -4,7 +4,7 @@ import Image from "next/image"
 import { FC } from "react"
 
 type CategoryDeleteRowProps = {
-  blog: BlogResponse
+  blog: BlogListResponse
   selected: boolean
   setSelected: () => void
   isTrash?: boolean
@@ -20,8 +20,8 @@ const CategoryDeleteRow: FC<CategoryDeleteRowProps> = ({
       "hover:bg-neutral-100 dark:hover:bg-neutral-900": !isTrash && !selected,
       "bg-red-500 dark:bg-red-900 text-white": isTrash && !selected,
       "bg-neutral-200 dark:bg-neutral-800": !selected,
-      "bg-primary-400 dark:bg-primary-900": selected,
-      "hover:bg-primary-300 dark:hover:bg-primary-800": selected
+      "bg-blue-600 dark:bg-blue-900 text-white": selected,
+      "hover:bg-blue-500 dark:hover:bg-blue-800": selected
     })}
     onClick={setSelected}
   >

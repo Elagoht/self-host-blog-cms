@@ -1,4 +1,4 @@
-import dictionary from "@/i18n"
+import Blogger from "@/data/Blogger"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import { PrismaClient } from "@prisma/client"
 
@@ -9,15 +9,9 @@ const db = new PrismaClient()
 export const GET = ApiEndpoint<Context>(async (
   request,
   context
-) => {
-  const blogs = await db.blog.findMany({
-    where: { category: { slug: { equals: (await context.params).slug } } },
-    include: { category: { select: { name: true, slug: true } } }
-  })
-
-  if (!Array.isArray(blogs)) return Response.json({
-    message: dictionary.api.error.notFound
-  })
-
-  return Response.json(blogs, { status: 200 })
-}, ApiType.public)
+) => Response.json(
+  await new Blogger(db).getBlogs({
+    category: (await context.params).slug
+  }, "list", 1, undefined), {
+  status: 200
+}), ApiType.public)

@@ -11,7 +11,7 @@ import CategoryDeleteNoAlternatives from "../pages/categories/CategoryDeleteCont
 import { useRouter } from "next/navigation"
 
 type FormCategoryDeleteProps = {
-  blogs: BlogResponse[]
+  blogs: BlogListResponse[]
   category: CategoryResponse
   categories: CategoryResponse[]
 }
@@ -54,7 +54,7 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
       const handleTransfer = (
         source: CategoryResponse["slug"],
         target: CategoryResponse["slug"],
-        slugs: BlogResponse["slug"][]
+        slugs: BlogListResponse["slug"][]
       ) => setValues({
         ...values,
         [source]: values[source].filter((slug) =>
@@ -83,6 +83,7 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
                 values[current.slug].includes(blog.slug)
               )}
               handleTransfer={handleTransfer}
+              deleting={category.slug}
               isTrash={current.slug === category.slug}
             />
           )}

@@ -28,15 +28,15 @@ class Blogger {
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
-    take: number = this.DEFAULT_TAKE
+    take: number | undefined = this.DEFAULT_TAKE
   ) => Pager.convert(
     await this.getBlogsData(filters, type, page, take),
     (page ?? this.DEFAULT_PAGE) < 1
       ? this.DEFAULT_PAGE
       : (page ?? this.DEFAULT_PAGE),
-    (take ?? this.DEFAULT_TAKE) < 1
-      ? this.DEFAULT_TAKE
-      : (take ?? this.DEFAULT_TAKE)
+    take === undefined
+      ? undefined // No limit
+      : (take < 1 ? this.DEFAULT_TAKE : take)
   )
 
   /**
@@ -115,21 +115,15 @@ class Blogger {
   }
 
   // Paginated list of blogs
-  public getBlogsData = async (
+  private getBlogsData = async (
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
-    take: number = this.DEFAULT_TAKE
+    take: number | undefined = this.DEFAULT_TAKE
   ) => {
-    const pageToUse = page < 1
-      ? this.DEFAULT_PAGE
-      : page
-    const takeToUse = take < 1
-      ? this.DEFAULT_TAKE
-      : take
     return (await this.prisma.blog.findMany({
-      skip: (pageToUse - 1) * takeToUse,
-      take: takeToUse,
+      skip: (page - 1) * (take ?? 0),
+      take,
       where: {
         published: filters.published ?? undefined,
 
@@ -169,6 +163,8 @@ class Blogger {
         } satisfies BlogCardResponse
       case "list":
         return {
+          id: blog.id,
+          slug: blog.slug,
           title: blog.title,
           cover: blog.cover,
           category: blog.category.slug

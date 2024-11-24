@@ -12,20 +12,21 @@ import Message from "@/utilities/Message"
 type CategoryDeleteTableProps = {
   name: CategoryResponse["name"]
   slug: CategoryResponse["slug"]
-  blogs: BlogResponse[]
+  blogs: BlogListResponse[]
   categories: CategoryResponse[]
-  list: BlogResponse["slug"][]
+  list: BlogListResponse["slug"][]
   handleTransfer: (
     source: CategoryResponse["id"],
     target: CategoryResponse["id"],
-    slugs: BlogResponse["slug"][]
+    slugs: BlogListResponse["slug"][]
   ) => void
+  deleting: CategoryResponse["slug"]
   isTrash?: boolean
 }
 
 const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
-  categories, blogs, name, slug,
-  list, handleTransfer, isTrash
+  categories, blogs, name, slug, list,
+  handleTransfer, deleting, isTrash
 }) => {
   const [target, setTarget] = useState<CategoryResponse["id"]>(
     categories?.[0]?.slug
@@ -129,7 +130,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
             onClick={() => {
               setSelected({})
               handleTransfer(
-                slug, "", blogs.filter(
+                slug, deleting, blogs.filter(
                   (blog) => selected[blog.id]
                 ).map((blog) => blog.slug)
               )
@@ -143,7 +144,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
       <ul>
         {blogs.filter((blog) => list.includes(blog.slug)).map((blog) =>
           <CategoryDeleteRow
-            key={blog.id}
+            key={blog.slug}
             blog={blog}
             isTrash={isTrash}
             selected={selected[blog.id]}
@@ -155,9 +156,9 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
         )}
       </ul>
     </div>
-  </div>
+  </div >
 }
 
 export default CategoryDeleteTable
 
-type Selection = { [key: BlogResponse["id"]]: boolean }
+type Selection = { [key: BlogListResponse["id"]]: boolean }

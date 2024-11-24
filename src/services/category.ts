@@ -26,7 +26,7 @@ export const patchCategory = (
 
 export const getCategoryBlogs = (
   slug: string
-) => ApiCall.get<BlogResponse[]>(
+) => ApiCall.get<Paginated<BlogListResponse>>(
   `/api/categories/${slug}/blogs`
 )
 
