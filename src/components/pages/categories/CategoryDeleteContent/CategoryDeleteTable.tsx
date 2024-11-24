@@ -101,7 +101,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
       self.removeEventListener("dragover", handleDragOver)
       self.removeEventListener("drop", handleDrop)
     }
-  }, [handleTransfer])
+  }, [handleTransfer, slug])
 
   return <div
     ref={selfRef}
