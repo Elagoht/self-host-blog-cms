@@ -5,7 +5,7 @@ import Checkbox from "@/components/formElements/Checkbox"
 import Select from "@/components/formElements/Select"
 import dictionary from "@/i18n"
 import { IconTransferVertical, IconTrash } from "@tabler/icons-react"
-import { FC, useMemo, useState } from "react"
+import { FC, useEffect, useMemo, useRef, useState } from "react"
 import CategoryDeleteRow from "./CategoryDeleteRow"
 import Message from "@/utilities/Message"
 
@@ -24,10 +24,30 @@ type CategoryDeleteTableProps = {
   isTrash?: boolean
 }
 
+/**
+ * Rows are draggable object and this is the container
+ * that users can drop the dragged row into. This is
+ * the place where we can handle the drop event.
+ *
+ * Target data will be text/plain and it will contain
+ * the json data of slug of the blog and source category.
+ *
+ * @example
+ * ```json
+ * {
+ *   "blog": "why-my-phone-is-slow",
+ *   "source": "technology"
+ * }
+ * ```
+ *
+ * @see CategoryDeleteRow
+ */
 const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
   categories, blogs, name, slug, list,
   handleTransfer, deleting, isTrash
 }) => {
+  const selfRef = useRef<HTMLDivElement>(null)
+
   const [target, setTarget] = useState<CategoryResponse["id"]>(
     categories?.[0]?.slug
   )
@@ -54,7 +74,39 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
     (selected) => selected
   ), [selected])
 
-  return <div className="overflow-x-auto p-1">
+  useEffect(() => {
+    if (!selfRef.current) return
+
+    const self = selfRef.current
+
+    const handleDragOver = (event: DragEvent) => {
+      if (!event.dataTransfer) return
+      event.preventDefault()
+      event.dataTransfer.dropEffect = "move"
+    }
+
+    const handleDrop = (event: DragEvent) => {
+      if (!event.dataTransfer) return
+      event.preventDefault()
+      const data = event.dataTransfer.getData("text/plain")
+      const { blog, source } = JSON.parse(data)
+
+      handleTransfer(source, slug, [blog])
+    }
+
+    self.addEventListener("dragover", handleDragOver)
+    self.addEventListener("drop", handleDrop)
+
+    return () => {
+      self.removeEventListener("dragover", handleDragOver)
+      self.removeEventListener("drop", handleDrop)
+    }
+  }, [handleTransfer])
+
+  return <div
+    ref={selfRef}
+    className="overflow-x-auto p-1"
+  >
     <h2 className="text-xl font-semibold px-2">
       {Message.format(dictionary.categories.delete.table[isTrash
         ? "delete"
@@ -148,6 +200,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
             blog={blog}
             isTrash={isTrash}
             selected={selected[blog.id]}
+            slug={slug}
             setSelected={() => setSelected({
               ...selected,
               [blog.id]: !selected[blog.id]
