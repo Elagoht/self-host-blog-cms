@@ -38,6 +38,8 @@ const ApiEndpoint = <T>(
       }
       return await handler(request, context)
     } catch (error) {
+      // eslint-disable-next-line no-console
+      if (process.env.DEBUG === "true") console.error(error)
       switch (true) {
         case error instanceof FormBodyError:
           return Response.json({
