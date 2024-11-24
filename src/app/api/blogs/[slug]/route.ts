@@ -14,8 +14,7 @@ type Context = Promise<{ slug: string }>
 const db = new PrismaClient()
 
 export const GET = ApiEndpoint<Context>(async (
-  request,
-  context
+  request, context
 ) => {
   const { searchParams } = request.nextUrl
 
@@ -30,8 +29,7 @@ export const GET = ApiEndpoint<Context>(async (
 }, ApiType.public)
 
 export const PATCH = ApiEndpoint<Context>(async (
-  request,
-  context
+  request, context
 ) => {
   const validated = await (
     await FormBody.fromRequest<Partial<BlogRequest>>(
@@ -97,8 +95,7 @@ export const PATCH = ApiEndpoint<Context>(async (
 })
 
 export const DELETE = ApiEndpoint<Context>(async (
-  request,
-  context
+  request, context
 ) => {
   const existing = await db.blog.findUnique({
     where: { slug: (await context.params).slug }
