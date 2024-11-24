@@ -31,12 +31,12 @@ class Blogger {
     take: number = this.DEFAULT_TAKE
   ) => Pager.convert(
     await this.getBlogsData(filters, type, page, take),
-    page < 1
+    (page ?? this.DEFAULT_PAGE) < 1
       ? this.DEFAULT_PAGE
-      : page,
-    take < 1
+      : (page ?? this.DEFAULT_PAGE),
+    (take ?? this.DEFAULT_TAKE) < 1
       ? this.DEFAULT_TAKE
-      : take
+      : (take ?? this.DEFAULT_TAKE)
   )
 
   /**
