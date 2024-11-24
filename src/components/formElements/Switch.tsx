@@ -28,17 +28,17 @@ const Switch: FC<SwitchProps> = ({
       />
 
       <div className={classNames(
-        "w-10 h-6 rounded-full p-1 relative transition-all", {
+        "w-10 h-6 rounded-full p-1 transition-all", {
         "bg-primary-500": props.checked,
         "bg-neutral-200 dark:bg-neutral-700": !props.checked,
         "cursor-not-allowed": props.disabled
       })}>
         <div className={classNames(
-          "absolute w-4 h-4 rounded-full",
+          "w-4 h-4 rounded-full",
           "transition-all duration-300", {
           "bg-neutral-200 dark:bg-neutral-900": props.checked,
           "bg-primary-500": !props.checked,
-          "transform translate-x-full": props.checked
+          "ml-4": props.checked
         })} />
       </div>
     </label>
