@@ -9,7 +9,7 @@ class Query {
 
   public truthy = (
     key: string
-  ): boolean => [
+  ): boolean => ![
     "false", "0"
   ].includes(this.get(key))
 
@@ -26,7 +26,6 @@ class Query {
   ) ? true : this.falsy(
     key
   ) ? false : undefined
-
 
   public array = (
     key: string
