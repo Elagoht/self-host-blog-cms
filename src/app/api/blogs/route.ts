@@ -21,14 +21,16 @@ export const GET = ApiEndpoint(async (
   const page = query.number("page")
   const take = query.number("take")
   const category = query.string("category")
-  const published = query.boolean("published")
+  const published = query.truthy("published")
   const type = query.oneOfOrDefault<BlogType>("type", [
     "detailed", "card", "list"
   ], "card")
 
-  return Response.json(await new Blogger(db).getBlogs({
+  const blog = await new Blogger(db).getBlogs({
     category,
     published,
     search
-  }, type, page, take))
+  }, type, page, take)
+
+  return Response.json(blog)
 }, ApiType.public)
