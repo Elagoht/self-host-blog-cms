@@ -4,10 +4,11 @@ import Button from "@/components/formElements/Button"
 import Checkbox from "@/components/formElements/Checkbox"
 import Select from "@/components/formElements/Select"
 import dictionary from "@/i18n"
+import Message from "@/utilities/Message"
 import { IconTransferVertical, IconTrash } from "@tabler/icons-react"
+import classNames from "classnames"
 import { FC, useEffect, useMemo, useRef, useState } from "react"
 import CategoryDeleteRow from "./CategoryDeleteRow"
-import Message from "@/utilities/Message"
 
 type CategoryDeleteTableProps = {
   name: CategoryResponse["name"]
@@ -25,20 +26,9 @@ type CategoryDeleteTableProps = {
 }
 
 /**
- * Rows are draggable object and this is the container
- * that users can drop the dragged row into. This is
- * the place where we can handle the drop event.
- *
- * Target data will be text/plain and it will contain
- * the json data of slug of the blog and source category.
- *
- * @example
- * ```json
- * {
- *   "blog": "why-my-phone-is-slow",
- *   "source": "technology"
- * }
- * ```
+ * Drag and drop table for transferring blogs
+ * between categories. Dragging stores a payload
+ * with source and blogs slugs as an array.
  *
  * @see CategoryDeleteRow
  */
@@ -57,6 +47,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
       return all
     }, {} as Selection)
   )
+  const [isDragging, setIsDragging] = useState<boolean>(false)
 
   const allSelected = useMemo(() => Object.keys(
     selected
@@ -79,6 +70,15 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
 
     const self = selfRef.current
 
+    const handleDragStart = (event: DragEvent) => {
+      event.dataTransfer?.setData("text/plain", JSON.stringify({
+        source: slug,
+        blogs: blogs.filter((blog) =>
+          selected[blog.id]
+        ).map((blog) => blog.slug)
+      }))
+    }
+
     const handleDragOver = (event: DragEvent) => {
       if (!event.dataTransfer) return
       event.preventDefault()
@@ -89,23 +89,42 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
       if (!event.dataTransfer) return
       event.preventDefault()
       const data = event.dataTransfer.getData("text/plain")
-      const { blog, source } = JSON.parse(data)
+      const { blogs, source } = JSON.parse(data)
 
-      handleTransfer(source, slug, [blog])
+      handleTransfer(source, slug, blogs)
+      setSelected({})
     }
 
+    self.addEventListener("dragstart", handleDragStart)
     self.addEventListener("dragover", handleDragOver)
     self.addEventListener("drop", handleDrop)
 
     return () => {
+      self.removeEventListener("dragstart", handleDragStart)
       self.removeEventListener("dragover", handleDragOver)
       self.removeEventListener("drop", handleDrop)
     }
-  }, [handleTransfer, slug])
+  }, [blogs, handleTransfer, selected, slug])
+
+  useEffect(() => {
+    const handleDragging = () => selected && setIsDragging(true)
+    const handleDragEnd = () => setIsDragging(false)
+
+    window.addEventListener("dragstart", handleDragging)
+    window.addEventListener("dragend", handleDragEnd)
+
+    return () => {
+      window.removeEventListener("dragstart", handleDragging)
+      window.removeEventListener("dragend", handleDragEnd)
+    }
+  }, [isDragging, selected])
 
   return <div
     ref={selfRef}
-    className="overflow-x-auto p-1"
+    className={classNames(
+      "overflow-x-auto p-1", {
+      "animate-drag-container": isDragging
+    })}
   >
     <h2 className="text-xl font-semibold px-2">
       {Message.format(dictionary.categories.delete.table[isTrash
@@ -116,7 +135,10 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
       })}
     </h2>
 
-    <div className="rounded-2xl overflow-clip shadow dark:shadow-neutral-950">
+    <div className={classNames(
+      "rounded-2xl overflow-clip shadow dark:shadow-neutral-950", {
+      "border-dashed border-2 border-primary-500": isDragging
+    })}>
       <hgroup className="bg-neutral-950 p-2 pl-4 gap-2
         text-white flex items-center justify-between"
       >
@@ -128,12 +150,10 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
               : "all"
             ]}
             checked={allSelected}
-            onChange={() =>
-              setSelected(blogs.reduce((all, blog) => {
-                all[blog.id] = !allSelected
-                return all
-              }, {} as Selection))
-            }
+            onChange={() => setSelected(blogs.reduce((all, blog) => {
+              all[blog.id] = !allSelected
+              return all
+            }, {} as Selection))}
           />
         </div>
 
@@ -193,7 +213,7 @@ const CategoryDeleteTable: FC<CategoryDeleteTableProps> = ({
         }
       </hgroup>
 
-      <ul>
+      <ul draggable={Object.values(selected).some((selected) => selected)}>
         {blogs.filter((blog) => list.includes(blog.slug)).map((blog) =>
           <CategoryDeleteRow
             key={blog.slug}

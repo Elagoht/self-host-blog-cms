@@ -12,12 +12,21 @@ const config: Config = {
         "spiral": "url('/assets/design/ssspiral.svg')"
       },
       animation: {
-        "fade-in": "fadeIn .3s ease-in-out"
+        "fade-in": "fadeIn .3s ease-in-out",
+        "drag-container": "dragContainer 3s ease-in-out infinite"
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" }
+        },
+        dragContainer: {
+          "0%": { transform: "rotate(0deg)" },
+          "20%": { transform: "rotate(0.2deg)" },
+          "40%": { transform: "rotate(-0.2deg)" },
+          "60%": { transform: "rotate(0.2deg)" },
+          "80%": { transform: "rotate(-.2deg)" },
+          "100%": { transform: "rotate(0deg)" }
         }
       },
       colors: {
