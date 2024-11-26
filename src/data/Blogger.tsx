@@ -193,24 +193,22 @@ class Blogger {
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
     take: number | undefined = this.DEFAULT_TAKE
-  ) => (
-    await this.prisma.blog.findMany({
-      skip: (page - 1) * (take ?? 0),
-      take,
-      where: {
-        published: filters.published ?? undefined,
+  ) => (await this.prisma.blog.findMany({
+    skip: (page - 1) * (take ?? 0),
+    take,
+    where: {
+      published: filters.published ?? undefined,
 
-        category: filters.category ? {
-          slug: filters.category
-        } : undefined,
-        OR: filters.search ? [
-          { title: { contains: filters.search } },
-          { content: { contains: filters.search } }
-        ] : undefined
-      },
-      include: { category: { select: { slug: true, name: true } } }
-    })
-  ).map(blog =>
+      category: filters.category ? {
+        slug: filters.category
+      } : undefined,
+      OR: filters.search ? [
+        { title: { contains: filters.search } },
+        { content: { contains: filters.search } }
+      ] : undefined
+    },
+    include: { category: { select: { slug: true, name: true } } }
+  })).map(blog =>
     this.changeModel(blog, type)
   )
 
