@@ -12,4 +12,4 @@
 - [ ] Add `Announcer` class to handle notifications
 - [ ] Handle cover photos with new `Studio` methods
 - [ ] `Blogger` and `Collectioner` repository classes
-- [ ] `Query` class for managing search Params
+- [X] `Query` class for managing search Params
