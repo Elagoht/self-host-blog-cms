@@ -4,6 +4,7 @@ import { blogEditScheme } from "@/lib/validation/blogs"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Bucket from "@/utilities/Bucket"
 import FormBody, { FormBodyType } from "@/utilities/FormBody"
+import Query from "@/utilities/Query"
 import Studio from "@/utilities/Studio"
 import TypeWriter from "@/utilities/TypeWriter"
 import { PrismaClient } from "@prisma/client"
@@ -16,16 +17,14 @@ const db = new PrismaClient()
 export const GET = ApiEndpoint<Context>(async (
   request, context
 ) => {
-  const { searchParams } = request.nextUrl
+  const { slug } = await context.params
+  const type = new Query(
+    request.nextUrl.searchParams
+  ).oneOfOrDefault<BlogType>("type", [
+    "detailed", "card", "list"
+  ], "detailed")
 
-  return Response.json(await new Blogger(db).getBlog((
-    await context.params
-  ).slug, ((
-    ["detailed", "card", "list"].includes(
-      searchParams.get("type") || ""
-    ) ? searchParams.get("type")
-      : "detailed"
-  ) ?? "detailed") as BlogType))
+  return Response.json(await new Blogger(db).getBlog(slug, type))
 }, ApiType.public)
 
 export const PATCH = ApiEndpoint<Context>(async (

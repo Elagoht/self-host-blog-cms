@@ -1,6 +1,6 @@
 import Blogger from "@/data/Blogger"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
-import Auth from "@/utilities/Auth"
+import Query from "@/utilities/Query"
 import { PrismaClient } from "@prisma/client"
 
 const db = new PrismaClient()
@@ -15,28 +15,20 @@ export const POST = ApiEndpoint(async (
 export const GET = ApiEndpoint(async (
   request
 ) => {
-  const { searchParams } = request.nextUrl
-  const page = Number(searchParams.get("page")) || undefined
-  const take = Number(searchParams.get("take")) || undefined
-  const category = searchParams.get("category") || undefined
-  const query = searchParams.get("query") || undefined
-  const published = !Auth.isTrustedSoftware(request.headers)
-    ? true
-    : searchParams.get("published") === "true"
-      ? true
-      : searchParams.get("published") === "false"
-        ? false
-        : undefined
-  const type = ((
-    ["detailed", "card", "list"].includes(
-      searchParams.get("type") || ""
-    ) ? searchParams.get("type")
-      : "card"
-  ) ?? "card") as BlogType
+  const query = new Query(request.nextUrl.searchParams)
+
+  const search = query.string("search")
+  const page = query.number("page")
+  const take = query.number("take")
+  const category = query.string("category")
+  const published = query.boolean("published")
+  const type = query.oneOfOrDefault<BlogType>("type", [
+    "detailed", "card", "list"
+  ], "card")
 
   return Response.json(await new Blogger(db).getBlogs({
     category,
     published,
-    search: query
+    search
   }, type, page, take))
 }, ApiType.public)
