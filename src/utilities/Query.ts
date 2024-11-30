@@ -18,14 +18,15 @@ class Query {
   ): boolean => [
     "true", "1"
   ].includes(this.get(key))
-
   public boolean = (
     key: string
-  ): boolean | undefined => this.truthy(
-    key
-  ) ? true : this.falsy(
-    key
-  ) ? false : undefined
+  ): boolean | undefined => {
+    const value = this.get(key)
+    if (value === null) return undefined
+    if (["true", "1"].includes(value)) return true
+    if (["false", "0"].includes(value)) return false
+    return undefined
+  }
 
   public array = (
     key: string

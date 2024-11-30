@@ -1,7 +1,16 @@
 import ApiCall from "@/utilities/ApiCall"
+import QueryString from "qs"
 
-export const getBlogs = () =>
-  ApiCall.get<Paginated<BlogCardResponse>>("/api/blogs")
+export const getBlogs = (filters?: {
+  category?: string
+  page?: string
+  published?: string
+}) => ApiCall.get<Paginated<BlogCardResponse>>(
+  `/api/blogs${QueryString.stringify(filters, {
+    addQueryPrefix: true,
+    skipNulls: true
+  })}`
+)
 
 export const getBlog = (
   slug: string

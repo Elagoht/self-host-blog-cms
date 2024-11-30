@@ -1,5 +1,6 @@
 import Blogger from "@/data/Blogger"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
+import Auth from "@/utilities/Auth"
 import Query from "@/utilities/Query"
 import { PrismaClient } from "@prisma/client"
 
@@ -15,13 +16,16 @@ export const POST = ApiEndpoint(async (
 export const GET = ApiEndpoint(async (
   request
 ) => {
+  const authorized = Auth.isTrustedSoftware(request.headers)
   const query = new Query(request.nextUrl.searchParams)
 
   const search = query.string("search")
   const page = query.number("page")
   const take = query.number("take")
   const category = query.string("category")
-  const published = query.truthy("published")
+  const published = authorized
+    ? query.boolean("published")
+    : true // Hide unpublished blogs from public
   const type = query.oneOfOrDefault<BlogType>("type", [
     "detailed", "card", "list"
   ], "card")

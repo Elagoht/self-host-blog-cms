@@ -17,7 +17,7 @@ const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
     {[
       <Button
         key={category.id}
-        href={`/blogs?category=${category.id}`}
+        href={`/blogs?category=${category.slug}`}
       >
         <IconEye />
       </Button>,

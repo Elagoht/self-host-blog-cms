@@ -5,8 +5,12 @@ import dictionary from "@/i18n"
 import { getBlogs } from "@/services/blog"
 import { FC } from "react"
 
-const BlogsPage: FC<PageComponent> = async () => {
-  const { data: blogs } = await (await getBlogs()).json()
+const BlogsPage: FC<PageComponent> = async ({
+  searchParams
+}) => {
+  const { data: blogs } = await (await getBlogs(
+    await searchParams
+  )).json()
 
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" }
