@@ -50,7 +50,7 @@ type BlogDetailedResponse = {
 }
 
 type BlogFilters = {
-  category?: string
+  category?: string[]
   published?: boolean
   search?: string
 }
