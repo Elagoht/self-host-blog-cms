@@ -11,7 +11,7 @@ const CategoriesPage: FC<PageComponent> = async () => {
   const categories = await (await getCategories()).json()
 
   return <Content breadcrumbs={[
-    { name: "categories", href: "/blogs" }
+    { name: "categories", href: "/categories" }
   ]}>
     <Container
       title={dictionary.categories.main.title}
