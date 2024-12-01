@@ -11,7 +11,7 @@ export const GET = ApiEndpoint<Context>(async (
   context
 ) => Response.json(
   await new Blogger(db).getBlogs({
-    category: (await context.params).slug
+    category: [(await context.params).slug]
   }, "list", 1, undefined), {
   status: 200
 }), ApiType.public)
