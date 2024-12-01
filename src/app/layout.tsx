@@ -2,7 +2,7 @@ import Providers from "@/components/layout/Providers"
 import "@/design/globals.css"
 import dictionary from "@/i18n"
 import classNames from "classnames"
-import { Metadata } from "next"
+import { Metadata, Viewport } from "next"
 import { DM_Sans as DMSans } from "next/font/google"
 import { FC } from "react"
 
@@ -27,6 +27,15 @@ export const metadata: Metadata = {
     template: `%s | ${dictionary.branding.title}`
   },
   description: dictionary.branding.description
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  minimumScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+  viewportFit: "cover"
 }
 
 const dmSans = DMSans({
