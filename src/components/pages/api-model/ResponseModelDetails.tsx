@@ -13,13 +13,14 @@ const ResponseModelDetails: FC<ResponseModelDetailsProps> = ({
 }) =>
   <div
     role="tab"
-    className="border-neutral-400 dark:border-neutral-700 border p-4 rounded-lg"
+    className="border-neutral-300 dark:border-neutral-700
+    border p-4 rounded-lg"
   >
     <h2 className="my-0">{model.title}</h2>
 
-    <p>{model.description}</p>
+    <p> {model.description}</p>
 
-    <pre className="flex flex-col leading-none my-0">
+    <pre className="flex flex-col leading-none my-0 !p-4 !bg-neutral-800">
       {Object.entries(model.values).map(([key, value]) => (
         <li key={key} className="flex gap-4">
           <span className="font-bold text-green-500">{key}</span>
