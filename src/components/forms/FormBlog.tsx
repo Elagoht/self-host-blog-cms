@@ -37,7 +37,7 @@ const FormBlog: FC<FormBlogProps> = ({
 
   const [preview, setPreview] = useState<
     "horizontal" | "vertical" | "disabled"
-  >("horizontal")
+  >("disabled")
   const [isNarrow, setIsNarrow] = useState<boolean>(false)
 
   useEffect(() => {
