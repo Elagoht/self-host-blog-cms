@@ -1,6 +1,7 @@
 "use client"
 
 import Button from "@/components/formElements/Button"
+import Expandable from "@/components/ui/Expandable"
 import dictionary from "@/i18n"
 import { IconFilter, IconLayoutGrid, IconLayoutRows, IconPlus } from "@tabler/icons-react"
 import { FC, useState } from "react"
@@ -55,11 +56,15 @@ const BlogFilters: FC<BlogFiltersProps> = ({
       </Button>
     </div>
 
-    <BlogFilterOptions
-      expandedFilters={expandedFilters}
-      searchParams={searchParams}
-      categories={categories}
-    />
+    <Expandable
+      expanded={expandedFilters}
+      className="p-4 rounded-xl bg-neutral-200 dark:bg-neutral-950"
+    >
+      <BlogFilterOptions
+        searchParams={searchParams}
+        categories={categories}
+      />
+    </Expandable >
   </>
 }
 

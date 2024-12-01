@@ -12,7 +12,7 @@ const Expandable: FC<ExpandableProps> = ({
   expanded, className, children, containerClassName
 }) =>
   <div className={classNames(
-    "grid transition-all", containerClassName, {
+    "grid transition-all duration-300 ease-out", containerClassName, {
     "grid-rows-expanded": expanded,
     "grid-rows-collapsed opacity-0": !expanded
   })}>
