@@ -4,7 +4,9 @@ import QueryString from "qs"
 export const getBlogs = (filters?: {
   category?: string
   page?: string
+  take?: string
   published?: string
+  search?: string
 }) => ApiCall.get<Paginated<BlogCardResponse>>(
   `/api/blogs${QueryString.stringify(filters, {
     addQueryPrefix: true,

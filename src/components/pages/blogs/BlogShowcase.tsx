@@ -3,40 +3,27 @@
 import classNames from "classnames"
 import { FC, useState } from "react"
 import BlogCard from "./BlogCard"
-import { IconLayoutGrid, IconLayoutRows, IconPlus } from "@tabler/icons-react"
-import Button from "@/components/formElements/Button"
-import dictionary from "@/i18n"
 import BlogCardEmpty from "./BlogCardEmpty"
+import BlogFilters from "./BlogFilters"
 
 type BlogShowcaseProps = {
   blogs: BlogCardResponse[]
+  categories: CategoryResponse[],
+  searchParams: Record<string, string | undefined>
 }
 
-const BlogShowcase: FC<BlogShowcaseProps> = ({ blogs }) => {
+const BlogShowcase: FC<BlogShowcaseProps> = ({
+  blogs, categories, searchParams
+}) => {
   const [layout, setLayout] = useState<"grid" | "list">("grid")
 
   return <>
-    <div className="flex gap-4">
-      <Button
-        onClick={() => setLayout(layout === "grid"
-          ? "list"
-          : "grid"
-        )}
-        color="secondary"
-      >
-        {layout === "grid"
-          ? <IconLayoutGrid size={24} />
-          : <IconLayoutRows size={24} />
-        }
-      </Button>
-
-      <Button
-        href="/blogs/new"
-        icon={<IconPlus />}
-      >
-        {dictionary.blogs.main.new}
-      </Button>
-    </div>
+    <BlogFilters
+      layout={layout}
+      setLayout={setLayout}
+      categories={categories}
+      searchParams={searchParams}
+    />
 
     <div className={classNames(
       "grid gap-4", {

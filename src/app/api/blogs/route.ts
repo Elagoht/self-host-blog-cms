@@ -22,7 +22,7 @@ export const GET = ApiEndpoint(async (
   const search = query.string("search")
   const page = query.number("page")
   const take = query.number("take")
-  const category = query.string("category")
+  const category = query.array("category")
   const published = authorized
     ? query.boolean("published")
     : true // Hide unpublished blogs from public

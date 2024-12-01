@@ -24,12 +24,12 @@ const Button: FC<ButtonProps> = ({
     props.className, {
     "flex-row-reverse": reverse,
     "hover:ring-2 hover:ring-offset-2": !props.disabled,
-    "ring-primary-500 bg-primary-500 text-white": color === "primary",
-    "ring-secondary-500 bg-secondary-500 text-white": color === "secondary",
-    "ring-red-500 bg-red-500 text-white": color === "danger",
-    "ring-green-500 bg-green-500 text-white": color === "success",
-    "ring-amber-500 bg-amber-500 text-white": color === "warning",
-    "ring-blue-500 bg-blue-500 text-white": color === "info",
+    "ring-primary-500 bg-primary-500 text-primary-100": color === "primary",
+    "ring-secondary-500 bg-secondary-500 text-secondary-900": color === "secondary",
+    "ring-red-500 bg-red-500 text-red-100": color === "danger",
+    "ring-green-500 bg-green-500 text-green-100": color === "success",
+    "ring-amber-500 bg-amber-500 text-amber-900": color === "warning",
+    "ring-blue-500 bg-blue-500 text-blue-100": color === "info",
     "cursor-not-allowed opacity-50": !href && props.disabled
   })
 

@@ -31,7 +31,21 @@
       "title": "Blogs",
       "description": "Here are the list of your blogs.",
       "new": "New Blog",
-      "edit": "Edit Blog"
+      "edit": "Edit Blog",
+      "filters": {
+        "title": "Filters",
+        "search": {
+          "title": "Include",
+          "placeholder": "Search by title"
+        },
+        "category": "Category",
+        "status": "Status",
+        "all": "All",
+        "published": "Published",
+        "draft": "Draft",
+        "reset": "Reset",
+        "apply": "Apply"
+      }
     },
     "new": {
       "title": "New Blog",
