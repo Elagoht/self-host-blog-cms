@@ -53,4 +53,5 @@ type BlogFilters = {
   category?: string[]
   published?: boolean
   search?: string
+  sort?: BlogSort
 }

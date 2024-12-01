@@ -25,7 +25,6 @@ class Blogger {
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
     take: number | undefined = this.DEFAULT_TAKE,
-    sort: BlogSort = "newest"
   ) => {
     const pageToUse = (page ?? this.DEFAULT_PAGE) < 1
       ? this.DEFAULT_PAGE
@@ -37,7 +36,7 @@ class Blogger {
         : take
 
     const blogs = await this.getBlogsData(
-      filters, type, pageToUse, takeToUse, sort
+      filters, type, pageToUse, takeToUse
     )
     const total = await this.countBlogs(filters)
 
@@ -199,7 +198,6 @@ class Blogger {
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
     take: number | undefined = this.DEFAULT_TAKE,
-    sort: BlogSort = "newest"
   ) => (await this.prisma.blog.findMany({
     skip: (page - 1) * (take ?? 0),
     take,
@@ -214,7 +212,7 @@ class Blogger {
         { content: { contains: filters.search } }
       ] : undefined
     },
-    orderBy: Blogger.generateSort(sort),
+    orderBy: Blogger.generateSort(filters.sort ?? "newest"),
     include: { category: { select: { slug: true, name: true } } }
   })).map(blog =>
     this.changeModel(blog, type)
@@ -283,7 +281,6 @@ class Blogger {
   private static generateSort(
     sort: BlogSort
   ): Prisma.BlogOrderByWithRelationInput {
-    console.log(sort)
     switch (sort) {
       case "newest":
         return { createdAt: "desc" }

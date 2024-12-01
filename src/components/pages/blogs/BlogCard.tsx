@@ -18,7 +18,7 @@ const BlogCard: FC<BlogCardProps> = ({
     href={`/blogs/edit/${blog.slug}`}
     className={classNames(
       "p-2 bg-neutral-50 dark:bg-neutral-800",
-      "flex rounded-lg shadow transition-colors",
+      "flex rounded-lg shadow transition-all overflow-clip",
       "hover:ring-2 hover:ring-offset-2 ring-secondary-500",
       "ring-offset-neutral-50 dark:ring-offset-neutral-900", {
       "flex-col gap-1": layout === "grid",

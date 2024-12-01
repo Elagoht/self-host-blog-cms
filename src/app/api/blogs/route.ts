@@ -37,8 +37,9 @@ export const GET = ApiEndpoint(async (
   const blog = await new Blogger(db).getBlogs({
     category,
     published,
-    search
-  }, type, page, take, sort)
+    search,
+    sort
+  }, type, page, take)
 
   return Response.json(blog)
 }, ApiType.public)

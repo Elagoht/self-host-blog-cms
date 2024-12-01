@@ -20,6 +20,22 @@
       "failure": "Invalid credentials."
     }
   },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Welcome to OwnBlog. Here you can manage your blogs and categories.",
+    "popular": {
+      "title": "Popular Blogs",
+      "description": "Here are the most popular blogs."
+    },
+    "recent": {
+      "title": "Recent Blogs",
+      "description": "Here are the most recent blogs."
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Here are the list of your categories."
+    }
+  },
   "blogs": {
     "card": {
       "status": {
