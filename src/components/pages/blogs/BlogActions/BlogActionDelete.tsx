@@ -10,8 +10,8 @@ import { FC, useCallback, useState } from "react"
 import toast from "react-hot-toast"
 
 type BlogActionDeleteProps = {
-  slug: BlogResponse["slug"]
-  title: BlogResponse["title"]
+  slug: BlogListResponse["slug"]
+  title: BlogListResponse["title"]
 }
 
 const BlogActionDelete: FC<BlogActionDeleteProps> = ({

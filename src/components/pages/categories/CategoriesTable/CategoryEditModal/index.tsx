@@ -11,8 +11,8 @@ type CategoriesEditModalProps = {
 
 const CategoriesEditModal: FC<CategoriesEditModalProps> = ({
   category, isOpen, close
-}) =>
-  <Modal
+}) => {
+  return <Modal
     title={dictionary.categories.edit.title}
     isOpen={isOpen}
     close={close}
@@ -31,5 +31,6 @@ const CategoriesEditModal: FC<CategoriesEditModalProps> = ({
       />
     }
   </Modal>
+}
 
 export default CategoriesEditModal

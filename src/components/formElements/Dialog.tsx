@@ -1,6 +1,9 @@
+"use client"
+
 import { IconX } from "@tabler/icons-react"
 import classNames from "classnames"
-import { FC, ReactNode } from "react"
+import { FC, ReactNode, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 
 type DialogProps = {
   title?: string
@@ -18,7 +21,16 @@ const Dialog: FC<DialogProps> = ({
   title, message, isOpen, close, persist = false,
   confirmText, cancelText, onConfirm, onCancel
 }) => {
-  return <div
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  if (!mounted) return null
+
+  return createPortal(<div
     onClick={!persist
       ? close
       : undefined
@@ -34,11 +46,14 @@ const Dialog: FC<DialogProps> = ({
       className={classNames(
         "bg-zinc-200 dark:bg-zinc-950 rounded-lg border",
         "border-neutral-200 dark:border-neutral-800 w-full",
-        "max-w-sm transition-all duration-300", {
-        "translate-y-full opacity-0 pointer-events-none": !isOpen
-      })}
+        "max-w-sm transition-all duration-300",
+        {
+          "translate-y-full opacity-0 pointer-events-none": !isOpen,
+        }
+      )}
     >
-      <div className="flex justify-between items-center border-b
+      <div
+        className="flex justify-between items-center border-b
         border-neutral-200 dark:border-neutral-800 p-2"
       >
         {title && <h2 className="text-lg font-bold">{title}</h2>}
@@ -95,7 +110,7 @@ const Dialog: FC<DialogProps> = ({
         }
       </div>
     </section>
-  </div>
+  </div>, document.body)
 }
 
 export default Dialog

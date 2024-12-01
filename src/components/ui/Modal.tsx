@@ -1,8 +1,9 @@
 import { IconX } from "@tabler/icons-react"
 import classNames from "classnames"
-import { FC, ReactNode } from "react"
+import { FC, ReactNode, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 
-type DialogProps = {
+type ModalProps = {
   title?: string
   isOpen: boolean
   close: () => void
@@ -10,10 +11,18 @@ type DialogProps = {
   children: ReactNode
 }
 
-const Dialog: FC<DialogProps> = ({
+const Modal: FC<ModalProps> = ({
   title, isOpen, close, persist = false, children
 }) => {
-  return <div
+  const [isMounted, setIsMounted] = useState<boolean>(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  if (!isMounted) return null
+  return createPortal(<div
     onClick={!persist
       ? close
       : undefined
@@ -58,7 +67,7 @@ const Dialog: FC<DialogProps> = ({
         {children}
       </article>
     </section>
-  </div>
+  </div>, document.body)
 }
 
-export default Dialog
+export default Modal
