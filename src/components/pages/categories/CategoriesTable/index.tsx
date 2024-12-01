@@ -31,11 +31,10 @@ const CategoriesTable: FC<CategoriesTableProps> = ({
           divide-x divide-neutral-900"
         >
           {[
-            "",
+            dictionary.categories.main.table.actions,
             dictionary.categories.main.table.name,
             dictionary.categories.main.table.blogs,
             dictionary.categories.main.table.spot,
-            dictionary.categories.main.table.actions
           ].map((column) =>
             <th
               key={column}

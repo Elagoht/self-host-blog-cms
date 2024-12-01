@@ -15,19 +15,17 @@ const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
     divide-x divide-neutral-300 dark:divide-neutral-950"
   >
     {[
-      <Button
-        key={category.id}
-        href={`/blogs?category=${category.slug}`}
-      >
-        <IconEye />
-      </Button>,
-      category.name,
-      category.blogCount,
-      category.spot,
       <div
         key="actions"
         className="flex justify-center gap-2"
       >
+        <Button
+          key={category.id}
+          href={`/blogs?category=${category.slug}`}
+        >
+          <IconEye />
+        </Button>
+
         <Button
           color="secondary"
           onClick={openEditModal}
@@ -41,15 +39,17 @@ const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
         >
           <IconTrash />
         </Button>
-      </div>
+      </div>,
+      category.name,
+      category.blogCount,
+      category.spot
     ].map((cell, index) =>
       <td
         key={index}
         className={classNames(
           "p-2", {
-          "text-right": index === 2,
-          "w-full": index === 3,
-          "w-40": index === 4
+          "text-right": index === 1,
+          "w-full min-w-96": index === 3,
         })}
       >
         {cell}
