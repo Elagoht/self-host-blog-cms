@@ -97,7 +97,7 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
           )}
         </div>
 
-        <div className="flex gap-2 mt-4">
+        <div className="flex gap-4 mt-4">
           <Button
             type="submit"
             color="primary"
