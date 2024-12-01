@@ -318,7 +318,7 @@
       },
       {
         "title": "Get Blogs by Category",
-        "description": "Fetches all blogs under the category with the category model in list model.",
+        "description": "Fetches all blogs under the category in list model.",
         "method": "GET",
         "url": "/api/blogs/category/`${slug}`/blogs"
       },
