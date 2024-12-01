@@ -1,6 +1,7 @@
 {
   "branding": {
-    "title": "OwnBlog"
+    "title": "OwnBlog",
+    "description": "Manage your blog and create an API to use it in your frontend"
   },
   "panel": {
     "notFound": {
@@ -44,7 +45,14 @@
         "published": "Published",
         "draft": "Draft",
         "reset": "Reset Filters",
-        "apply": "Apply"
+        "apply": "Apply",
+        "sort": "Sort By",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "popular": "Popular",
+        "unpopular": "Unpopular",
+        "a2z": "A-Z",
+        "z2a": "Z-A"
       }
     },
     "new": {

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     default: dictionary.branding.title,
     template: `%s | ${dictionary.branding.title}`
   },
-  description: "Manage your blog and create an API to use it in your frontend"
+  description: dictionary.branding.description
 }
 
 const dmSans = DMSans({
