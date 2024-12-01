@@ -27,8 +27,8 @@ const CategoriesPage: FC<PageComponent> = async () => {
       >
         {dictionary.categories.main.new}
       </Button>
-    </Container >
-  </Content >
+    </Container>
+  </Content>
 }
 
 export default CategoriesPage
