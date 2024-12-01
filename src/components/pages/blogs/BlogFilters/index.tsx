@@ -58,7 +58,7 @@ const BlogFilters: FC<BlogFiltersProps> = ({
 
     <Expandable
       expanded={expandedFilters}
-      className="p-4 rounded-xl bg-neutral-200 dark:bg-neutral-950"
+      className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-950 shadow"
     >
       <BlogFilterOptions
         searchParams={searchParams}
