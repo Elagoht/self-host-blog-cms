@@ -239,6 +239,75 @@
       "uniqueSlug": "Slug must be unique. Try changing the title."
     }
   },
+  "apiModel": {
+    "title": "API Model",
+    "description": "This api will give you only a read only access to the blogs and categories. You can use this api to show the blogs and categories in your frontend. Filtering by category, status, search term and sorting is also available. The only write operation is to increment the read count of a blog.",
+    "subtitles": {
+      "endpoints": "Endpoints",
+      "responseModels": "Response Models"
+    },
+    "endpoints": [
+      {
+        "title": "Get All Blogs",
+        "description": "Get all the blogs.",
+        "method": "GET",
+        "url": "/api/blogs",
+        "query": {
+          "type": {
+            "description": "Directly affects the response model.",
+            "available": "`detailed`, `list`, `card`: response model"
+          },
+          "category": {
+            "description": "Filter by category slug.",
+            "available": "`string`: slug of the category"
+          },
+          "search": {
+            "description": "Search by title.",
+            "available": "`string`: search term"
+          },
+          "sort": {
+            "description": "Sort by field.",
+            "available": "`newest`, `oldest`, `popular`, `unpopular`, `a2z`, `z2a`: sort order",
+            "default": "newest"
+          },
+          "page": {
+            "description": "Page number.",
+            "available": "`number`: page number",
+            "default": "1"
+          },
+          "take": {
+            "description": "Number of blogs per page.",
+            "available": "`number`: number of blogs",
+            "default": "12 *divisible by 2, 3, 4, and 6*"
+          }
+        }
+      },
+      {
+        "title": "Get Blog by Slug",
+        "description": "Get a blog by its slug.",
+        "method": "GET",
+        "url": "/api/blogs/`${slug}`"
+      },
+      {
+        "title": "Get Blogs by Category",
+        "description": "Get all the blogs under a category.",
+        "method": "GET",
+        "url": "/api/blogs/category/`${slug}`/blogs"
+      },
+      {
+        "title": "Get All Categories",
+        "description": "Get all the category instances.",
+        "method": "GET",
+        "url": "/api/categories"
+      },
+      {
+        "title": "Get Category by Slug",
+        "description": "Get a category instance by its slug.",
+        "method": "GET",
+        "url": "/api/categories/`${slug}`"
+      }
+    ]
+  },
   "breadcrumbs": {
     "dashboard": "Dashboard",
     "blogs": "Blogs",
@@ -246,7 +315,8 @@
     "new": "New",
     "edit": "Edit",
     "delete": "Delete",
-    "relatedBlogs": "Related Blogs"
+    "relatedBlogs": "Related Blogs",
+    "apiModel": "API Model"
   },
   "navbar": {
     "dashboard": "Dashboard",

@@ -1,0 +1,74 @@
+{
+  "types": {
+    "blog": {
+      "title": "Blog Type Response Model",
+      "description": "The type of response model for blog, can be changed by query parameter."
+    },
+    "category": {
+      "title": "Category Response Model",
+      "description": "The type of response model for category, single response model."
+    }
+  },
+  "blog": [
+    {
+      "title": "Detailed",
+      "description": "All publicly available information about a blog",
+      "values": {
+        "id": "string",
+        "title": "string",
+        "slug": "string",
+        "content": "string",
+        "keywords": "string",
+        "description": "string",
+        "spot": "string",
+        "cover": "string",
+        "published": "boolean",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "readTime": "number",
+        "readCount": "number",
+        "category": "string"
+      }
+    },
+    {
+      "title": "Card",
+      "description": "All required information to show a card of a blog",
+      "values": {
+        "title": "string",
+        "slug": "string",
+        "spot": "string",
+        "cover": "string",
+        "published": "boolean",
+        "createdAt": "Date",
+        "updatedAt": "Date",
+        "category": "string"
+      }
+    },
+    {
+      "title": "List",
+      "description": "All required information to list blogs",
+      "values": {
+        "id": "string",
+        "slug": "string",
+        "title": "string",
+        "cover": "string",
+        "category": "string"
+      }
+    }
+  ],
+  "category": [
+    {
+      "title": "Unified",
+      "description": "The type of response model for category, single response model.",
+      "values": {
+        "id": "string",
+        "slug": "string",
+        "blogCount": "number",
+        "name": "string",
+        "description": "string",
+        "keywords": "string",
+        "spot": "string"
+      }
+    }
+  ]
+}
