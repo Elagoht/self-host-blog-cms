@@ -18,11 +18,12 @@ class Query {
   ): boolean => [
     "true", "1"
   ].includes(this.get(key))
+
   public boolean = (
     key: string
   ): boolean | undefined => {
     const value = this.get(key)
-    if (value === null) return undefined
+    if (!value) return undefined
     if (["true", "1"].includes(value)) return true
     if (["false", "0"].includes(value)) return false
     return undefined
@@ -30,9 +31,11 @@ class Query {
 
   public array = (
     key: string
-  ): string[] => this.get(
-    key
-  ).split(",")
+  ): string[] | undefined => {
+    const value = this.get(key)
+    if (!value) return undefined
+    return value.split(",")
+  }
 
   public number = (
     key: string
