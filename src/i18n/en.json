@@ -300,23 +300,31 @@
         "title": "Get Blog by Slug",
         "description": "Fetch a blog by its slug. Cannot fetch draft blogs.",
         "method": "GET",
-        "url": "/api/blogs/`${slug}`"
+        "url": "/api/blogs/`${slug}`",
+        "query": [
+          {
+            "parameter": "type",
+            "description": "Directly affects the response model.",
+            "available": "`detailed`, `list`, `card`: response model",
+            "default": "detailed"
+          }
+        ]
       },
       {
-        "title": "Increment Blog Read Count",
+        "title": "Increase Read Count",
         "description": "Increment the read count of a blog.",
         "method": "PATCH",
         "url": "/api/blogs/`${slug}`/read"
       },
       {
         "title": "Get Blogs by Category",
-        "description": "Get all the blogs under a category.",
+        "description": "Fetches all blogs under the category with the category model in list model.",
         "method": "GET",
         "url": "/api/blogs/category/`${slug}`/blogs"
       },
       {
         "title": "Get All Categories",
-        "description": "Get all the category instances.",
+        "description": "Fetch all the categories in list model.",
         "method": "GET",
         "url": "/api/categories"
       },
