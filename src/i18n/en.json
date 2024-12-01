@@ -246,47 +246,67 @@
       "endpoints": "Endpoints",
       "responseModels": "Response Models"
     },
+    "queryTable": {
+      "parameter": "Query Parameter",
+      "description": "Description",
+      "available": "Available Values",
+      "default": "Default"
+    },
     "endpoints": [
       {
         "title": "Get All Blogs",
-        "description": "Get all the blogs.",
+        "description": "Fetch all the published blogs with pagination and filtering.",
         "method": "GET",
         "url": "/api/blogs",
-        "query": {
-          "type": {
+        "query": [
+          {
+            "parameter": "type",
             "description": "Directly affects the response model.",
-            "available": "`detailed`, `list`, `card`: response model"
+            "available": "`detailed`, `list`, `card`: response model",
+            "default": "card"
           },
-          "category": {
+          {
+            "parameter": "category",
             "description": "Filter by category slug.",
             "available": "`string`: slug of the category"
           },
-          "search": {
+          {
+            "parameter": "search",
             "description": "Search by title.",
             "available": "`string`: search term"
           },
-          "sort": {
+          {
+            "parameter": "sort",
             "description": "Sort by field.",
             "available": "`newest`, `oldest`, `popular`, `unpopular`, `a2z`, `z2a`: sort order",
             "default": "newest"
           },
-          "page": {
+          {
+            "parameter": "page",
             "description": "Page number.",
             "available": "`number`: page number",
             "default": "1"
           },
-          "take": {
+          {
+            "parameter": "take",
             "description": "Number of blogs per page.",
             "available": "`number`: number of blogs",
-            "default": "12 *divisible by 2, 3, 4, and 6*"
+            "default": "12 *(divisible by 2, 3, 4 & 6)*"
           }
-        }
+        ],
+        "extra": "**Wrappes the requested blog models array in the model below:**\n```json\n{\n  \"data\": [...],\n  \"page\": 1,\n  \"take\": 12,\n  \"total\": 471\n}\n```"
       },
       {
         "title": "Get Blog by Slug",
-        "description": "Get a blog by its slug.",
+        "description": "Fetch a blog by its slug. Cannot fetch draft blogs.",
         "method": "GET",
         "url": "/api/blogs/`${slug}`"
+      },
+      {
+        "title": "Increment Blog Read Count",
+        "description": "Increment the read count of a blog.",
+        "method": "PATCH",
+        "url": "/api/blogs/`${slug}`/read"
       },
       {
         "title": "Get Blogs by Category",
