@@ -58,26 +58,25 @@ const Pagination: FC<PaginationProps> = ({
       className: classNames(
         "h-10 w-10 grid place-items-center text-sm bg-gray-200",
         "rounded hover:bg-gray-300 dark:bg-neutral-700",
-        "dark:hover:bg-neutral-600", {
-        "opacity-50 cursor-not-allowed": currentPage === 1
+        "dark:hover:bg-neutral-600 shadow", {
+        "opacity-30 cursor-not-allowed": currentPage === 1
       })
     }, <IconArrowLeft />)}
 
 
     {pageNumbers.map((page) =>
-      <Link
-        key={page}
-        href={createPageUrl(page)}
-        className={classNames(
-          "h-10 w-10 grid place-items-center text-sm rounded", {
-          "text-primary-100": page === currentPage,
-          "bg-primary-500 hover:bg-primary-600": page === currentPage,
+      createElement(
+        page === currentPage ? "div" : Link, {
+        key: page,
+        href: createPageUrl(page),
+        className: classNames(
+          "h-10 w-10 grid place-items-center text-sm",
+          "rounded select-none shadow", {
+          "text-primary-100 bg-primary-500": page === currentPage,
           "bg-neutral-200 hover:bg-neutral-300": page !== currentPage,
           "dark:bg-neutral-700 dark:hover:bg-neutral-600": page !== currentPage
-        })}
-      >
-        {page}
-      </Link>
+        })
+      }, page)
     )}
 
     {createElement(
@@ -86,8 +85,8 @@ const Pagination: FC<PaginationProps> = ({
       className: classNames(
         "h-10 w-10 grid place-items-center text-sm bg-gray-200",
         "rounded hover:bg-gray-300 dark:bg-neutral-700",
-        "dark:hover:bg-neutral-600", {
-        "opacity-50 cursor-not-allowed": currentPage === totalPages
+        "dark:hover:bg-neutral-600 shadow", {
+        "opacity-30 cursor-not-allowed": currentPage === totalPages
       })
     }, <IconArrowRight />)}
   </div>

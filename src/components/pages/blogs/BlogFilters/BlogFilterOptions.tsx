@@ -45,12 +45,13 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
   >
     {({ values, setValues, handleChange }) =>
       <Form className="grid gap-2">
-        <div className="grid gap-4 grid-cols-4">
+        <div className="flex gap-4">
           <Select
             label={dictionary.blogs.main.filters.status}
             name="published"
             value={values.published}
             onChange={handleChange}
+            containerClassName="shrink-0"
           >
             {[
               { name: dictionary.blogs.main.filters.all, value: "" },
@@ -71,7 +72,8 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
             placeholder={dictionary.blogs.main.filters.search.placeholder}
             name="search"
             value={values.search}
-            containerClassName="col-span-3"
+            containerClassName="grow"
+            className="min-w-none w-full"
             onChange={handleChange}
           />
         </div>

@@ -6,12 +6,16 @@ type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   message?: string
   error?: string
   touched?: boolean
+  containerClassName?: string
 }
 
 const Select: FC<SelectProps> = ({
-  label, message, error, touched, ...props
+  label, message, error, touched, containerClassName, ...props
 }) => {
-  return <div className="flex flex-col gap-1">
+  return <div className={classNames(
+    "flex flex-col gap-1",
+    containerClassName
+  )}>
     {label &&
       <label htmlFor={props.name}>{label}</label>
     }
@@ -38,7 +42,9 @@ const Select: FC<SelectProps> = ({
       {props.children}
     </select>
 
-    {error && touched && <small className="text-red-500">{error}</small>}
+    {error && touched &&
+      <small className="text-red-500">{error}</small>
+    }
   </div>
 }
 
