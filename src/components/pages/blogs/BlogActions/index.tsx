@@ -3,6 +3,7 @@ import BlogActionLayout from "./BlogActionLayout"
 import BlogActionDelete from "./BlogActionDelete"
 
 type BlogActionsProps = {
+  isNarrow: boolean
   preview: "horizontal" | "vertical" | "disabled"
   setPreview: (
     preview: "horizontal" | "vertical" | "disabled"
@@ -18,10 +19,11 @@ type BlogActionsProps = {
 })
 
 const BlogActions: FC<BlogActionsProps> = ({
-  mode, slug, title, preview, setPreview
+  mode, slug, title, isNarrow, preview, setPreview
 }) =>
-  <div className="flex gap-4 items-center flex-col sticky top-0">
+  <div className="flex gap-4 items-center md:flex-col md:sticky top-0">
     <BlogActionLayout
+      isNarrow={isNarrow}
       preview={preview}
       setPreview={setPreview}
     />

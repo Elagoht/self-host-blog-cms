@@ -23,6 +23,13 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
 
   return <Formik<BlogFilters>
     initialValues={{
+      sort: [
+        "newest", "oldest", "popular",
+        "unpopular", "a-z", "z-a"
+      ].includes(
+        searchParams.sort ?? ""
+      ) ? searchParams.sort as BlogSort
+        : "newest",
       category: searchParams.category ?? "",
       published: ["true", "false"].includes(
         searchParams.published ?? ""
@@ -45,7 +52,7 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
   >
     {({ values, setValues, handleChange }) =>
       <Form className="grid gap-2">
-        <div className="flex gap-4">
+        <div className="flex gap-4 max-md:flex-wrap">
           <Select
             label={dictionary.blogs.main.filters.status}
             name="published"
@@ -57,6 +64,30 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
               { name: dictionary.blogs.main.filters.all, value: "" },
               { name: dictionary.blogs.main.filters.published, value: "true" },
               { name: dictionary.blogs.main.filters.draft, value: "false" }
+            ].map(option =>
+              <option
+                key={option.value}
+                value={option.value}
+              >
+                {option.name}
+              </option>
+            )}
+          </Select>
+
+          <Select
+            label={dictionary.blogs.main.filters.sort}
+            name="sort"
+            value={values.sort}
+            onChange={handleChange}
+            containerClassName="shrink-0 max-md:grow"
+          >
+            {[
+              { name: dictionary.blogs.main.filters.newest, value: "newest" },
+              { name: dictionary.blogs.main.filters.oldest, value: "oldest" },
+              { name: dictionary.blogs.main.filters.popular, value: "popular" },
+              { name: dictionary.blogs.main.filters.unpopular, value: "unpopular" },
+              { name: dictionary.blogs.main.filters.a2z, value: "a-z" },
+              { name: dictionary.blogs.main.filters.z2a, value: "z-a" }
             ].map(option =>
               <option
                 key={option.value}
@@ -112,6 +143,7 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
             type="reset"
             onClick={() => {
               setValues({
+                sort: "",
                 category: "",
                 published: "",
                 search: ""
@@ -132,6 +164,7 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
 export default BlogFilterOptions
 
 type BlogFilters = {
+  sort: BlogSort | ""
   category: CategoryResponse["name"]
   published: "true" | "false" | ""
   search: string

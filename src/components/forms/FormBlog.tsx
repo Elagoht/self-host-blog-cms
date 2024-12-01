@@ -13,7 +13,7 @@ import { IconDeviceFloppy, IconLoader } from "@tabler/icons-react"
 import classNames from "classnames"
 import { Form, Formik } from "formik"
 import { useRouter } from "next/navigation"
-import { FC, useState } from "react"
+import { FC, useEffect, useLayoutEffect, useState } from "react"
 import toast from "react-hot-toast"
 import Switch from "../formElements/Switch"
 import BlogActions from "../pages/blogs/BlogActions"
@@ -37,7 +37,18 @@ const FormBlog: FC<FormBlogProps> = ({
 
   const [preview, setPreview] = useState<
     "horizontal" | "vertical" | "disabled"
-  >("vertical")
+  >("horizontal")
+  const [isNarrow, setIsNarrow] = useState<boolean>(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsNarrow(window.innerWidth < 768)
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useLayoutEffect(() => setIsNarrow(window.innerWidth < 768), [isNarrow])
 
   return <Formik<BlogFormModel>
     initialValues={initialValues ? {
@@ -94,6 +105,7 @@ const FormBlog: FC<FormBlogProps> = ({
         <div className="flex gap-4 items-start max-md:flex-col">
           <BlogActions
             {...{
+              isNarrow,
               preview,
               setPreview,
               ...(mode === "edit" ? {

@@ -7,6 +7,7 @@ import {
 import { FC } from "react"
 
 type BlogActionLayoutProps = {
+  isNarrow: boolean
   preview: "horizontal" | "vertical" | "disabled"
   setPreview: (
     preview: "horizontal" | "vertical" | "disabled"
@@ -14,13 +15,15 @@ type BlogActionLayoutProps = {
 }
 
 const BlogActionLayout: FC<BlogActionLayoutProps> = ({
-  preview, setPreview
+  isNarrow, preview, setPreview
 }) => {
-  const layouts = [
-    <IconLayoutBottombarFilled key="horizontal" />,
-    <IconLayoutSidebarRightFilled key="vertical" />,
-    <IconEyeOff key="disabled" />
-  ]
+  const layouts = (isNarrow
+    ? [] : [
+      <IconLayoutSidebarRightFilled key="vertical" />
+    ]).concat([
+      <IconLayoutBottombarFilled key="horizontal" />,
+      <IconEyeOff key="disabled" />
+    ])
 
   return <button
     type="button"
