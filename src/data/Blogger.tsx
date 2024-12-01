@@ -35,10 +35,14 @@ class Blogger {
         ? this.DEFAULT_TAKE
         : take
 
+    const blogs = await this.getBlogsData(filters, type, pageToUse, takeToUse)
+    const total = await this.countBlogs(filters)
+
     return Pager.convert(
-      await this.getBlogsData(filters, type, pageToUse, takeToUse),
+      blogs,
       pageToUse,
-      takeToUse,
+      takeToUse ?? this.DEFAULT_TAKE,
+      total
     )
   }
 
@@ -187,7 +191,6 @@ class Blogger {
     return this.changeModel(blog, type)
   }
 
-  // Paginated list of blogs
   private getBlogsData = async (
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
@@ -200,7 +203,7 @@ class Blogger {
       published: filters.published ?? undefined,
 
       category: filters.category ? {
-        slug: filters.category
+        slug: { in: filters.category }
       } : undefined,
       OR: filters.search ? [
         { title: { contains: filters.search } },
@@ -211,6 +214,22 @@ class Blogger {
   })).map(blog =>
     this.changeModel(blog, type)
   )
+
+  private countBlogs = async (
+    filters: BlogFilters = this.DEFAULT_FILTERS
+  ) => await this.prisma.blog.count({
+    where: {
+      published: filters.published ?? undefined,
+
+      category: filters.category ? {
+        slug: { in: filters.category }
+      } : undefined,
+      OR: filters.search ? [
+        { title: { contains: filters.search } },
+        { content: { contains: filters.search } }
+      ] : undefined
+    }
+  })
 
   private changeModel(
     blog: BlogWithCategory,
