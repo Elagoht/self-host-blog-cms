@@ -1,27 +1,65 @@
+"use client"
+
 import Breadcrumbs from "@/components/layout/Breadcrumbs"
 import HeaderMenu from "@/components/layout/HeaderMenu"
 import NavBar from "@/components/layout/NavBar"
 import dictionary from "@/i18n"
-import { IconContract } from "@tabler/icons-react"
-import { FC } from "react"
+import { useHamburger } from "@/stores/hamburger"
+import { IconContract, IconX } from "@tabler/icons-react"
+import classNames from "classnames"
+import { usePathname } from "next/navigation"
+import { FC, useEffect } from "react"
 
 const PanelLayout: FC<LayoutComponent> = ({
   children
 }) => {
+  const isOpen = useHamburger(state => state.isOpen)
+  const close = useHamburger(state => state.close)
+
+  const pathname = usePathname()
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(close, [pathname])
+
   return <div className="h-screen sm:p-4 p-2 sm:gap-4 gap-2 grid
     grid-rows-dashboard sm:grid-cols-dashboard transition-all"
   >
-    <nav className="max-sm:hidden flex flex-col gap-4
-      row-span-2 overflow-x-auto"
+    <div
+      className={classNames(
+        "fixed inset-0 z-40",
+        "max-sm:bg-black max-sm:transition-all", {
+        "opacity-0 pointer-events-none": !isOpen,
+        "max-sm:opacity-75": isOpen
+      })}
+      onClick={close}
+    />
+
+    <nav className={classNames(
+      "flex flex-col gap-4 row-span-2 overflow-x-auto max-sm:max-w-96",
+      "max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:bottom-0",
+      "max-sm:z-50 max-sm:p-4 max-sm:w-screen max-sm:transition-transform", {
+      "max-sm:-translate-x-full": !isOpen,
+      "max-sm:bg-neutral-50 dark:max-sm:bg-neutral-950": isOpen
+    })}
     >
       <figure className="flex items-center justify-center gap-4
         text-3xl font-semibold my-2"
       >
-        <IconContract size={48} />
+        <button
+          className="flex items-center justify-center gap-2 sm:hidden
+          p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800"
+          onClick={close}
+        >
+          <IconX size={24} />
+        </button>
 
-        <figcaption>
-          {dictionary.branding.title}
-        </figcaption>
+        <div className="flex items-center justify-center gap-2 grow">
+          <IconContract size={48} />
+
+          <figcaption>
+            {dictionary.branding.title}
+          </figcaption>
+        </div>
       </figure>
 
       <NavBar />
@@ -41,7 +79,7 @@ const PanelLayout: FC<LayoutComponent> = ({
     >
       {children}
     </main>
-  </div>
+  </div >
 }
 
 export default PanelLayout
