@@ -23,6 +23,10 @@ export const GET = ApiEndpoint(async (
   const page = query.number("page")
   const take = query.number("take")
   const category = query.array("category")
+  const sort = query.oneOfOrDefault<BlogSort>("sort", [
+    "newest", "oldest", "popular",
+    "unpopular", "a-z", "z-a"
+  ], "newest")
   const published = authorized
     ? query.boolean("published")
     : true // Hide unpublished blogs from public
@@ -34,7 +38,7 @@ export const GET = ApiEndpoint(async (
     category,
     published,
     search
-  }, type, page, take)
+  }, type, page, take, sort)
 
   return Response.json(blog)
 }, ApiType.public)

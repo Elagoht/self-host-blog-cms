@@ -36,7 +36,9 @@ class Blogger {
         ? this.DEFAULT_TAKE
         : take
 
-    const blogs = await this.getBlogsData(filters, type, pageToUse, takeToUse)
+    const blogs = await this.getBlogsData(
+      filters, type, pageToUse, takeToUse, sort
+    )
     const total = await this.countBlogs(filters)
 
     return Pager.convert(
@@ -281,6 +283,7 @@ class Blogger {
   private static generateSort(
     sort: BlogSort
   ): Prisma.BlogOrderByWithRelationInput {
+    console.log(sort)
     switch (sort) {
       case "newest":
         return { createdAt: "desc" }
