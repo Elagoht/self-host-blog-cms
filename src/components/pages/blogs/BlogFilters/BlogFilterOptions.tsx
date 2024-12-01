@@ -43,7 +43,7 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
       })}`)
     }
   >
-    {({ values, handleChange }) =>
+    {({ values, setValues, handleChange }) =>
       <Form className="grid gap-2">
         <div className="grid gap-4 grid-cols-4">
           <Select
@@ -109,8 +109,12 @@ const BlogFilterOptions: FC<BlogFilterOptionsProps> = ({
           <Button
             type="reset"
             onClick={() => {
+              setValues({
+                category: "",
+                published: "",
+                search: ""
+              })
               router.push("/blogs")
-              router.refresh()
             }}
             color="danger"
             icon={<IconFilterOff />}
