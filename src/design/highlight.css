@@ -94,3 +94,7 @@
 .hljs-deletion {
   @apply text-red-950 dark:text-red-900 inline-block w-full;
 }
+
+code::after, code::before {
+  @apply !content-empty;
+}

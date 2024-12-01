@@ -7,7 +7,7 @@ img {
 }
 
 pre {
-  @apply !p-0;
+  @apply !p-0 !rounded-xl !bg-transparent shadow;
 }
 
 mark {
@@ -15,11 +15,11 @@ mark {
 }
 
 .code-container {
-  @apply mx-auto text-lg;
+  @apply mx-auto;
 }
 
 .code-lang {
-  @apply leading-none !font-[unset];
+  @apply leading-none font-mono;
 }
 
 .prose h1 a,
@@ -32,11 +32,11 @@ mark {
 }
 
 .code-header {
-  @apply bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 select-none items-center justify-between flex pl-4 p-2 rounded-t;
+  @apply bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 select-none items-center justify-between flex pl-4 p-2 rounded-t shadow-inner;
 }
 
 .code-copy {
-  @apply p-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-800 dark:hover:bg-neutral-700 transition-colors rounded leading-none;
+  @apply p-2 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors rounded leading-none;
 }
 
 hr {
