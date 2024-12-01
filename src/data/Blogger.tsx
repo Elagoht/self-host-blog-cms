@@ -1,16 +1,16 @@
+import dictionary from "@/i18n"
 import { blogAddScheme, blogEditScheme } from "@/lib/validation/blogs"
 import Bucket from "@/utilities/Bucket"
 import FormBody, { FormBodyError, FormBodyType } from "@/utilities/FormBody"
 import Message from "@/utilities/Message"
+import Pager from "@/utilities/Pager"
+import Query from "@/utilities/Query"
 import Studio from "@/utilities/Studio"
 import TypeWriter from "@/utilities/TypeWriter"
-import { Blog, PrismaClient } from "@prisma/client"
+import { Blog, type Prisma, PrismaClient } from "@prisma/client"
 import { NextRequest } from "next/server"
 import slugify from "slugify"
 import RepositoryError from "."
-import Pager from "@/utilities/Pager"
-import dictionary from "@/i18n"
-import Query from "@/utilities/Query"
 
 class Blogger {
   public getBlog = async (
@@ -24,7 +24,8 @@ class Blogger {
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
-    take: number | undefined = this.DEFAULT_TAKE
+    take: number | undefined = this.DEFAULT_TAKE,
+    sort: BlogSort = "newest"
   ) => {
     const pageToUse = (page ?? this.DEFAULT_PAGE) < 1
       ? this.DEFAULT_PAGE
@@ -195,7 +196,8 @@ class Blogger {
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
-    take: number | undefined = this.DEFAULT_TAKE
+    take: number | undefined = this.DEFAULT_TAKE,
+    sort: BlogSort = "newest"
   ) => (await this.prisma.blog.findMany({
     skip: (page - 1) * (take ?? 0),
     take,
@@ -210,6 +212,7 @@ class Blogger {
         { content: { contains: filters.search } }
       ] : undefined
     },
+    orderBy: Blogger.generateSort(sort),
     include: { category: { select: { slug: true, name: true } } }
   })).map(blog =>
     this.changeModel(blog, type)
@@ -220,7 +223,6 @@ class Blogger {
   ) => await this.prisma.blog.count({
     where: {
       published: filters.published ?? undefined,
-
       category: filters.category ? {
         slug: { in: filters.category }
       } : undefined,
@@ -275,12 +277,43 @@ class Blogger {
       default: throw new Error("Invalid blog type for changeModel")
     }
   }
+
+  private static generateSort(
+    sort: BlogSort
+  ): Prisma.BlogOrderByWithRelationInput {
+    switch (sort) {
+      case "newest":
+        return { createdAt: "desc" }
+      case "oldest":
+        return { createdAt: "asc" }
+      case "popular":
+        return { readCount: "desc" }
+      case "unpopular":
+        return { readCount: "asc" }
+      case "a-z":
+        return { title: "asc" }
+      case "z-a":
+        return { title: "desc" }
+      default: return { createdAt: "desc" }
+    }
+  }
 }
 
 declare global {
   type BlogWithCategory = Blog & { category: { slug: string, name?: string } }
 
-  type BlogType = "card" | "list" | "detailed"
+  type BlogType =
+    | "card"
+    | "list"
+    | "detailed"
+
+  type BlogSort =
+    | "newest"
+    | "oldest"
+    | "popular"
+    | "unpopular"
+    | "a-z"
+    | "z-a"
 }
 
 export default Blogger
