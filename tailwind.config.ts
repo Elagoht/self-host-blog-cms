@@ -55,10 +55,12 @@ const config: Config = {
           800: "#923f0e",
           900: "#78340f",
           950: "#451a03"
-        },
+        }
       },
       gridTemplateRows: {
         "dashboard": "auto 1fr",
+        "expanded": "1fr",
+        "collapsed": "0fr"
       },
       gridTemplateColumns: {
         "dashboard": "16rem 1fr",
