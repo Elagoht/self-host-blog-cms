@@ -76,13 +76,13 @@ const EndpointModel: FC<EndpointModelProps> = ({
                 even:bg-neutral-200 dark:even:bg-neutral-800"
               >
                 <td
-                  className="p-2 font-mono font-bold"
+                  className="*:m-0 p-2 font-mono font-bold"
                   dangerouslySetInnerHTML={{
                     __html: TypeWriter.markdownToHtml(parameter.parameter)
                   }} />
 
                 <td
-                  className="p-2"
+                  className="*:m-0 p-2"
                   dangerouslySetInnerHTML={{
                     __html: TypeWriter.markdownToHtml(parameter.description)
                       .replace(/<\/?p>/g, "")
@@ -90,7 +90,7 @@ const EndpointModel: FC<EndpointModelProps> = ({
                 />
 
                 <td
-                  className="p-2 *:text-blue-600 *:dark:text-blue-400"
+                  className="*:m-0 p-2 *:text-blue-600 *:dark:text-blue-400"
                   dangerouslySetInnerHTML={{
                     __html: TypeWriter.markdownToHtml(parameter.available)
                       .replace(/<\/?p>/g, "")
@@ -98,7 +98,7 @@ const EndpointModel: FC<EndpointModelProps> = ({
                 />
 
                 <td
-                  className="p-2 font-mono text-teal-600 dark:text-teal-400"
+                  className="*:m-0 p-2 font-mono text-teal-600 dark:text-teal-400"
                   dangerouslySetInnerHTML={{
                     __html: TypeWriter.markdownToHtml(parameter.default || "N/A")
                   }} />
