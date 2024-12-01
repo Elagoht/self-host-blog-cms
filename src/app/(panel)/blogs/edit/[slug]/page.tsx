@@ -21,12 +21,7 @@ const BlogEditPage: FC<PageComponent<Context>> = async ({
 
   return <Content breadcrumbs={[
     { name: "blogs", href: "/blogs" },
-    { name: "edit", href: "/blogs/edit" }, {
-      text: blog.title.length > 20
-        ? `${blog.title.slice(0, 20)}...`
-        : blog.title,
-      href: `/blogs/${slug}`
-    }
+    { name: "edit", href: "/blogs/edit" }
   ]}>
     <FormBlog
       categories={categories}
