@@ -20,7 +20,9 @@ type EndpointModelProps = {
 const EndpointModel: FC<EndpointModelProps> = ({
   title, description, endpoint, method, query, extra
 }) => {
-  return <section className="p-4 rounded-lg border border-neutral-300 dark:border-neutral-700">
+  return <section className="p-4 rounded-lg border
+    border-neutral-300 dark:border-neutral-700"
+  >
     <h2 className="mt-0">{title}</h2>
 
     <h3 className="font-mono flex items-center">
@@ -98,9 +100,13 @@ const EndpointModel: FC<EndpointModelProps> = ({
                 />
 
                 <td
-                  className="*:m-0 p-2 font-mono text-teal-600 dark:text-teal-400"
+                  className="*:m-0 p-2 font-mono text-teal-600
+                  dark:text-teal-400"
                   dangerouslySetInnerHTML={{
-                    __html: TypeWriter.markdownToHtml(parameter.default || "N/A")
+                    __html: TypeWriter.markdownToHtml(
+                      parameter.default
+                      || "N/A"
+                    )
                   }} />
               </tr>)}
           </tbody>
