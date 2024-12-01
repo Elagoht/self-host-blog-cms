@@ -251,6 +251,7 @@
   "navbar": {
     "dashboard": "Dashboard",
     "blogs": "Blogs",
-    "categories": "Categories"
+    "categories": "Categories",
+    "apiModel": "API Model"
   }
 }

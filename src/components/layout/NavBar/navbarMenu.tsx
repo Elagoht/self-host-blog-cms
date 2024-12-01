@@ -1,4 +1,7 @@
-import { IconCategory, IconDashboard, IconWritingSign } from "@tabler/icons-react"
+import {
+  IconApi, IconCategory,
+  IconDashboard, IconWritingSign
+} from "@tabler/icons-react"
 import { ReactElement } from "react"
 
 const navbarMenu: Array<{
@@ -17,6 +20,10 @@ const navbarMenu: Array<{
   title: "categories",
   href: "/categories",
   icon: <IconCategory />
+}, {
+  title: "apiModel",
+  href: "/api-model",
+  icon: <IconApi />
 }]
 
 export default navbarMenu
