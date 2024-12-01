@@ -12,10 +12,7 @@ const BlogsPage: FC<PageComponent> = async ({
 }) => {
   const query = await searchParams
 
-  const blogs = await (await getBlogs({
-    ...query,
-    take: "6"
-  })).json()
+  const blogs = await (await getBlogs(query)).json()
   const categories = await (await getCategories()).json()
 
   return <Content breadcrumbs={[

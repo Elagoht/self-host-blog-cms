@@ -8,7 +8,7 @@ class RepositoryError extends Error {
   }
 }
 
-type RepositoryErrorReason = "NotFound"
+type RepositoryErrorReason = "NotFound" | "InvalidSort"
 
 
 export default RepositoryError
