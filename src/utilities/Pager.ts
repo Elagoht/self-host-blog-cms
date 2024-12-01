@@ -2,12 +2,13 @@ class Pager {
   static convert = <T>(
     data: T[],
     page: number,
-    take: number | undefined
+    take: number,
+    total: number
   ): Paginated<T> => ({
     data,
     page,
     take,
-    took: data.length
+    total
   })
 }
 
