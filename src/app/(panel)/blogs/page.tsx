@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container"
 import Content from "@/components/layout/Content"
 import BlogShowcase from "@/components/pages/blogs/BlogShowcase"
+import Pagination from "@/components/ui/Pagination"
 import dictionary from "@/i18n"
 import { getBlogs } from "@/services/blog"
 import { getCategories } from "@/services/category"
@@ -27,6 +28,14 @@ const BlogsPage: FC<PageComponent> = async ({
       <BlogShowcase
         blogs={blogs.data}
         categories={categories}
+        searchParams={query}
+      />
+
+
+      <Pagination
+        totalPages={Math.ceil(blogs.total / blogs.take)}
+        pageParam="page"
+        pathname="/blogs"
         searchParams={query}
       />
     </Container>
