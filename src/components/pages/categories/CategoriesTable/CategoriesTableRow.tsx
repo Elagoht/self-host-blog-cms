@@ -48,7 +48,7 @@ const CategoriesTableRow: FC<CategoriesTableRowProps> = ({
         key={index}
         className={classNames(
           "p-2", {
-          "text-right": index === 1,
+          "text-right": index === 2,
           "w-full min-w-96": index === 3,
         })}
       >
