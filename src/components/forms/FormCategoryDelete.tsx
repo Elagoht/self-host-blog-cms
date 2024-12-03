@@ -67,31 +67,33 @@ const FormCategoryDelete: FC<FormCategoryDeleteProps> = ({
       })
 
       return <Form className="flex flex-col gap-4">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          {categories.sort((a) =>
-            a.slug === category.slug ? -1 : 1
-          ).map((current) =>
-            <CategoryDeleteTable
-              key={current.slug}
-              categories={categories.filter(({ slug }) =>
-                ![current.slug, category.slug].includes(slug)
-              )}
-              name={current.name}
-              slug={current.slug}
-              list={values[current.slug]}
-              blogs={blogs.filter((blog) =>
-                values[current.slug].includes(blog.slug)
-              )}
-              handleTransfer={handleTransfer}
-              deleting={category.slug}
-              isTrash={current.slug === category.slug}
-            />
-          )}
+        {blogs.length > 0 &&
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            {categories.sort((a) =>
+              a.slug === category.slug ? -1 : 1
+            ).map((current) =>
+              <CategoryDeleteTable
+                key={current.slug}
+                categories={categories.filter(({ slug }) =>
+                  ![current.slug, category.slug].includes(slug)
+                )}
+                name={current.name}
+                slug={current.slug}
+                list={values[current.slug]}
+                blogs={blogs.filter((blog) =>
+                  values[current.slug].includes(blog.slug)
+                )}
+                handleTransfer={handleTransfer}
+                deleting={category.slug}
+                isTrash={current.slug === category.slug}
+              />
+            )}
 
-          {categories.length === 1 &&
-            <CategoryDeleteNoAlternatives slug={category.slug} />
-          }
-        </div>
+            {categories.length === 1 &&
+              <CategoryDeleteNoAlternatives slug={category.slug} />
+            }
+          </div>
+        }
 
         <Button
           type="submit"
