@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "2998:3000"
+    volumes:
+      - /var/ownblog:/uploads
