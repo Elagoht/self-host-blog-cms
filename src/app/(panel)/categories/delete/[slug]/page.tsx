@@ -4,7 +4,7 @@ import Content from "@/components/layout/Content"
 import dictionary from "@/i18n"
 import { getCategories, getCategory, getCategoryBlogs } from "@/services/category"
 import Message from "@/utilities/Message"
-import { notFound } from "next/navigation"
+import { redirect } from "next/navigation"
 import { FC } from "react"
 
 type Context = { slug: string }
@@ -14,7 +14,7 @@ const CategoryDeletePage: FC<PageComponent<Context>> = async ({
 }) => {
   const { slug } = await params
   const category = await (await getCategory(slug)).json()
-  if (!category.id) notFound()
+  if (!category.id) redirect("/categories")
 
   const { data: blogs } = await (await getCategoryBlogs(slug)).json()
   const categories = await (await getCategories()).json()
