@@ -3,6 +3,6 @@ type PageComponent<Context = object> = {
   searchParams: Promise<Record<string, string | undefined>>
 }
 
-type ParentComponent<T = object> = T & {
+type ParentComponent<T = object> = {
   children: React.ReactNode
-}
+} & T
