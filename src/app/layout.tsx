@@ -6,7 +6,7 @@ import { Metadata, Viewport } from "next"
 import { DM_Sans as DMSans } from "next/font/google"
 import { FC } from "react"
 
-const RootLayout: FC<RootLayoutComponent> = ({
+const RootLayout: FC<ParentComponent> = ({
   children
 }) =>
   <html lang="en">

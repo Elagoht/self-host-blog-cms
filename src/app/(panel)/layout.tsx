@@ -10,7 +10,7 @@ import classNames from "classnames"
 import { usePathname } from "next/navigation"
 import { FC, useEffect } from "react"
 
-const PanelLayout: FC<LayoutComponent> = ({
+const PanelLayout: FC<ParentComponent> = ({
   children
 }) => {
   const isOpen = useHamburger(state => state.isOpen)

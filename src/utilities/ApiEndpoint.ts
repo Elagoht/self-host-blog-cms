@@ -5,7 +5,7 @@ import Auth from "./Auth"
 import { FormBodyError } from "./FormBody"
 import RepositoryError from "@/data"
 
-const ApiEndpoint = <T>(
+const ApiEndpoint = <T = Promise<unknown>>(
   /**
    * Default Next.js request handler function
    *

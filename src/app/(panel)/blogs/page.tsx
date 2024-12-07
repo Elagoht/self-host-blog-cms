@@ -28,7 +28,6 @@ const BlogsPage: FC<PageComponent> = async ({
         searchParams={query}
       />
 
-
       <Pagination
         totalPages={Math.ceil(blogs.total / blogs.take)}
         pageParam="page"
