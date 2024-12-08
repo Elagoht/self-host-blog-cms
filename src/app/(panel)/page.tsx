@@ -8,6 +8,8 @@ import { getBlogs } from "@/services/blog"
 import { getCategories } from "@/services/category"
 import { FC } from "react"
 
+export const dynamic = "force-dynamic"
+
 const DashboardPage: FC<PageComponent> = async () => {
   const categories = await (await getCategories()).json()
   const { data: popular } = await (await getBlogs({

@@ -6,6 +6,8 @@ import Content from "@/components/layout/Content"
 import { getCategories } from "@/services/category"
 import NoCategoryWarning from "@/components/pages/blogs/NoCategoryWarning"
 
+export const dynamic = "force-dynamic"
+
 const NewBlogPage: FC<PageComponent> = async () => {
   const categories = await (await getCategories()).json()
 

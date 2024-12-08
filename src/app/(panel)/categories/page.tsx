@@ -7,6 +7,8 @@ import { getCategories } from "@/services/category"
 import { IconPlus } from "@tabler/icons-react"
 import { FC } from "react"
 
+export const dynamic = "force-dynamic"
+
 const CategoriesPage: FC<PageComponent> = async () => {
   const categories = await (await getCategories()).json()
 

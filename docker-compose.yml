@@ -2,8 +2,14 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "2998:3000"
+      # You can change the port on host machine
+      # Default port is 2998 on host machine
+      - "2998:2998"
     volumes:
-      - /var/ownblog:/uploads
+      # You can create and use another folder for uploads
+      # Default folder is /uploads in current directory on host machine
+      - ./uploads:/uploads

@@ -1,4 +1,4 @@
-# Stage 1: Builder
+# === BUILDER IMAGE === #
 FROM node:22 AS builder
 
 WORKDIR /app
@@ -10,12 +10,17 @@ COPY . .
 
 RUN npm run build
 
-# Stage 2: Runner
+# === RUNTIME IMAGE === #
 FROM node:22 AS runner
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/ ./
+COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules ./node_modules
 
-CMD ["node", "dist/main.js"]
+RUN mkdir -p /uploads
+
+ENV PORT=2998
+
+CMD ["npm", "start"]

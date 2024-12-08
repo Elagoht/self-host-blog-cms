@@ -15,8 +15,8 @@ export const middleware = async (
     !isAuthorized && !isOnAuthPage
   ) return NextResponse.redirect(
     `${request.nextUrl.origin
-    }/login?next=${encodeURIComponent(request.nextUrl.toString())
-    }`
+    }/login?next=${encodeURIComponent(request.nextUrl.toString(
+    ).replace(request.nextUrl.origin, ""))}`
   )
   if (isOnAuthPage && isAuthorized)
     return NextResponse.redirect(`${request.nextUrl.origin}/`)
