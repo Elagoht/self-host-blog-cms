@@ -27,6 +27,7 @@ const NavBarItem: FC<INavBarItemProps> = ({
 
   return <Link
     href={href}
+    prefetch={false}
     className={classNames(
       "p-2 rounded-full flex items-center gap-4",
       "transition-all hover:shadow", {
