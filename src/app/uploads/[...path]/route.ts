@@ -1,5 +1,5 @@
 import dictionary from "@/i18n"
-import ApiEndpoint from "@/utilities/ApiEndpoint"
+import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Bucket, { BucketError } from "@/utilities/Bucket"
 
 type Context = Promise<{ path: string[] }>
@@ -24,4 +24,4 @@ export const GET = ApiEndpoint<Context>(async (
 
     throw error
   }
-})
+}, ApiType.public)
