@@ -45,7 +45,7 @@ const FormLogin: FC<FormLoginProps> = ({
       router.push(next || "/")
     }}
   >
-    {({ values, touched, errors, handleChange }) =>
+    {({ values, touched, errors, handleChange, isSubmitting }) =>
       <Form className="flex flex-col gap-4 w-full">
         <Input
           label={dictionary.auth.login.username}
@@ -66,7 +66,10 @@ const FormLogin: FC<FormLoginProps> = ({
           error={errors.passphrase}
         />
 
-        <Button type="submit">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+        >
           {dictionary.auth.login.login}
         </Button>
       </Form>
