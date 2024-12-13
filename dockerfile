@@ -1,23 +1,12 @@
-# === BUILDER IMAGE === #
-FROM node:22 AS builder
-
+FROM node:22-slim AS runner
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+RUN apt-get update -y && apt-get install -y openssl
 
 COPY . .
+RUN npm install
 
 RUN npm run build
-
-# === RUNTIME IMAGE === #
-FROM node:22 AS runner
-
-WORKDIR /app
-
-COPY --from=builder /app/ ./
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
 
 RUN mkdir -p /uploads
 

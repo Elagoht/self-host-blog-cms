@@ -6,7 +6,7 @@
     "db-push": "npx prisma db push",
     "dev": "npx prisma generate && next dev --turbopack",
     "build": "npx prisma generate && npx prisma db push && next build",
-    "start": "next start",
+    "start": "next start -p 2998",
     "lint": "next lint"
   },
   "dependencies": {

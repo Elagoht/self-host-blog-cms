@@ -13,3 +13,4 @@ services:
       # You can create and use another folder for uploads
       # Default folder is /uploads in current directory on host machine
       - ./uploads:/uploads
+      - ./db:/prisma/
