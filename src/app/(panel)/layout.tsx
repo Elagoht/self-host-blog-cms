@@ -21,7 +21,7 @@ const PanelLayout: FC<ParentComponent> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(close, [pathname])
 
-  return <div className="h-screen sm:p-4 p-2 sm:gap-4 gap-2 grid
+  return <div className="h-dvh sm:p-4 p-2 sm:gap-4 gap-2 grid
     grid-rows-dashboard sm:grid-cols-dashboard transition-all"
   >
     <div
