@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     network_mode: "host"
     volumes:
-      - ./uploads:/uploads
-      - ./db:/prisma
-    environment:
-      PORT: 2998
+      - ./uploads:/app/uploads
+      - ./db:/app/prisma
 

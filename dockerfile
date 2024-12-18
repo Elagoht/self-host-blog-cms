@@ -10,6 +10,4 @@ RUN npm run build
 
 RUN mkdir -p /uploads
 
-ENV PORT=2998
-
 CMD ["npm", "start"]
