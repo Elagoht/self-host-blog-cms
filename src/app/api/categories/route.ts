@@ -1,5 +1,6 @@
 import { categoryAddScheme } from "@/lib/validation/category"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
+import Auth from "@/utilities/Auth"
 import FormBody from "@/utilities/FormBody"
 import { PrismaClient } from "@prisma/client"
 import { NextRequest } from "next/server"
@@ -27,9 +28,21 @@ export const POST = ApiEndpoint(async (
   }))
 })
 
-export const GET = ApiEndpoint(async () => {
+export const GET = ApiEndpoint(async (
+  request: NextRequest
+) => {
+  const isTrusted = Auth.isTrustedSoftware(request.headers)
+
   const data = await db.category.findMany({
-    include: { _count: { select: { blogs: true } } }
+    include: {
+      _count: {
+        select: {
+          blogs: {
+            where: { published: isTrusted ? undefined : true }
+          }
+        }
+      }
+    }
   })
 
   const model: CategoryResponse[] = data.map(({

@@ -1,6 +1,7 @@
 import dictionary from "@/i18n"
 import { categoryEditScheme } from "@/lib/validation/category"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
+import Auth from "@/utilities/Auth"
 import FormBody from "@/utilities/FormBody"
 import { PrismaClient } from "@prisma/client"
 
@@ -11,9 +12,19 @@ const db = new PrismaClient()
 export const GET = ApiEndpoint<Context>(async (
   request, context
 ) => {
+  const isTrusted = Auth.isTrustedSoftware(request.headers)
+
   const data = await db.category.findUnique({
     where: { slug: (await context.params).slug },
-    include: { _count: { select: { blogs: true } } }
+    include: {
+      _count: {
+        select: {
+          blogs: {
+            where: { published: isTrusted ? undefined : true }
+          }
+        }
+      }
+    }
   })
 
   if (!data) return Response.json({
