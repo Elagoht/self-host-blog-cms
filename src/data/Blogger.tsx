@@ -24,7 +24,7 @@ class Blogger {
     filters: BlogFilters = this.DEFAULT_FILTERS,
     type: BlogType = "detailed",
     page: number = this.DEFAULT_PAGE,
-    take: number | undefined = this.DEFAULT_TAKE,
+    take: number | undefined = this.DEFAULT_TAKE
   ) => {
     const pageToUse = (page ?? this.DEFAULT_PAGE) < 1
       ? this.DEFAULT_PAGE
@@ -247,6 +247,7 @@ class Blogger {
           published: blog.published,
           createdAt: blog.createdAt,
           updatedAt: blog.updatedAt,
+          readCount: blog.readCount,
           category: blog.category.name!
         } satisfies BlogCardResponse
       case "list":

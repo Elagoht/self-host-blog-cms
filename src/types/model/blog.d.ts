@@ -29,6 +29,7 @@ type BlogCardResponse = {
   published: boolean
   createdAt: Date
   updatedAt: Date
+  readCount: number
   category: string
 }
 

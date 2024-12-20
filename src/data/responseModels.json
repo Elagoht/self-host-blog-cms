@@ -41,6 +41,7 @@
         "published": "boolean",
         "createdAt": "Date",
         "updatedAt": "Date",
+        "readTime": "number",
         "category": "string"
       }
     },

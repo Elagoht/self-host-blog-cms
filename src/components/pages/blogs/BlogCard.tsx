@@ -84,6 +84,13 @@ const BlogCard: FC<BlogCardProps> = ({
         }}
       />
 
+      <span className={classNames(
+        "text-neutral-500 dark:text-neutral-400",
+        "text-sm flex items-center gap-1"
+      )}>
+        <IconClock size={16} /> {blog.readCount}
+      </span>
+
       <div className={classNames(
         "flex gap-2", {
         "justify-between": layout === "grid"
