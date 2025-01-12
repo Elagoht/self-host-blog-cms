@@ -101,7 +101,7 @@ export const PATCH = ApiEndpoint<Context>(async (
     slug: blog.slug,
     title: blog.title,
     published: blog.published
-  })
+  }, "blogs")
 
   return Response.json(blog, { status: 200 })
 })
@@ -135,7 +135,7 @@ export const DELETE = ApiEndpoint<Context>(async (
     slug: existing.slug,
     title: existing.title,
     published: existing.published
-  })
+  }, "blogs")
 
   return new Response(null, { status: 204 })
 })

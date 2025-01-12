@@ -18,7 +18,7 @@ export const POST = ApiEndpoint(async (
     slug: blog.slug,
     title: blog.title,
     published: blog.published
-  })
+  }, "blogs")
 
   return Response.json(blog, {
     status: 201
