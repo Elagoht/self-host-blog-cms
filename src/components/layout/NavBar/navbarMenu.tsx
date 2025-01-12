@@ -1,6 +1,6 @@
 import {
   IconApi, IconCategory,
-  IconDashboard, IconWritingSign
+  IconDashboard, IconWebhook, IconWritingSign
 } from "@tabler/icons-react"
 import { ReactElement } from "react"
 
@@ -24,6 +24,10 @@ const navbarMenu: Array<{
   title: "apiModel",
   href: "/api-model",
   icon: <IconApi />
+}, {
+  title: "webhooks",
+  href: "/webhooks",
+  icon: <IconWebhook />
 }]
 
 export default navbarMenu

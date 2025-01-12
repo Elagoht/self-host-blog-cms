@@ -187,6 +187,15 @@
       "description": "Here are the list of blogs under \"{{category}}\" category."
     }
   },
+  "webhooks": {
+    "main": {
+      "title": "Webhooks",
+      "description": "Here are the list of webhooks.",
+      "fire": "Fire Manually",
+      "success": "Webhook fired successfully.",
+      "failure": "Failed to fire webhook."
+    }
+  },
   "input": {
     "file": {
       "change": "Change",
@@ -350,6 +359,7 @@
     "dashboard": "Dashboard",
     "blogs": "Blogs",
     "categories": "Categories",
-    "apiModel": "API Model"
+    "apiModel": "API Model",
+    "webhooks": "Webhooks"
   }
 }
