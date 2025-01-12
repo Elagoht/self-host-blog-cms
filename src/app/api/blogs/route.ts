@@ -14,11 +14,7 @@ export const POST = ApiEndpoint(async (
 ) => {
   const blog = await new Blogger(db).createBlog(request)
 
-  Fisherman.fireWebhook(process.env.WEBHOOK_URL!, {
-    slug: blog.slug,
-    title: blog.title,
-    published: blog.published
-  }, "blogs")
+  Fisherman.fireWebhook(process.env.WEBHOOK_URL!, undefined, "blogs")
 
   return Response.json(blog, {
     status: 201

@@ -96,12 +96,7 @@ export const PATCH = ApiEndpoint<Context>(async (
   })
 
   // Do not await this
-  Fisherman.fireWebhook(
-    process.env.WEBHOOK_URL!, {
-    slug: blog.slug,
-    title: blog.title,
-    published: blog.published
-  }, "blogs")
+  Fisherman.fireWebhook(process.env.WEBHOOK_URL!, undefined, "blogs")
 
   return Response.json(blog, { status: 200 })
 })
@@ -130,12 +125,7 @@ export const DELETE = ApiEndpoint<Context>(async (
   )
 
   // Do not await this
-  Fisherman.fireWebhook(
-    process.env.WEBHOOK_URL!, {
-    slug: existing.slug,
-    title: existing.title,
-    published: existing.published
-  }, "blogs")
+  Fisherman.fireWebhook(process.env.WEBHOOK_URL!, undefined, "blogs")
 
   return new Response(null, { status: 204 })
 })

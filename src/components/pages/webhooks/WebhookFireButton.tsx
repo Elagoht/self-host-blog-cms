@@ -13,10 +13,11 @@ type WebhookFireButtonProps = {
 }
 
 const WebhookFireButton: FC<WebhookFireButtonProps> = ({
-  url, method, headers, body
+  url, method = "PATCH", headers, body
 }) => {
   return <Button
-    color="secondary"
+    color="success"
+    className="w-fit"
     onClick={() => {
       fetch(url, {
         method,

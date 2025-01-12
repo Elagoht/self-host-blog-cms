@@ -15,12 +15,22 @@ const Webhook: FC<WebhookProps> = ({
   title, description, url, method = "PATCH", headers, body
 }) => {
   return <div className="flex flex-col gap-2 bg-neutral-200 dark:bg-neutral-950 p-2 rounded-md">
-    <div className="flex flex-col p-2 bg-primary-500 rounded-md text-primary-50">
-      <h1 className="text-lg font-semibold">{title}</h1>
-      <p className="text-sm text-primary-200">{description}</p>
+    <div className="flex flex-wrap p-2 bg-primary-500 rounded-md text-primary-50 gap-2 items-end">
+      <div className="flex flex-col gap-2 grow">
+        <h1 className="text-lg font-semibold">{title}</h1>
+
+        <p className="text-sm text-primary-200">{description}</p>
+      </div>
+
+      <WebhookFireButton
+        url={url}
+        method={method}
+        headers={headers}
+        body={body}
+      />
     </div>
 
-    <div className="font-mono flex items-center gap-2">
+    <div className="font-mono flex items-center gap-2 overflow-x-auto">
       <span className={classNames(
         "p-2 rounded-md", {
         "bg-green-600 text-green-200": method === "GET",
@@ -29,14 +39,7 @@ const Webhook: FC<WebhookProps> = ({
         {method}
       </span>
 
-      <span className="grow bg-stone-300 dark:bg-stone-800 p-2 rounded-md">{url}</span>
-
-      <WebhookFireButton
-        url={url}
-        method={method}
-        headers={headers}
-        body={body}
-      />
+      <span className="grow whitespace-nowrap bg-stone-300 dark:bg-stone-800 p-2 rounded-md">{url}</span>
     </div>
 
     {headers &&
