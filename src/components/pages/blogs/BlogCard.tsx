@@ -1,6 +1,6 @@
 import dictionary from "@/i18n"
 import TypeWriter from "@/utilities/TypeWriter"
-import { IconCheck, IconClock, IconEdit } from "@tabler/icons-react"
+import { IconCheck, IconClock, IconEdit, IconEye } from "@tabler/icons-react"
 import classNames from "classnames"
 import Image from "next/image"
 import Link from "next/link"
@@ -88,7 +88,7 @@ const BlogCard: FC<BlogCardProps> = ({
         "text-neutral-500 dark:text-neutral-400",
         "text-sm flex items-center gap-1"
       )}>
-        <IconClock size={16} /> {blog.readCount}
+        <IconEye size={16} /> {blog.readCount}
       </span>
 
       <div className={classNames(
