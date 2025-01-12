@@ -6,6 +6,7 @@
 - [X] Pagination for API endpoints
 - [X] Pagination for CMS UI
 - [X] Published blogs endpoints
+- [X] Fisherman class to handle webhook firing
 
 [REFACTOR]
 

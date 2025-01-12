@@ -3,6 +3,7 @@ import dictionary from "@/i18n"
 import { blogEditScheme } from "@/lib/validation/blogs"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Bucket from "@/utilities/Bucket"
+import Fisherman from "@/utilities/Fisherman"
 import FormBody, { FormBodyType } from "@/utilities/FormBody"
 import Query from "@/utilities/Query"
 import Studio from "@/utilities/Studio"
@@ -94,6 +95,14 @@ export const PATCH = ApiEndpoint<Context>(async (
     }
   })
 
+  // Do not await this
+  Fisherman.fireWebhook(
+    process.env.WEBHOOK_URL!, {
+    slug: blog.slug,
+    title: blog.title,
+    published: blog.published
+  })
+
   return Response.json(blog, { status: 200 })
 })
 
@@ -119,6 +128,14 @@ export const DELETE = ApiEndpoint<Context>(async (
       ""
     ).replace(/\+\d+.*/, ""))
   )
+
+  // Do not await this
+  Fisherman.fireWebhook(
+    process.env.WEBHOOK_URL!, {
+    slug: existing.slug,
+    title: existing.title,
+    published: existing.published
+  })
 
   return new Response(null, { status: 204 })
 })

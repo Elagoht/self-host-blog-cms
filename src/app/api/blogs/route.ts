@@ -1,6 +1,7 @@
 import Blogger from "@/data/Blogger"
 import ApiEndpoint, { ApiType } from "@/utilities/ApiEndpoint"
 import Auth from "@/utilities/Auth"
+import Fisherman from "@/utilities/Fisherman"
 import Query from "@/utilities/Query"
 import { PrismaClient } from "@prisma/client"
 
@@ -10,10 +11,19 @@ export const dynamic = "force-dynamic"
 
 export const POST = ApiEndpoint(async (
   request
-) => Response.json(
-  await new Blogger(db).createBlog(request), {
-  status: 201
-}))
+) => {
+  const blog = await new Blogger(db).createBlog(request)
+
+  Fisherman.fireWebhook(process.env.WEBHOOK_URL!, {
+    slug: blog.slug,
+    title: blog.title,
+    published: blog.published
+  })
+
+  return Response.json(blog, {
+    status: 201
+  })
+})
 
 export const GET = ApiEndpoint(async (
   request
